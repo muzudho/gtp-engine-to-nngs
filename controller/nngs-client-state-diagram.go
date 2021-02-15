@@ -33,6 +33,7 @@ func (dia *NngsClientStateDiagram) promptDiagram(lib *libraryListener, subCode i
 	case 6:
 		if dia.promptState == 5 {
 			lib.matchStart() // 対局成立
+			lib.turn()
 		}
 		dia.promptState = 6
 	// Scoring
@@ -124,8 +125,7 @@ func (lib *libraryListener) parse() {
 			fmt.Printf("[情報] lib.MyColorを%sに変更☆（＾～＾）\n", configuredColorUpperCase)
 			lib.MyColor = phase.ToNum(configuredColorUpperCase)
 
-			opponentColorString := phase.FlipColorString(configuredColorUpperCase)
-			message := fmt.Sprintf("match %s %s %d %d %d\n", lib.entryConf.OpponentName(), opponentColorString, lib.entryConf.BoardSize(), lib.entryConf.AvailableTimeMinutes(), lib.entryConf.CanadianTiming())
+			message := fmt.Sprintf("match %s %s %d %d %d\n", lib.entryConf.OpponentName(), configuredColorUpperCase, lib.entryConf.BoardSize(), lib.entryConf.AvailableTimeMinutes(), lib.entryConf.CanadianTiming())
 			fmt.Printf("[情報] 対局を申し込んだぜ☆（＾～＾）[%s]", message)
 			oi.LongWrite(lib.writer, []byte(message))
 		}
@@ -294,7 +294,7 @@ func (lib *libraryListener) parse() {
 
 							// Original code: nngsCUI.rb/announce class/update/`when 'my_turn'`.
 							// Original code: nngsCUI.rb/engine  class/update/`when 'my_turn'`.
-							print("****** I am thinking now   ******")
+							lib.myTurn()
 
 							// @gtp.time_left('WHITE', @nngs.white_user[2])
 							// @gtp.time_left('BLACK', @nngs.black_user[2])
@@ -318,7 +318,7 @@ func (lib *libraryListener) parse() {
 
 							// Original code: nngsCUI.rb/annouce class/update/`when 'his_turn'`.
 							// Original code: nngsCUI.rb/engine  class/update/`when 'his_turn'`.
-							print("****** wating for his move ******")
+							lib.opponentTurn()
 
 							// lib.
 							//       mv = if move == 'Pass'
@@ -350,4 +350,22 @@ func (lib *libraryListener) parse() {
 		// 想定外の遷移だぜ☆（＾～＾）！
 		panic(fmt.Sprintf("Unexpected state transition. state=%d", lib.state))
 	}
+}
+
+func (lib *libraryListener) turn() {
+	fmt.Printf("[情報] ターン☆（＾～＾） MyColor=%s, CurrentPhase=%s\n", phase.ToString(lib.MyColor), phase.ToString(lib.CurrentPhase))
+	if lib.MyColor == lib.CurrentPhase {
+		// 自分の手番だぜ☆（＾～＾）！
+		lib.myTurn()
+	} else {
+		// 相手の手番だぜ☆（＾～＾）！
+		lib.opponentTurn()
+	}
+}
+
+func (lib *libraryListener) myTurn() {
+	print("****** I am thinking now   ******")
+}
+func (lib *libraryListener) opponentTurn() {
+	print("****** wating for his move ******")
 }
