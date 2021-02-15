@@ -88,7 +88,7 @@ type NngsClientStateDiagram struct {
 	GameBField4 string
 }
 
-func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientListener, subCode int) {
+func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramListener, subCode int) {
 	switch subCode {
 	// Info
 	case 5:
@@ -126,7 +126,7 @@ func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientListener, subCod
 	}
 }
 
-func (dia *NngsClientStateDiagram) parse(lis *nngsClientListener) {
+func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 	// 現在読み取り中の文字なので、早とちりするかも知れないぜ☆（＾～＾）
 	line := string(dia.lineBuffer[:dia.index])
 
@@ -414,7 +414,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientListener) {
 	}
 }
 
-func (dia *NngsClientStateDiagram) turn(lis *nngsClientListener) {
+func (dia *NngsClientStateDiagram) turn(lis *nngsClientStateDiagramListener) {
 	fmt.Printf("[情報] ターン☆（＾～＾） MyColor=%s, CurrentPhase=%s\n", phase.ToString(dia.MyColor), phase.ToString(dia.CurrentPhase))
 	if dia.MyColor == dia.CurrentPhase {
 		// 自分の手番だぜ☆（＾～＾）！
@@ -425,9 +425,9 @@ func (dia *NngsClientStateDiagram) turn(lis *nngsClientListener) {
 	}
 }
 
-func (dia *NngsClientStateDiagram) myTurn(lis *nngsClientListener) {
+func (dia *NngsClientStateDiagram) myTurn(lis *nngsClientStateDiagramListener) {
 	print("****** I am thinking now   ******")
 }
-func (dia *NngsClientStateDiagram) opponentTurn(lis *nngsClientListener) {
+func (dia *NngsClientStateDiagram) opponentTurn(lis *nngsClientStateDiagramListener) {
 	print("****** wating for his move ******")
 }
