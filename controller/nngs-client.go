@@ -61,7 +61,7 @@ type libraryListener struct {
 	// BoardSize - 何路盤。マッチを受け取ったときに確定
 	BoardSize uint
 	// Phase - これから指す方。局面の手番とは逆になる
-	Phase phase.Phase
+	CurrentPhase phase.Phase
 	// MyMove - 自分の指し手
 	MyMove string
 	// OpponentMove - 相手の指し手
