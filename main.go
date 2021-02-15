@@ -43,24 +43,25 @@ func main() {
 	fmt.Printf("[情報] (^q^) プレイヤーのタイプ☆ [%s]", entryConf.Nngs.PlayerType)
 
 	// 思考エンジンを起動
-	engineStdin := startEngine(entryConf)
+	engineStdin, engineStdout := startEngine(entryConf)
 
 	fmt.Println("[情報] (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
-	c.Spawn(entryConf, &engineStdin)
+	c.Spawn(entryConf, &engineStdin, &engineStdout)
 
 	engineStdin.Close()
 	fmt.Println("[情報] (^q^) おわり☆！")
 }
 
 // 思考エンジンを起動
-func startEngine(entryConf c.EntryConf) io.WriteCloser {
+func startEngine(entryConf c.EntryConf) (io.WriteCloser, io.ReadCloser) {
 	parameters := strings.Split(entryConf.Nngs.EngineCommandOption, " ")
 	fmt.Printf("(^q^) GTP対応の思考エンジンを起動するぜ☆ [%s] [%s]", entryConf.Nngs.EngineCommand, strings.Join(parameters, " "))
 	cmd := exec.Command(entryConf.Nngs.EngineCommand, parameters...)
 	stdin, _ := cmd.StdinPipe()
+	stdout, _ := cmd.StdoutPipe()
 	err := cmd.Start()
 	if err != nil {
 		panic(err)
 	}
-	return stdin
+	return stdin, stdout
 }

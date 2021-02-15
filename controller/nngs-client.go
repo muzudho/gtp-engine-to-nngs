@@ -13,11 +13,12 @@ import (
 
 // Spawn - クライアント接続
 // * `engineStdin` - GTP Engine stdin
-func Spawn(entryConf EntryConf, engineStdin *io.WriteCloser) error {
+func Spawn(entryConf EntryConf, engineStdin *io.WriteCloser, engineStdout *io.ReadCloser) error {
 	// NNGSクライアントの状態遷移図
 	nngsClientStateDiagram := NngsClientStateDiagram{
-		EngineStdin: engineStdin,
-		entryConf:   entryConf,
+		EngineStdin:  engineStdin,
+		EngineStdout: engineStdout,
+		entryConf:    entryConf,
 		// nngsClientStateDiagram: *new(NngsClientStateDiagram),
 		index:                  0,
 		regexCommand:           *regexp.MustCompile("^(\\d+) (.*)"),

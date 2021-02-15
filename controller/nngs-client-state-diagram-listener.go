@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
 )
@@ -22,7 +23,43 @@ func (lis *nngsClientStateDiagramListener) scoring() {
 
 func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 	print("****** I am thinking now   ******")
-	(*dia.EngineStdin).Write([]byte(fmt.Sprintf("movegen %s", phase.ToString(dia.MyColor))))
+	message := fmt.Sprintf("genmove %s\n", strings.ToLower(phase.ToString(dia.MyColor)))
+	fmt.Printf("[情報] エンジンにメッセージ送ったろ☆（＾～＾）[%s]", message)
+	(*dia.EngineStdin).Write([]byte(message))
+
+	var buffer [1]byte // これが満たされるまで待つ。1バイト。
+	var lineBuffer [1024]byte
+	index := 0
+	p := buffer[:]
+
+	for {
+		n, err := (*dia.EngineStdout).Read(p) // ブロッキングしない？
+
+		if nil != err {
+			if fmt.Sprintf("%s", err) != "EOF" {
+				fmt.Printf("[情報] エラーだぜ☆（＾～＾）[%s]", err)
+				return
+			}
+			// 送られてくる文字がなければ、ここをずっと通る？
+			// fmt.Printf("[情報] EOFだぜ☆（＾～＾）\n")
+			index = 0
+			continue
+		}
+
+		if 0 < n {
+			bytes := p[:n]
+			lineBuffer[index] = bytes[0]
+			index++
+
+			print(string(bytes)) // 受け取るたびに１文字ずつ表示。
+
+			if bytes[0] == '\n' {
+				index = 0
+				// 終わりかどうか分からん。
+			}
+		}
+	}
+
 }
 func (lis *nngsClientStateDiagramListener) opponentTurn(dia *NngsClientStateDiagram) {
 	print("****** wating for his move ******")

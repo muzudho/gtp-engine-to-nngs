@@ -17,6 +17,8 @@ import (
 type NngsClientStateDiagram struct {
 	// EngineStdin - GTP Engine stdin
 	EngineStdin *io.WriteCloser
+	// EngineStdin - GTP Engine stdin
+	EngineStdout *io.ReadCloser
 
 	// 状態遷移の中の小さな区画
 	promptState int
