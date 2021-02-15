@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"io"
 	"regexp"
 	"strconv"
 	"strings"
@@ -14,6 +15,9 @@ import (
 
 // NngsClientStateDiagram - NNGSクライアントの状態遷移図
 type NngsClientStateDiagram struct {
+	// EngineStdin - GTP Engine stdin
+	EngineStdin *io.WriteCloser
+
 	// 状態遷移の中の小さな区画
 	promptState int
 

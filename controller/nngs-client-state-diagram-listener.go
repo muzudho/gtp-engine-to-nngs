@@ -1,5 +1,11 @@
 package controller
 
+import (
+	"fmt"
+
+	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
+)
+
 // `github.com/reiver/go-telnet` ライブラリーの動作をリスニングします
 type nngsClientStateDiagramListener struct {
 }
@@ -16,6 +22,7 @@ func (lis *nngsClientStateDiagramListener) scoring() {
 
 func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 	print("****** I am thinking now   ******")
+	(*dia.EngineStdin).Write([]byte(fmt.Sprintf("movegen %s", phase.ToString(dia.MyColor))))
 }
 func (lis *nngsClientStateDiagramListener) opponentTurn(dia *NngsClientStateDiagram) {
 	print("****** wating for his move ******")

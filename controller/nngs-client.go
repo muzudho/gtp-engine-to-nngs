@@ -11,17 +11,13 @@ import (
 	"github.com/reiver/go-telnet"
 )
 
-// NngsClient - クライアント
-type NngsClient struct {
-	// Cmd - External GTP Engine process
-	EngineStdin *io.WriteCloser
-}
-
 // Spawn - クライアント接続
-func (client NngsClient) Spawn(entryConf EntryConf) error {
+// * `engineStdin` - GTP Engine stdin
+func Spawn(entryConf EntryConf, engineStdin *io.WriteCloser) error {
 	// NNGSクライアントの状態遷移図
 	nngsClientStateDiagram := NngsClientStateDiagram{
-		entryConf: entryConf,
+		EngineStdin: engineStdin,
+		entryConf:   entryConf,
 		// nngsClientStateDiagram: *new(NngsClientStateDiagram),
 		index:                  0,
 		regexCommand:           *regexp.MustCompile("^(\\d+) (.*)"),

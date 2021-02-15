@@ -46,11 +46,7 @@ func main() {
 	engineStdin := startEngine(entryConf)
 
 	fmt.Println("[情報] (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
-	nngsClient := c.NngsClient{
-		EngineStdin: &engineStdin,
-	}
-
-	nngsClient.Spawn(entryConf)
+	c.Spawn(entryConf, &engineStdin)
 
 	engineStdin.Close()
 	fmt.Println("[情報] (^q^) おわり☆！")
