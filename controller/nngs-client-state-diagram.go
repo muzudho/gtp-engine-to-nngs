@@ -167,26 +167,18 @@ func (lib *libraryListener) parse() {
 						// Example: `decline kifuwarabi`
 						lib.CommandOfMatchDecline = string(matches2[2])
 
-						// acceptコマンドを半角空白でスプリットした３番目が、申し込んできた方の手番
+						// acceptコマンドを半角空白でスプリットした３番目が、自分の手番
 						matchAcceptTokens := strings.Split(lib.CommandOfMatchAccept, " ")
 						if len(matchAcceptTokens) < 6 {
 							panic(fmt.Sprintf("Error matchAcceptTokens=[%s].", matchAcceptTokens))
 						}
 
 						opponentPlayerName := matchAcceptTokens[1]
+						myColorString := matchAcceptTokens[2]
+						myColorUppercase := strings.ToUpper(myColorString)
+						fmt.Printf("[情報] lib.MyColorを[%s]に変更☆（＾～＾）\n", myColorString)
+						lib.MyColor = phase.ToNum(myColorString)
 
-						opponentColor := matchAcceptTokens[2]
-						opponentColorUppercase := strings.ToUpper(opponentColor)
-						switch opponentColor {
-						case "W":
-							fmt.Printf("[情報] lib.MyColorを黒に変更☆（＾～＾）\n")
-							lib.MyColor = phase.Black
-						case "B":
-							fmt.Printf("[情報] lib.MyColorを白に変更☆（＾～＾）\n")
-							lib.MyColor = phase.White
-						default:
-							panic(fmt.Sprintf("Unexpected opponentColor=%s.", opponentColor))
-						}
 						boardSize, err := strconv.ParseUint(matchAcceptTokens[3], 10, 0)
 						if err != nil {
 							panic(err)
@@ -201,7 +193,7 @@ func (lib *libraryListener) parse() {
 						}
 
 						// cmd_match
-						message := fmt.Sprintf("match %s %s %d %d %d\n", opponentPlayerName, opponentColorUppercase, lib.entryConf.BoardSize(), lib.entryConf.AvailableTimeMinutes(), lib.entryConf.CanadianTiming())
+						message := fmt.Sprintf("match %s %s %d %d %d\n", opponentPlayerName, myColorUppercase, lib.entryConf.BoardSize(), lib.entryConf.AvailableTimeMinutes(), lib.entryConf.CanadianTiming())
 						fmt.Printf("[情報] 対局を申し込むぜ☆（＾～＾）[%s]\n", message)
 						oi.LongWrite(lib.writer, []byte(message))
 					}
