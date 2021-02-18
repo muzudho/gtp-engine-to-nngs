@@ -18,7 +18,6 @@ type EntryConf struct {
 type Nngs struct {
 	Host                string
 	Port                int64 // Tomlのライブラリーが精度を細かく指定できないので int64 型で。
-	User                string
 	Pass                string
 	EngineCommand       string
 	EngineCommandOption string
@@ -30,6 +29,7 @@ type Player struct {
 	// * `Human` - 人間プレイヤーが接続する
 	// * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
 	InterfaceType string
+	User          string
 }
 
 // MatchApplication - [MatchApplication] 区画。
@@ -63,7 +63,7 @@ func (config EntryConf) Port() uint {
 // Only A-Z a-z 0-9
 // Names may be at most 10 characters long
 func (config EntryConf) User() string {
-	return config.Nngs.User
+	return config.Player.User
 }
 
 // Pass - 何路盤
