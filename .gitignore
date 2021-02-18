@@ -1,4 +1,5 @@
-output/*.log
+workspace_b/output/*.log
+workspace_w/output/*.log
 
 # Binaries for programs and plugins
 *.exe

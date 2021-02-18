@@ -4,8 +4,8 @@
 
 ```shell
 # 白番の例
-gtp-engine-to-nngs
+gtp-engine-to-nngs --workdir C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs\workspace_w
 
 # 黒番の例
-gtp-engine-to-nngs --entry input/engineb.entryConf.toml
+gtp-engine-to-nngs --workdir C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs\workspace_b
 ```

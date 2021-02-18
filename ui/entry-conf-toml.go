@@ -32,7 +32,7 @@ func LoadEntryConf(path string) e.EntryConf {
 }
 
 func debugPrintToml(fileData []byte) {
-	fmt.Printf("[情報] %s", string(fileData))
+	// fmt.Printf("[情報] content=%s", string(fileData))
 
 	// Toml解析
 	tomlTree, err := toml.Load(string(fileData))
