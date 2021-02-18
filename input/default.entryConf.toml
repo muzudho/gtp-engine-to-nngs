@@ -2,10 +2,6 @@
 
 [Nngs]
 
-# * `Human` - 人間プレイヤーが接続する
-# * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
-PlayerType = 'GTP'
-
 Host = 'localhost'
 
 # 接続先サーバーのポート番号
@@ -24,6 +20,13 @@ Pass = ''
 EngineCommand = 'C:\Users\むずでょ\go\src\github.com\muzudho\kifuwarabe-gtp\kifuwarabe-gtp.exe'
 # EngineCommandOption - 思考エンジンを起動するコマンドの半角スペース区切りの引数（OSにより書き方が異なるかも）
 EngineCommandOption = ''
+
+# 選手設定
+[Player]
+
+# * `Human` - 人間プレイヤーが接続する
+# * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
+InterfaceType = 'GTP'
 
 # マッチの申込
 [MatchApplication]

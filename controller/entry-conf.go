@@ -10,18 +10,26 @@ import (
 // EntryConf - 参加設定。
 type EntryConf struct {
 	Nngs             Nngs
+	Player           Player
 	MatchApplication MatchApplication
 }
 
 // Nngs - [Nngs] 区画。
 type Nngs struct {
-	PlayerType          string
 	Host                string
 	Port                int64 // Tomlのライブラリーが精度を細かく指定できないので int64 型で。
 	User                string
 	Pass                string
 	EngineCommand       string
 	EngineCommandOption string
+}
+
+// Player - [Player] 区画。
+type Player struct {
+	// InterfaceType - プレイヤーの種類
+	// * `Human` - 人間プレイヤーが接続する
+	// * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
+	InterfaceType string
 }
 
 // MatchApplication - [MatchApplication] 区画。
@@ -34,11 +42,11 @@ type MatchApplication struct {
 	CanadianTiming       int64
 }
 
-// PlayerType - プレイヤーの種類
+// InterfaceType - プレイヤーの種類
 // * `Human` - 人間プレイヤーが接続する
 // * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
-func (config EntryConf) PlayerType() string {
-	return config.Nngs.PlayerType
+func (config EntryConf) InterfaceType() string {
+	return config.Player.InterfaceType
 }
 
 // Host - 接続先ホスト名
