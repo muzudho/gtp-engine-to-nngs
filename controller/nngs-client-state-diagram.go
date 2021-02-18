@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/muzudho/gtp-engine-to-nngs/controller/clistat"
+	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
 	"github.com/reiver/go-oi"
 	"github.com/reiver/go-telnet"
@@ -23,7 +24,7 @@ type NngsClientStateDiagram struct {
 	// 状態遷移の中の小さな区画
 	promptState int
 
-	entryConf EntryConf
+	entryConf e.EntryConf
 
 	// 末尾に改行が付いていると想定していいフェーズ。逆に、そうでない例は `Login:` とか
 	newlineReadableState uint
@@ -167,7 +168,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 			if dia.entryConf.Pass() == "" {
 				panic("Need password")
 			}
-			oi.LongWrite(dia.writer, []byte(dia.entryConf.Player.Pass))
+			oi.LongWrite(dia.writer, []byte(dia.entryConf.User.Pass))
 			oi.LongWrite(dia.writer, []byte("\n"))
 			setClientMode(dia.writer)
 			dia.state = clistat.EnteredClientMode
@@ -177,7 +178,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 			if dia.entryConf.Pass() == "" {
 				panic("Need password")
 			}
-			oi.LongWrite(dia.writer, []byte(dia.entryConf.Player.Pass))
+			oi.LongWrite(dia.writer, []byte(dia.entryConf.User.Pass))
 			oi.LongWrite(dia.writer, []byte("\n"))
 			dia.state = clistat.EnteredMyPasswordAndIAmWaitingToBePrompted
 

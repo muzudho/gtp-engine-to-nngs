@@ -1,4 +1,4 @@
-package controller
+package entities
 
 import (
 	"fmt"
@@ -9,13 +9,13 @@ import (
 
 // EntryConf - 参加設定。
 type EntryConf struct {
-	Nngs             Nngs
+	Server           Server
 	User             User
 	MatchApplication MatchApplication
 }
 
-// Nngs - [Nngs] 区画。
-type Nngs struct {
+// Server - [Server] 区画。
+type Server struct {
 	Host string
 	Port int64 // Tomlのライブラリーが精度を細かく指定できないので int64 型で。
 }
@@ -52,12 +52,12 @@ func (config EntryConf) InterfaceType() string {
 
 // Host - 接続先ホスト名
 func (config EntryConf) Host() string {
-	return config.Nngs.Host
+	return config.Server.Host
 }
 
 // Port - 接続先ホストのポート番号
 func (config EntryConf) Port() uint {
-	return uint(config.Nngs.Port)
+	return uint(config.Server.Port)
 }
 
 // UserName - 対局者名（アカウント名）

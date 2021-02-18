@@ -7,13 +7,14 @@ import (
 	"os"
 	"regexp"
 
+	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	"github.com/reiver/go-oi"
 	"github.com/reiver/go-telnet"
 )
 
 // Spawn - クライアント接続
 // * `engineStdin` - GTP Engine stdin
-func Spawn(entryConf EntryConf, engineStdin *io.WriteCloser, engineStdout *io.ReadCloser) error {
+func Spawn(entryConf e.EntryConf, engineStdin *io.WriteCloser, engineStdout *io.ReadCloser) error {
 	// NNGSクライアントの状態遷移図
 	nngsClientStateDiagram := NngsClientStateDiagram{
 		EngineStdin:  engineStdin,
@@ -31,7 +32,7 @@ func Spawn(entryConf EntryConf, engineStdin *io.WriteCloser, engineStdout *io.Re
 		regexGame:              *regexp.MustCompile("Game (\\d+) ([a-zA-Z]): (\\S+) \\((\\S+) (\\S+) (\\S+)\\) vs (\\S+) \\((\\S+) (\\S+) (\\S+)\\)"),
 		regexMove:              *regexp.MustCompile("\\s*(\\d+)\\(([BWbw])\\): ([A-Z]\\d+|Pass)"),
 		regexAcceptCommand:     *regexp.MustCompile("match \\S+ \\S+ (\\d+) ")}
-	return telnet.DialToAndCall(fmt.Sprintf("%s:%d", entryConf.Nngs.Host, entryConf.Nngs.Port), nngsClientStateDiagram)
+	return telnet.DialToAndCall(fmt.Sprintf("%s:%d", entryConf.Server.Host, entryConf.Server.Port), nngsClientStateDiagram)
 }
 
 // CallTELNET - 決まった形のメソッド。

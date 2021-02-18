@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	c "github.com/muzudho/gtp-engine-to-nngs/controller"
+	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	"github.com/muzudho/gtp-engine-to-nngs/ui"
 	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
 )
@@ -40,7 +41,7 @@ func main() {
 	entryConf := ui.LoadEntryConf(*entryConfPath) // "./input/default.entryConf.toml"
 
 	// NNGSからのメッセージ受信に対応するプログラムを指定したろ☆（＾～＾）
-	fmt.Printf("[情報] (^q^) プレイヤーのタイプ☆ [%s]", entryConf.Nngs.PlayerType)
+	fmt.Printf("[情報] (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
 
 	// 思考エンジンを起動
 	engineStdin, engineStdout := startEngine(entryConf)
@@ -53,7 +54,7 @@ func main() {
 }
 
 // 思考エンジンを起動
-func startEngine(entryConf c.EntryConf) (io.WriteCloser, io.ReadCloser) {
+func startEngine(entryConf e.EntryConf) (io.WriteCloser, io.ReadCloser) {
 	parameters := strings.Split(entryConf.User.EngineCommandOption, " ")
 	fmt.Printf("(^q^) GTP対応の思考エンジンを起動するぜ☆ [%s] [%s]", entryConf.User.EngineCommand, strings.Join(parameters, " "))
 	cmd := exec.Command(entryConf.User.EngineCommand, parameters...)
