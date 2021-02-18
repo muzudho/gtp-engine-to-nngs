@@ -16,10 +16,8 @@ type EntryConf struct {
 
 // Nngs - [Nngs] 区画。
 type Nngs struct {
-	Host                string
-	Port                int64 // Tomlのライブラリーが精度を細かく指定できないので int64 型で。
-	EngineCommand       string
-	EngineCommandOption string
+	Host string
+	Port int64 // Tomlのライブラリーが精度を細かく指定できないので int64 型で。
 }
 
 // User - [User] 区画。
@@ -29,8 +27,10 @@ type User struct {
 	// * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
 	InterfaceType string
 	// User name
-	Name string
-	Pass string
+	Name                string
+	Pass                string
+	EngineCommand       string
+	EngineCommandOption string
 }
 
 // MatchApplication - [MatchApplication] 区画。
@@ -74,12 +74,12 @@ func (config EntryConf) Pass() string {
 
 // EngineCommand - 思考エンジンを起動するコマンドの実行ファイル名の部分（OSにより書き方が異なるかも）
 func (config EntryConf) EngineCommand() string {
-	return config.Nngs.EngineCommand
+	return config.User.EngineCommand
 }
 
 // EngineCommandOption - 思考エンジンを起動するコマンドの半角スペース区切りの引数（OSにより書き方が異なるかも）
 func (config EntryConf) EngineCommandOption() string {
-	return config.Nngs.EngineCommandOption
+	return config.User.EngineCommandOption
 }
 
 // ApplyFromMe - 自分の方から申し込むなら true, 申し込みを受けるのを待つ方なら false。
