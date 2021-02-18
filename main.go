@@ -66,7 +66,7 @@ func main() {
 
 // 思考エンジンを起動
 func startEngine(entryConf e.EntryConf, workdir *string) (io.WriteCloser, io.ReadCloser) {
-	parameters := strings.Split(entryConf.User.EngineCommandOption, " ")
+	parameters := strings.Split("--workdir "+*workdir+" "+entryConf.User.EngineCommandOption, " ")
 	fmt.Printf("(^q^) GTP対応の思考エンジンを起動するぜ☆ [%s] [%s]", entryConf.User.EngineCommand, strings.Join(parameters, " "))
 	cmd := exec.Command(entryConf.User.EngineCommand, parameters...)
 	stdin, _ := cmd.StdinPipe()
