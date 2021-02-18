@@ -8,25 +8,25 @@ Host = 'localhost'
 # (^q^) 数値型のデータをクォーテーションで囲むとエラーもなく読取失敗するから注意☆
 Port = 9696
 
-# パスワード（任意）
-Pass = ''
-
 # EngineCommand - 思考エンジンを起動するコマンドの実行ファイル名の部分（OSにより書き方が異なるかも）
 EngineCommand = 'C:\Users\むずでょ\go\src\github.com\muzudho\kifuwarabe-gtp\kifuwarabe-gtp.exe'
 # EngineCommandOption - 思考エンジンを起動するコマンドの半角スペース区切りの引数（OSにより書き方が異なるかも）
 EngineCommandOption = ''
 
 # 選手設定
-[Player]
-
-# * `Human` - 人間プレイヤーが接続する
-# * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
-InterfaceType = 'GTP'
+[User]
 
 # 対局者名（アカウント名）
 # Only A-Z a-z 0-9
 # Names may be at most 10 characters long
-User = 'kifuwarabi'
+Name = 'kifuwarabi'
+
+# パスワード（任意）
+Pass = ''
+
+# * `Human` - 人間プレイヤーが接続する
+# * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
+InterfaceType = 'GTP'
 
 # マッチの申込
 [MatchApplication]

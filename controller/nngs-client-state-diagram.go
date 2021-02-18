@@ -148,11 +148,11 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 			// あなたの名前を入力してください。
 
 			// 設定ファイルから自動で入力するぜ☆（＾ｑ＾）
-			user := dia.entryConf.User()
+			user := dia.entryConf.UserName()
 
 			// 自動入力のときは、設定ミスなら強制終了しないと無限ループしてしまうぜ☆（＾～＾）
 			if user == "" {
-				panic("Need name (User)")
+				panic("Need name (UserName)")
 			}
 
 			oi.LongWrite(dia.writer, []byte(user))
@@ -167,7 +167,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 			if dia.entryConf.Pass() == "" {
 				panic("Need password")
 			}
-			oi.LongWrite(dia.writer, []byte(dia.entryConf.Nngs.Pass))
+			oi.LongWrite(dia.writer, []byte(dia.entryConf.Player.Pass))
 			oi.LongWrite(dia.writer, []byte("\n"))
 			setClientMode(dia.writer)
 			dia.state = clistat.EnteredClientMode
@@ -177,7 +177,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 			if dia.entryConf.Pass() == "" {
 				panic("Need password")
 			}
-			oi.LongWrite(dia.writer, []byte(dia.entryConf.Nngs.Pass))
+			oi.LongWrite(dia.writer, []byte(dia.entryConf.Player.Pass))
 			oi.LongWrite(dia.writer, []byte("\n"))
 			dia.state = clistat.EnteredMyPasswordAndIAmWaitingToBePrompted
 

@@ -10,7 +10,7 @@ import (
 // EntryConf - 参加設定。
 type EntryConf struct {
 	Nngs             Nngs
-	Player           Player
+	User             User
 	MatchApplication MatchApplication
 }
 
@@ -18,18 +18,19 @@ type EntryConf struct {
 type Nngs struct {
 	Host                string
 	Port                int64 // Tomlのライブラリーが精度を細かく指定できないので int64 型で。
-	Pass                string
 	EngineCommand       string
 	EngineCommandOption string
 }
 
-// Player - [Player] 区画。
-type Player struct {
+// User - [User] 区画。
+type User struct {
 	// InterfaceType - プレイヤーの種類
 	// * `Human` - 人間プレイヤーが接続する
 	// * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
 	InterfaceType string
-	User          string
+	// User name
+	Name string
+	Pass string
 }
 
 // MatchApplication - [MatchApplication] 区画。
@@ -46,7 +47,7 @@ type MatchApplication struct {
 // * `Human` - 人間プレイヤーが接続する
 // * `GTP` - GTP(碁テキスト プロトコル)を用いる思考エンジンが接続する
 func (config EntryConf) InterfaceType() string {
-	return config.Player.InterfaceType
+	return config.User.InterfaceType
 }
 
 // Host - 接続先ホスト名
@@ -59,16 +60,16 @@ func (config EntryConf) Port() uint {
 	return uint(config.Nngs.Port)
 }
 
-// User - 対局者名（アカウント名）
+// UserName - 対局者名（アカウント名）
 // Only A-Z a-z 0-9
 // Names may be at most 10 characters long
-func (config EntryConf) User() string {
-	return config.Player.User
+func (config EntryConf) UserName() string {
+	return config.User.Name
 }
 
 // Pass - 何路盤
 func (config EntryConf) Pass() string {
-	return config.Nngs.Pass
+	return config.User.Pass
 }
 
 // EngineCommand - 思考エンジンを起動するコマンドの実行ファイル名の部分（OSにより書き方が異なるかも）
