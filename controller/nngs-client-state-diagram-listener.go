@@ -26,7 +26,8 @@ func (lis *nngsClientStateDiagramListener) scoring() {
 func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 	print("****** I am thinking now   ******")
 	message := fmt.Sprintf("genmove %s\n", strings.ToLower(phase.ToString(dia.MyColor)))
-	fmt.Printf("<情報> エンジンにメッセージ送ったろ☆（＾～＾）[%s]", message)
+
+	fmt.Printf("<情報> エンジンへ送信[%s]\n", message)
 	(*dia.EngineStdin).Write([]byte(message))
 
 	var buffer [1]byte // これが満たされるまで待つ。1バイト。
@@ -105,4 +106,10 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 func (lis *nngsClientStateDiagramListener) opponentTurn(dia *NngsClientStateDiagram) {
 	print("****** wating for his move ******\n")
 	u.G.Chat.Debug("<情報> MyMove=[%s] OpponentMove=[%s]\n", dia.MyMove, dia.OpponentMove)
+
+	if dia.OpponentMove != "" {
+		message := strings.ToLower(fmt.Sprintf("play %s %s", phase.FlipColorString(phase.ToString(dia.MyColor)), dia.OpponentMove))
+		fmt.Printf("<情報> エンジンへ送信[%s]\n", message)
+		(*dia.EngineStdin).Write([]byte(message))
+	}
 }
