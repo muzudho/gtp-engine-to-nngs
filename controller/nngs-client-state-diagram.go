@@ -35,7 +35,7 @@ type NngsClientStateDiagram struct {
 	// 20: 白番は盤更新へ
 	// 30: 白番は着手へ
 	// 40: 黒番は盤更新へ
-	turnState uint
+	// turnState uint
 
 	// NNGSへ書込み
 	writerToServer telnet.Writer
@@ -296,7 +296,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 				} else if dia.regexMatchAccepted.Match(promptStateBytes) {
 					// 黒の手番から始まるぜ☆（＾～＾）
 					dia.CurrentPhase = phase.Black
-					dia.turnState = 10
+					// dia.turnState = 10
 
 				} else if dia.regexDecline1.Match(promptStateBytes) {
 					print("[対局はキャンセルされたぜ☆]")
@@ -396,6 +396,22 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 							//      mv = "#{mv}#{j}"
 							//    end
 							//    @nngs.input mv
+
+							//if dia.OpponentMove != "" {
+							message := strings.ToLower(fmt.Sprintf("play %s %s\n", phase.FlipColorString(phase.ToString(dia.MyColor)), dia.OpponentMove))
+							fmt.Printf("<GE2NNGS> エンジンへ送信[%s]\n", message)
+							(*dia.EngineStdin).Write([]byte(message))
+
+							// if dia.CurrentPhase == phase.Black {
+							// 	dia.turnState = 30
+							// } else {
+							// 	dia.turnState = 10
+							// }
+
+							// TODO '= \n\n' が返ってくると思うが、 genmove と混線しない工夫が必要。
+							//}
+							lis.waitForPlayResponse(dia)
+
 						} else {
 							// 相手の手番だぜ☆（＾～＾）！
 							fmt.Printf("<GE2NNGS> 自分の手を記憶☆（＾～＾） move=%s\n", matches3[3])
@@ -445,9 +461,11 @@ func (dia *NngsClientStateDiagram) turn(lis *nngsClientStateDiagramListener) {
 	fmt.Printf("<GE2NNGS> ターン☆（＾～＾） MyColor=%s, CurrentPhase=%s\n", phase.ToString(dia.MyColor), phase.ToString(dia.CurrentPhase))
 	if dia.MyColor == dia.CurrentPhase {
 		// 自分の手番だぜ☆（＾～＾）！
+		fmt.Printf("<GE2NNGS> 自分の手番だぜ☆（＾～＾）！\n")
 		lis.myTurn(dia)
 	} else {
 		// 相手の手番だぜ☆（＾～＾）！
+		fmt.Printf("<GE2NNGS> 相手の手番だぜ☆（＾～＾）！\n")
 		lis.opponentTurn(dia)
 	}
 }
