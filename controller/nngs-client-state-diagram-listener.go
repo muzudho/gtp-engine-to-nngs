@@ -37,7 +37,7 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 
 		if nil != err {
 			if fmt.Sprintf("%s", err) != "EOF" {
-				fmt.Printf("[情報] エラーだぜ☆（＾～＾）[%s]", err)
+				fmt.Printf("[情報] エラーだぜ☆（＾～＾）[%s]\n", err)
 				return
 			}
 			// 送られてくる文字がなければ、ここをずっと通る？
@@ -48,18 +48,26 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 
 		if 0 < n {
 			bytes := p[:n]
-			lineBuffer[index] = bytes[0]
-			index++
 
 			// 思考エンジンから１文字送られてくるたび、表示。
 			// print(string(bytes))
 
 			if bytes[0] == '\n' {
 				// 思考エンジンから送られてきた１文字が、１行分 溜まるごとに表示。
-				fmt.Printf("<情報> 受信行[%s]", string(lineBuffer[:index]))
+				lineString := string(lineBuffer[:index])
 
 				index = 0
 				// 終わりかどうか分からん。
+
+				if lineString == "" {
+					// 空行
+					fmt.Printf("<情報> 空行。\n")
+				} else {
+					fmt.Printf("<情報> 受信行[%s]\n", lineString)
+				}
+			} else {
+				lineBuffer[index] = bytes[0]
+				index++
 			}
 		}
 	}
