@@ -77,9 +77,12 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 							u.G.Chat.Debug("<情報> サーバーへ送信[%s\n]\n", matches71[1])
 							oi.LongWrite(dia.writerToServer, []byte(matches71[1]))
 							oi.LongWrite(dia.writerToServer, []byte("\n"))
-						} else {
-							u.G.Chat.Debug("<情報> 空行(手番)。line=[%s] pre-line=[%s] len=[%d]\n", string(lineBuffer[indexY][:indexX[(indexY+1)%2]]), string(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]]), len(matches71))
+
+							// myTurn のループ終わり（＾～＾）！
+							return
 						}
+						u.G.Chat.Debug("<情報> 空行(手番)。line=[%s] pre-line=[%s] len=[%d]\n", string(lineBuffer[indexY][:indexX[(indexY+1)%2]]), string(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]]), len(matches71))
+
 					} else {
 						u.G.Chat.Debug("<情報> 空行(相手番)。\n")
 					}
