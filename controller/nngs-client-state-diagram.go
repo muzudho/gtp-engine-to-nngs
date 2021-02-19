@@ -30,9 +30,12 @@ type NngsClientStateDiagram struct {
 	promptState int
 	// 末尾に改行が付いていると想定していいフェーズ。逆に、そうでない例は `Login:` とか
 	newlineReadableState uint
-	// 0:
-	// 10: 相手の着手を盤面に置いている最中
-	phaseState uint
+	// 0: 白番は対局を承諾へ
+	// 10: 黒番は着手へ
+	// 20: 白番は盤更新へ
+	// 30: 白番は着手へ
+	// 40: 黒番は盤更新へ
+	turnState uint
 
 	// NNGSへ書込み
 	writerToServer telnet.Writer
@@ -293,13 +296,12 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 				} else if dia.regexMatchAccepted.Match(promptStateBytes) {
 					// 黒の手番から始まるぜ☆（＾～＾）
 					dia.CurrentPhase = phase.Black
+					dia.turnState = 10
 
 				} else if dia.regexDecline1.Match(promptStateBytes) {
 					print("[対局はキャンセルされたぜ☆]")
-					// self.match_cancel
 				} else if dia.regexDecline2.Match(promptStateBytes) {
 					print("[対局はキャンセルされたぜ☆]")
-					// self.match_cancel
 				} else if dia.regexOneSeven.Match(promptStateBytes) {
 					print("[サブ遷移へ☆]")
 					dia.promptDiagram(lis, 7)
@@ -372,6 +374,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 						fmt.Printf("<GE2NNGS> 指し手☆（＾～＾） code=%s color=%s move=%s MyColor=%s, CurrentPhase=%s\n", matches3[1], matches3[2], matches3[3], phase.ToString(dia.MyColor), phase.ToString(dia.CurrentPhase))
 						if dia.MyColor == dia.CurrentPhase {
 							// 自分の手番だぜ☆（＾～＾）！
+							fmt.Printf("<GE2NNGS> 相手の手を記憶☆（＾～＾） move=%s\n", matches3[3])
 							dia.OpponentMove = string(matches3[3]) // 相手の指し手が付いてくるので記憶
 							// fmt.Printf("<GE2NNGS> 自分の手番で一旦ブロッキング☆（＾～＾）")
 							// 初回だけここを通るが、以後、ここには戻ってこないぜ☆（＾～＾）
@@ -395,6 +398,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 							//    @nngs.input mv
 						} else {
 							// 相手の手番だぜ☆（＾～＾）！
+							fmt.Printf("<GE2NNGS> 自分の手を記憶☆（＾～＾） move=%s\n", matches3[3])
 							dia.MyMove = string(matches3[3]) // 自分の指し手が付いてくるので記憶
 							// fmt.Printf("<GE2NNGS> 相手の手番で一旦ブロッキング☆（＾～＾）")
 							// 初回だけここを通るが、以後、ここには戻ってこないぜ☆（＾～＾）

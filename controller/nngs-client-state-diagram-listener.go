@@ -25,23 +25,29 @@ func (lis *nngsClientStateDiagramListener) scoring() {
 
 func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 	print("****** I am thinking now   ******")
-	message := fmt.Sprintf("genmove %s\n", strings.ToLower(phase.ToString(dia.MyColor)))
 
+	message := fmt.Sprintf("genmove %s\n", strings.ToLower(phase.ToString(dia.MyColor)))
 	fmt.Printf("<GE2NNGS> エンジンへ送信[%s]\n", message)
 	(*dia.EngineStdin).Write([]byte(message))
 
+	if dia.CurrentPhase == phase.Black {
+		dia.turnState = 20
+	} else {
+		dia.turnState = 40
+	}
+
 	var buffer [1]byte // これが満たされるまで待つ。1バイト。
 
-	// めっちゃ 難しいが、
-	// [0] Current [1] Previous
-	// [0] Previous [1] Current
-	// を交互にやっている。
-	var lineBuffer [2][1024]byte
-	indexX := []uint{0, 0}
-	indexY := 0
+	// 着手
+	bestmove := ""
+
+	// ただのライン・バッファー
+	var lineBuffer [1024]byte
+	index := 0
 	p := buffer[:]
 
 	for {
+		// エンジンから送られてくる文字列
 		n, err := (*dia.EngineStdout).Read(p) // ブロッキングしない？
 
 		if nil != err {
@@ -51,8 +57,7 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 			}
 			// 送られてくる文字がなければ、ここをずっと通る？
 			// fmt.Printf("<GE2NNGS> EOFだぜ☆（＾～＾）\n")
-			indexY = (indexY + 1) % 2
-			indexX[indexY] = 0
+			index = 0
 			continue
 		}
 
@@ -64,7 +69,7 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 
 			if bytes[0] == '\n' {
 				// 思考エンジンから送られてきた１文字が、１行分 溜まるごとに表示。
-				lineString := string(lineBuffer[indexY][:indexX[indexY]])
+				lineString := string(lineBuffer[:index])
 
 				if lineString == "" {
 					// 空行
@@ -73,31 +78,39 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 						// サーバーに着手を送信します。１行前の文字列を使います
 						// Example: `= A1`
 						// Example: `= Pass`
-						matches71 := dia.regexBestmove.FindSubmatch(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]])
-						if 1 < len(matches71) {
-							u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", matches71[1])
-							oi.LongWrite(dia.writerToServer, []byte(matches71[1]))
+						if bestmove != "" {
+							u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", bestmove)
+							oi.LongWrite(dia.writerToServer, []byte(bestmove))
 							oi.LongWrite(dia.writerToServer, []byte("\n"))
-
 							// myTurn のループ終わり（＾～＾）！
 							return
 						}
-						u.G.Chat.Debug("<GE2NNGS> 空行(手番)。line=[%s] pre-line=[%s] len=[%d]\n", string(lineBuffer[indexY][:indexX[(indexY+1)%2]]), string(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]]), len(matches71))
-
+						u.G.Chat.Debug("<GE2NNGS> 空行(手番)。bestmove未決定=[%s]\n", bestmove)
 					} else {
 						u.G.Chat.Debug("<GE2NNGS> 空行(相手番)。\n")
 					}
+
 					dia.ChatDebugState()
 
 				} else {
 					u.G.Chat.Debug("<GE2NNGS> 受信行[%s]\n", lineString)
+
+					// サーバーに着手を送信します。１行前の文字列を使います
+					// Example: `= A1`
+					// Example: `= Pass`
+					matches71 := dia.regexBestmove.FindSubmatch(lineBuffer[:index])
+					if 1 < len(matches71) {
+						bestmove = string(matches71[1])
+						u.G.Chat.Debug("<GE2NNGS> bestmove=[%s]\n", bestmove)
+					} else {
+						u.G.Chat.Debug("<GE2NNGS> 空行(手番)。line=[%s] bestmove=[%s] len=[%d]\n", string(lineBuffer[:index]), bestmove, len(matches71))
+					}
 				}
 
-				indexY = (indexY + 1) % 2
-				indexX[indexY] = 0
+				index = 0
 			} else {
-				lineBuffer[indexY][indexX[indexY]] = bytes[0]
-				indexX[indexY]++
+				lineBuffer[index] = bytes[0]
+				index++
 			}
 		}
 	}
@@ -105,13 +118,18 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 }
 func (lis *nngsClientStateDiagramListener) opponentTurn(dia *NngsClientStateDiagram) {
 	print("****** wating for his move ******\n")
-	dia.phaseState = 10
 	u.G.Chat.Debug("<GE2NNGS> MyMove=[%s] OpponentMove=[%s]\n", dia.MyMove, dia.OpponentMove)
 
 	if dia.OpponentMove != "" {
 		message := strings.ToLower(fmt.Sprintf("play %s %s", phase.FlipColorString(phase.ToString(dia.MyColor)), dia.OpponentMove))
 		fmt.Printf("<GE2NNGS> エンジンへ送信[%s]\n", message)
 		(*dia.EngineStdin).Write([]byte(message))
+
+		if dia.CurrentPhase == phase.Black {
+			dia.turnState = 30
+		} else {
+			dia.turnState = 10
+		}
 
 		// TODO '= \n\n' が返ってくると思うが、 genmove と混線しない工夫が必要。
 	}
