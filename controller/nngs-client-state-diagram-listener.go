@@ -14,20 +14,20 @@ type nngsClientStateDiagramListener struct {
 }
 
 func (lis *nngsClientStateDiagramListener) matchStart() {
-	print("<情報> 対局成立だぜ☆")
+	print("<GE2NNGS> 対局成立だぜ☆")
 }
 func (lis *nngsClientStateDiagramListener) matchEnd() {
-	print("<情報> 対局終了だぜ☆")
+	print("<GE2NNGS> 対局終了だぜ☆")
 }
 func (lis *nngsClientStateDiagramListener) scoring() {
-	print("<情報> 得点計算だぜ☆")
+	print("<GE2NNGS> 得点計算だぜ☆")
 }
 
 func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 	print("****** I am thinking now   ******")
 	message := fmt.Sprintf("genmove %s\n", strings.ToLower(phase.ToString(dia.MyColor)))
 
-	fmt.Printf("<情報> エンジンへ送信[%s]\n", message)
+	fmt.Printf("<GE2NNGS> エンジンへ送信[%s]\n", message)
 	(*dia.EngineStdin).Write([]byte(message))
 
 	var buffer [1]byte // これが満たされるまで待つ。1バイト。
@@ -46,11 +46,11 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 
 		if nil != err {
 			if fmt.Sprintf("%s", err) != "EOF" {
-				fmt.Printf("<情報> エラーだぜ☆（＾～＾）[%s]\n", err)
+				fmt.Printf("<GE2NNGS> エラーだぜ☆（＾～＾）[%s]\n", err)
 				return
 			}
 			// 送られてくる文字がなければ、ここをずっと通る？
-			// fmt.Printf("<情報> EOFだぜ☆（＾～＾）\n")
+			// fmt.Printf("<GE2NNGS> EOFだぜ☆（＾～＾）\n")
 			indexY = (indexY + 1) % 2
 			indexX[indexY] = 0
 			continue
@@ -75,22 +75,22 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 						// Example: `= Pass`
 						matches71 := dia.regexBestmove.FindSubmatch(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]])
 						if 1 < len(matches71) {
-							u.G.Chat.Debug("<情報> サーバーへ送信[%s\n]\n", matches71[1])
+							u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", matches71[1])
 							oi.LongWrite(dia.writerToServer, []byte(matches71[1]))
 							oi.LongWrite(dia.writerToServer, []byte("\n"))
 
 							// myTurn のループ終わり（＾～＾）！
 							return
 						}
-						u.G.Chat.Debug("<情報> 空行(手番)。line=[%s] pre-line=[%s] len=[%d]\n", string(lineBuffer[indexY][:indexX[(indexY+1)%2]]), string(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]]), len(matches71))
+						u.G.Chat.Debug("<GE2NNGS> 空行(手番)。line=[%s] pre-line=[%s] len=[%d]\n", string(lineBuffer[indexY][:indexX[(indexY+1)%2]]), string(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]]), len(matches71))
 
 					} else {
-						u.G.Chat.Debug("<情報> 空行(相手番)。\n")
+						u.G.Chat.Debug("<GE2NNGS> 空行(相手番)。\n")
 					}
 					dia.ChatDebugState()
 
 				} else {
-					u.G.Chat.Debug("<情報> 受信行[%s]\n", lineString)
+					u.G.Chat.Debug("<GE2NNGS> 受信行[%s]\n", lineString)
 				}
 
 				indexY = (indexY + 1) % 2
@@ -105,11 +105,14 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 }
 func (lis *nngsClientStateDiagramListener) opponentTurn(dia *NngsClientStateDiagram) {
 	print("****** wating for his move ******\n")
-	u.G.Chat.Debug("<情報> MyMove=[%s] OpponentMove=[%s]\n", dia.MyMove, dia.OpponentMove)
+	dia.phaseState = 10
+	u.G.Chat.Debug("<GE2NNGS> MyMove=[%s] OpponentMove=[%s]\n", dia.MyMove, dia.OpponentMove)
 
 	if dia.OpponentMove != "" {
 		message := strings.ToLower(fmt.Sprintf("play %s %s", phase.FlipColorString(phase.ToString(dia.MyColor)), dia.OpponentMove))
-		fmt.Printf("<情報> エンジンへ送信[%s]\n", message)
+		fmt.Printf("<GE2NNGS> エンジンへ送信[%s]\n", message)
 		(*dia.EngineStdin).Write([]byte(message))
+
+		// TODO '= \n\n' が返ってくると思うが、 genmove と混線しない工夫が必要。
 	}
 }

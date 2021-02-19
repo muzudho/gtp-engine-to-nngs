@@ -40,11 +40,11 @@ func Spawn(entryConf e.EntryConf, engineStdin *io.WriteCloser, engineStdout *io.
 // CallTELNET - 決まった形のメソッド。
 func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer, r telnet.Reader) {
 
-	print("<情報> 受信開始☆")
+	print("<GE2NNGS> 受信開始☆")
 	lis := nngsClientStateDiagramListener{}
 
 	dia.writerToServer = w
-	dia.readerToServer = r
+	dia.readerFromServer = r
 
 	go dia.read(&lis)
 
@@ -53,19 +53,19 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 	// 無限ループ。 一行読み取ります。
 	for scanner.Scan() {
 		// 書き込みます。最後に改行を付けます。
-		u.G.Chat.Debug("<情報> サーバーへ送信[%s\n]\n", scanner.Bytes())
+		u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", scanner.Bytes())
 		oi.LongWrite(dia.writerToServer, scanner.Bytes())
 		oi.LongWrite(dia.writerToServer, []byte("\n"))
 	}
 }
 
-// 送られてくるメッセージを待ち構えるループです。
+// サーバーから送られてくるメッセージを待ち構えるループです。
 func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 	var buffer [1]byte // これが満たされるまで待つ。1バイト。
 	p := buffer[:]
 
 	for {
-		n, err := dia.readerToServer.Read(p) // 送られてくる文字がなければ、ここでブロックされます。
+		n, err := dia.readerFromServer.Read(p) // 送られてくる文字がなければ、ここでブロックされます。
 
 		if n > 0 {
 			bytes := p[:n]
@@ -99,10 +99,10 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 		}
 	}
 
-	// 改行が送られてくるものと考えるぜ☆（＾～＾）
+	// サーバーから改行が送られてくるものと考えるぜ☆（＾～＾）
 	// これで、１行ずつ読み込めるな☆（＾～＾）
 	for {
-		n, err := dia.readerToServer.Read(p) // 送られてくる文字がなければ、ここでブロックされます。
+		n, err := dia.readerFromServer.Read(p) // サーバーから送られてくる文字がなければ、ここでブロックされます。
 
 		if nil != err {
 			return // 相手が切断したなどの理由でエラーになるので、終了します。
@@ -135,6 +135,6 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 // Original code: NngsClient.rb/NNGSClient/`def login`
 func setClientMode(writerToServer telnet.Writer) {
 	message := "set client true\n"
-	u.G.Chat.Debug("<情報> サーバーへ送信[%s]\n", message)
+	u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s]\n", message)
 	oi.LongWrite(writerToServer, []byte(message))
 }
