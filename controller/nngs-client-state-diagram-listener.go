@@ -14,19 +14,19 @@ type nngsClientStateDiagramListener struct {
 }
 
 func (lis *nngsClientStateDiagramListener) matchStart() {
-	print("[情報] 対局成立だぜ☆")
+	print("<情報> 対局成立だぜ☆")
 }
 func (lis *nngsClientStateDiagramListener) matchEnd() {
-	print("[情報] 対局終了だぜ☆")
+	print("<情報> 対局終了だぜ☆")
 }
 func (lis *nngsClientStateDiagramListener) scoring() {
-	print("[情報] 得点計算だぜ☆")
+	print("<情報> 得点計算だぜ☆")
 }
 
 func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 	print("****** I am thinking now   ******")
 	message := fmt.Sprintf("genmove %s\n", strings.ToLower(phase.ToString(dia.MyColor)))
-	fmt.Printf("[情報] エンジンにメッセージ送ったろ☆（＾～＾）[%s]", message)
+	fmt.Printf("<情報> エンジンにメッセージ送ったろ☆（＾～＾）[%s]", message)
 	(*dia.EngineStdin).Write([]byte(message))
 
 	var buffer [1]byte // これが満たされるまで待つ。1バイト。
@@ -45,11 +45,11 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 
 		if nil != err {
 			if fmt.Sprintf("%s", err) != "EOF" {
-				fmt.Printf("[情報] エラーだぜ☆（＾～＾）[%s]\n", err)
+				fmt.Printf("<情報> エラーだぜ☆（＾～＾）[%s]\n", err)
 				return
 			}
 			// 送られてくる文字がなければ、ここをずっと通る？
-			// fmt.Printf("[情報] EOFだぜ☆（＾～＾）\n")
+			// fmt.Printf("<情報> EOFだぜ☆（＾～＾）\n")
 			indexY = (indexY + 1) % 2
 			indexX[indexY] = 0
 			continue
@@ -74,9 +74,9 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 						// Example: `= Pass`
 						matches71 := dia.regexBestmove.FindSubmatch(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]])
 						if 1 < len(matches71) {
-							u.G.Chat.Debug("<情報> 着手[%s]。\n", matches71[1])
-							oi.LongWrite(dia.writer, []byte(matches71[1]))
-							oi.LongWrite(dia.writer, []byte("\n"))
+							u.G.Chat.Debug("<情報> サーバーへ送信[%s\n]\n", matches71[1])
+							oi.LongWrite(dia.writerToServer, []byte(matches71[1]))
+							oi.LongWrite(dia.writerToServer, []byte("\n"))
 						} else {
 							u.G.Chat.Debug("<情報> 空行(手番)。line=[%s] pre-line=[%s] len=[%d]\n", string(lineBuffer[indexY][:indexX[(indexY+1)%2]]), string(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]]), len(matches71))
 						}

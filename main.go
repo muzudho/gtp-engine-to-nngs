@@ -19,17 +19,17 @@ func main() {
 	// Working directory
 	wdir, err := os.Getwd()
 	if err != nil {
-		panic(fmt.Sprintf("[情報] wdir=%s", wdir))
+		panic(fmt.Sprintf("<情報> wdir=%s", wdir))
 	}
-	fmt.Printf("[情報] wdir=%s\n", wdir)
+	fmt.Printf("<情報> wdir=%s\n", wdir)
 
 	// コマンドライン引数
 	workdir := flag.String("workdir", wdir, "Working directory path.")
 	flag.Parse()
-	fmt.Printf("[情報] flag.Args()=%s\n", flag.Args())
-	fmt.Printf("[情報] workdir=%s\n", *workdir)
+	fmt.Printf("<情報> flag.Args()=%s\n", flag.Args())
+	fmt.Printf("<情報> workdir=%s\n", *workdir)
 	entryConfPath := filepath.Join(*workdir, "input/default.entryConf.toml")
-	fmt.Printf("[情報] entryConfPath=%s\n", entryConfPath)
+	fmt.Printf("<情報> entryConfPath=%s\n", entryConfPath)
 
 	// グローバル変数の作成
 	u.G = *new(u.GlobalVariables)
@@ -48,20 +48,20 @@ func main() {
 	// チャッターの作成。 標準出力とロガーを一緒にしただけです。
 	u.G.Chat = *u.NewChatter(u.G.Log)
 
-	// fmt.Println("[情報] 設定ファイルを読み込んだろ☆（＾～＾）")
+	// fmt.Println("<情報> 設定ファイルを読み込んだろ☆（＾～＾）")
 	entryConf := ui.LoadEntryConf(entryConfPath) // "./input/default.entryConf.toml"
 
 	// NNGSからのメッセージ受信に対応するプログラムを指定したろ☆（＾～＾）
-	fmt.Printf("[情報] (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
+	fmt.Printf("<情報> (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
 
 	// 思考エンジンを起動
 	engineStdin, engineStdout := startEngine(entryConf, workdir)
 
-	fmt.Println("[情報] (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
+	fmt.Println("<情報> (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
 	c.Spawn(entryConf, &engineStdin, &engineStdout)
 
 	engineStdin.Close()
-	fmt.Println("[情報] (^q^) おわり☆！")
+	fmt.Println("<情報> (^q^) おわり☆！")
 }
 
 // 思考エンジンを起動

@@ -8,6 +8,7 @@ import (
 	"regexp"
 
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
+	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
 	"github.com/reiver/go-oi"
 	"github.com/reiver/go-telnet"
 )
@@ -39,11 +40,11 @@ func Spawn(entryConf e.EntryConf, engineStdin *io.WriteCloser, engineStdout *io.
 // CallTELNET - 決まった形のメソッド。
 func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer, r telnet.Reader) {
 
-	print("[情報] 受信開始☆")
+	print("<情報> 受信開始☆")
 	lis := nngsClientStateDiagramListener{}
 
-	dia.writer = w
-	dia.reader = r
+	dia.writerToServer = w
+	dia.readerToServer = r
 
 	go dia.read(&lis)
 
@@ -52,8 +53,9 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 	// 無限ループ。 一行読み取ります。
 	for scanner.Scan() {
 		// 書き込みます。最後に改行を付けます。
-		oi.LongWrite(dia.writer, scanner.Bytes())
-		oi.LongWrite(dia.writer, []byte("\n"))
+		u.G.Chat.Debug("<情報> サーバーへ送信[%s\n]\n", scanner.Bytes())
+		oi.LongWrite(dia.writerToServer, scanner.Bytes())
+		oi.LongWrite(dia.writerToServer, []byte("\n"))
 	}
 }
 
@@ -63,7 +65,7 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 	p := buffer[:]
 
 	for {
-		n, err := dia.reader.Read(p) // 送られてくる文字がなければ、ここでブロックされます。
+		n, err := dia.readerToServer.Read(p) // 送られてくる文字がなければ、ここでブロックされます。
 
 		if n > 0 {
 			bytes := p[:n]
@@ -100,7 +102,7 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 	// 改行が送られてくるものと考えるぜ☆（＾～＾）
 	// これで、１行ずつ読み込めるな☆（＾～＾）
 	for {
-		n, err := dia.reader.Read(p) // 送られてくる文字がなければ、ここでブロックされます。
+		n, err := dia.readerToServer.Read(p) // 送られてくる文字がなければ、ここでブロックされます。
 
 		if nil != err {
 			return // 相手が切断したなどの理由でエラーになるので、終了します。
@@ -131,6 +133,8 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 
 // 簡易表示モードに切り替えます。
 // Original code: NngsClient.rb/NNGSClient/`def login`
-func setClientMode(w telnet.Writer) {
-	oi.LongWrite(w, []byte("set client true\n"))
+func setClientMode(writerToServer telnet.Writer) {
+	message := "set client true\n"
+	u.G.Chat.Debug("<情報> サーバーへ送信[%s]\n", message)
+	oi.LongWrite(writerToServer, []byte(message))
 }
