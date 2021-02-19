@@ -51,9 +51,13 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 			lineBuffer[index] = bytes[0]
 			index++
 
-			print(string(bytes)) // 受け取るたびに１文字ずつ表示。
+			// 思考エンジンから１文字送られてくるたび、表示。
+			// print(string(bytes))
 
 			if bytes[0] == '\n' {
+				// 思考エンジンから送られてきた１文字が、１行分 溜まるごとに表示。
+				fmt.Printf("<情報> 受信行[%s]", string(lineBuffer[:index]))
+
 				index = 0
 				// 終わりかどうか分からん。
 			}

@@ -70,8 +70,9 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 			dia.index++
 
 			if dia.newlineReadableState < 2 {
+				// サーバーから１文字送られてくるたび、表示。
 				// [受信] 割り込みで 改行がない行も届くので、改行が届くまで待つという処理ができません。
-				print(string(bytes)) // 受け取るたびに１文字ずつ表示。
+				print(string(bytes))
 			}
 
 			// 改行を受け取る前にパースしてしまおう☆（＾～＾）早とちりするかも知れないけど☆（＾～＾）
