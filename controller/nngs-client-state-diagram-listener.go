@@ -103,5 +103,6 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 
 }
 func (lis *nngsClientStateDiagramListener) opponentTurn(dia *NngsClientStateDiagram) {
-	print("****** wating for his move ******")
+	print("****** wating for his move ******\n")
+	u.G.Chat.Debug("<情報> MyMove=[%s] OpponentMove=[%s]\n", dia.MyMove, dia.OpponentMove)
 }
