@@ -10,6 +10,7 @@ import (
 	"github.com/muzudho/gtp-engine-to-nngs/controller/clistat"
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
+	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
 	"github.com/reiver/go-oi"
 	"github.com/reiver/go-telnet"
 )
@@ -21,11 +22,12 @@ type NngsClientStateDiagram struct {
 	// EngineStdin - GTP Engine stdin
 	EngineStdout *io.ReadCloser
 
-	// 状態遷移の中の小さな区画
-	promptState int
-
 	entryConf e.EntryConf
 
+	// 状態遷移
+	state clistat.Clistat
+	// 状態遷移の中の小さな区画
+	promptState int
 	// 末尾に改行が付いていると想定していいフェーズ。逆に、そうでない例は `Login:` とか
 	newlineReadableState uint
 
@@ -41,9 +43,6 @@ type NngsClientStateDiagram struct {
 	lineBuffer [1024]byte
 	index      uint
 
-	// 状態遷移
-	state clistat.Clistat
-
 	// 正規表現
 	regexCommand           regexp.Regexp
 	regexUseMatch          regexp.Regexp
@@ -57,14 +56,16 @@ type NngsClientStateDiagram struct {
 	// Example: `15 Game 2 I: kifuwarabe (0 2289 -1) vs kifuwarabi (0 2298 -1)`.
 	regexMove          regexp.Regexp
 	regexAcceptCommand regexp.Regexp
+	// Example: `= A1`
+	regexBestmove regexp.Regexp
 
 	// MyColor - 自分の手番の色
 	MyColor phase.Phase
+	// Phase - これから指す方。局面の手番とは逆になる
+	CurrentPhase phase.Phase
 
 	// BoardSize - 何路盤。マッチを受け取ったときに確定
 	BoardSize uint
-	// Phase - これから指す方。局面の手番とは逆になる
-	CurrentPhase phase.Phase
 	// MyMove - 自分の指し手
 	MyMove string
 	// OpponentMove - 相手の指し手
@@ -93,6 +94,11 @@ type NngsClientStateDiagram struct {
 	GameBAvailableSeconds int
 	// GameBField4 - 黒手番の４番目のフィールド（用途不明）
 	GameBField4 string
+}
+
+// ChatDebugState - 状態をデバッグ表示
+func (dia *NngsClientStateDiagram) ChatDebugState() {
+	u.G.Chat.Debug("[情報] state=%d promptState=%d newlineReadableState=%d\n", dia.state, dia.promptState, dia.newlineReadableState)
 }
 
 func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramListener, subCode int) {

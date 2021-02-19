@@ -5,6 +5,8 @@ import (
 	"strings"
 
 	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
+	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
+	"github.com/reiver/go-oi"
 )
 
 // `github.com/reiver/go-telnet` ライブラリーの動作をリスニングします
@@ -28,8 +30,14 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 	(*dia.EngineStdin).Write([]byte(message))
 
 	var buffer [1]byte // これが満たされるまで待つ。1バイト。
-	var lineBuffer [1024]byte
-	index := 0
+
+	// めっちゃ 難しいが、
+	// [0] Current [1] Previous
+	// [0] Previous [1] Current
+	// を交互にやっている。
+	var lineBuffer [2][1024]byte
+	indexX := []uint{0, 0}
+	indexY := 0
 	p := buffer[:]
 
 	for {
@@ -42,7 +50,8 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 			}
 			// 送られてくる文字がなければ、ここをずっと通る？
 			// fmt.Printf("[情報] EOFだぜ☆（＾～＾）\n")
-			index = 0
+			indexY = (indexY + 1) % 2
+			indexX[indexY] = 0
 			continue
 		}
 
@@ -54,20 +63,37 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 
 			if bytes[0] == '\n' {
 				// 思考エンジンから送られてきた１文字が、１行分 溜まるごとに表示。
-				lineString := string(lineBuffer[:index])
-
-				index = 0
-				// 終わりかどうか分からん。
+				lineString := string(lineBuffer[indexY][:indexX[indexY]])
 
 				if lineString == "" {
 					// 空行
-					fmt.Printf("<情報> 空行。\n")
+
+					if dia.MyColor == dia.CurrentPhase {
+						// サーバーに着手を送信します。１行前の文字列を使います
+						// Example: `= A1`
+						// Example: `= Pass`
+						matches71 := dia.regexBestmove.FindSubmatch(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]])
+						if 1 < len(matches71) {
+							u.G.Chat.Debug("<情報> 着手[%s]。\n", matches71[1])
+							oi.LongWrite(dia.writer, []byte(matches71[1]))
+							oi.LongWrite(dia.writer, []byte("\n"))
+						} else {
+							u.G.Chat.Debug("<情報> 空行(手番)。line=[%s] pre-line=[%s] len=[%d]\n", string(lineBuffer[indexY][:indexX[(indexY+1)%2]]), string(lineBuffer[(indexY+1)%2][:indexX[(indexY+1)%2]]), len(matches71))
+						}
+					} else {
+						u.G.Chat.Debug("<情報> 空行(相手番)。\n")
+					}
+					dia.ChatDebugState()
+
 				} else {
-					fmt.Printf("<情報> 受信行[%s]\n", lineString)
+					u.G.Chat.Debug("<情報> 受信行[%s]\n", lineString)
 				}
+
+				indexY = (indexY + 1) % 2
+				indexX[indexY] = 0
 			} else {
-				lineBuffer[index] = bytes[0]
-				index++
+				lineBuffer[indexY][indexX[indexY]] = bytes[0]
+				indexX[indexY]++
 			}
 		}
 	}

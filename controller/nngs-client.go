@@ -31,7 +31,8 @@ func Spawn(entryConf e.EntryConf, engineStdin *io.WriteCloser, engineStdout *io.
 		regexOneSeven:          *regexp.MustCompile("1 7"),
 		regexGame:              *regexp.MustCompile("Game (\\d+) ([a-zA-Z]): (\\S+) \\((\\S+) (\\S+) (\\S+)\\) vs (\\S+) \\((\\S+) (\\S+) (\\S+)\\)"),
 		regexMove:              *regexp.MustCompile("\\s*(\\d+)\\(([BWbw])\\): ([A-Z]\\d+|Pass)"),
-		regexAcceptCommand:     *regexp.MustCompile("match \\S+ \\S+ (\\d+) ")}
+		regexAcceptCommand:     *regexp.MustCompile("match \\S+ \\S+ (\\d+) "),
+		regexBestmove:          *regexp.MustCompile("= ([A-Z]\\d+|Pass)")}
 	return telnet.DialToAndCall(fmt.Sprintf("%s:%d", entryConf.Server.Host, entryConf.Server.Port), nngsClientStateDiagram)
 }
 
