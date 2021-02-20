@@ -137,8 +137,8 @@ func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramList
 			// コンピューター囲碁大会では 思考エンジンの自己申告だけ聞き取るので、
 			// このフェーズは飛ばします。
 			message := "done\nquit\n"
-			fmt.Printf("...GE2NNGS... 得点計算は飛ばすぜ☆（＾～＾）対局も終了するぜ☆（＾～＾）\n")
-			kwu.G.Chat.Trace("<--GE2NNGS... [%s]\n", message)
+			kwu.G.Chat.Trace("...GE2NNGS... 得点計算は飛ばすぜ☆（＾～＾）対局も終了するぜ☆（＾～＾）\n")
+			kwu.G.Chat.Notice("<--GE2NNGS... [%s]\n", message)
 			oi.LongWrite(dia.writerToServer, []byte(message))
 		}
 		dia.promptState = 7
@@ -170,7 +170,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 				panic(kwu.G.Chat.Fatal("Need name (UserName)"))
 			}
 
-			kwu.G.Chat.Trace("<--GE2NNGS... [%s\n]\n", user)
+			kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", user)
 			oi.LongWrite(dia.writerToServer, []byte(user))
 			oi.LongWrite(dia.writerToServer, []byte("\n"))
 
@@ -184,7 +184,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 				panic(kwu.G.Chat.Fatal("Need password"))
 			}
 
-			kwu.G.Chat.Trace("<--GE2NNGS... [%s\n]\n", dia.entryConf.User.Pass)
+			kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", dia.entryConf.User.Pass)
 			oi.LongWrite(dia.writerToServer, []byte(dia.entryConf.User.Pass))
 			oi.LongWrite(dia.writerToServer, []byte("\n"))
 			setClientMode(dia.writerToServer)
@@ -196,7 +196,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 				panic(kwu.G.Chat.Fatal("Need password"))
 			}
 
-			kwu.G.Chat.Trace("<--GE2NNGS... [%s\n]\n", dia.entryConf.User.Pass)
+			kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", dia.entryConf.User.Pass)
 			oi.LongWrite(dia.writerToServer, []byte(dia.entryConf.User.Pass))
 			oi.LongWrite(dia.writerToServer, []byte("\n"))
 			dia.state = clistat.EnteredMyPasswordAndIAmWaitingToBePrompted
@@ -221,12 +221,12 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 				panic(kwu.G.Chat.Fatal(err.Error()))
 			}
 
-			fmt.Printf("...GE2NNGS... lis.MyColorを%sに変更☆（＾～＾）\n", configuredColorUpperCase)
+			kwu.G.Log.Trace("...GE2NNGS... lis.MyColorを%sに変更☆（＾～＾）\n", configuredColorUpperCase)
 			dia.MyColor = phase.ToNum(configuredColorUpperCase)
 
 			message := fmt.Sprintf("match %s %s %d %d %d\n", dia.entryConf.OpponentName(), configuredColorUpperCase, dia.entryConf.BoardSize(), dia.entryConf.AvailableTimeMinutes(), dia.entryConf.CanadianTiming())
-			fmt.Printf("...GE2NNGS... 対局を申し込んだぜ☆（＾～＾）")
-			kwu.G.Chat.Trace("<--GE2NNGS... [%s]\n", message)
+			kwu.G.Log.Trace("...GE2NNGS... 対局を申し込んだぜ☆（＾～＾）")
+			kwu.G.Chat.Notice("<--GE2NNGS... [%s]\n", message)
 			oi.LongWrite(dia.writerToServer, []byte(message))
 		}
 		dia.state = clistat.WaitingInInfo
@@ -236,7 +236,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 		// Example: 1 5
 		matches := dia.regexCommand.FindSubmatch(dia.lineBuffer[:dia.index])
 
-		//fmt.Printf("...GE2NNGS... m[%s]", matches)
+		//kwu.G.Chat.Trace("...GE2NNGS... m[%s]", matches)
 		if 2 < len(matches) {
 			commandCodeBytes := matches[1]
 			commandCode := string(commandCodeBytes)
@@ -260,7 +260,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 					matches2 := dia.regexUseMatchToRespond.FindSubmatch(promptStateBytes)
 					if 2 < len(matches2) {
 						// 対局を申し込まれた方だけ、ここを通るぜ☆（＾～＾）
-						fmt.Printf("...GE2NNGS... 対局を申し込まれたぜ☆（＾～＾）[%s] accept[%s],decline[%s]\n", string(promptStateBytes), matches2[1], matches2[2])
+						kwu.G.Chat.Trace("...GE2NNGS... 対局を申し込まれたぜ☆（＾～＾）[%s] accept[%s],decline[%s]\n", string(promptStateBytes), matches2[1], matches2[2])
 
 						// Example: `match kifuwarabi W 19 40 0`
 						dia.CommandOfMatchAccept = string(matches2[1])
@@ -276,7 +276,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 						opponentPlayerName := matchAcceptTokens[1]
 						myColorString := matchAcceptTokens[2]
 						myColorUppercase := strings.ToUpper(myColorString)
-						fmt.Printf("...GE2NNGS... MyColorを[%s]に変更☆（＾～＾）\n", myColorString)
+						// kwu.G.Chat.Trace("...GE2NNGS... MyColorを[%s]に変更☆（＾～＾）\n", myColorString)
 						dia.MyColor = phase.ToNum(myColorString)
 
 						boardSize, err := strconv.ParseUint(matchAcceptTokens[3], 10, 0)
@@ -284,7 +284,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 							panic(kwu.G.Chat.Fatal(err.Error()))
 						}
 						dia.BoardSize = uint(boardSize)
-						fmt.Printf("...GE2NNGS... ボードサイズは%d☆（＾～＾）", dia.BoardSize)
+						// kwu.G.Chat.Trace("...GE2NNGS... ボードサイズは%d☆（＾～＾）", dia.BoardSize)
 
 						configuredColor, _, err := dia.entryConf.MyColor()
 						if err != nil {
@@ -297,7 +297,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 						// cmd_match
 						message := fmt.Sprintf("match %s %s %d %d %d\n", opponentPlayerName, myColorUppercase, dia.entryConf.BoardSize(), dia.entryConf.AvailableTimeMinutes(), dia.entryConf.CanadianTiming())
-						fmt.Printf("...GE2NNGS... 対局を申し込むぜ☆（＾～＾）[%s]\n", message)
+						kwu.G.Chat.Trace("...GE2NNGS... 対局を申し込むぜ☆（＾～＾）[%s]\n", message)
 						oi.LongWrite(dia.writerToServer, []byte(message))
 					}
 				} else if dia.regexMatchAccepted.Match(promptStateBytes) {
@@ -328,7 +328,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 				matches2 := dia.regexGame.FindSubmatch(promptStateBytes)
 				if 10 < len(matches2) {
 					// 白 VS 黒 の順序固定なのか☆（＾～＾）？ それともマッチを申し込んだ方 VS 申し込まれた方 なのか☆（＾～＾）？
-					fmt.Printf("...GE2NNGS... 対局現在情報☆（＾～＾） gameid[%s], gametype[%s] white_user[%s][%s][%s][%s] black_user[%s][%s][%s][%s]", matches2[1], matches2[2], matches2[3], matches2[4], matches2[5], matches2[6], matches2[7], matches2[8], matches2[9], matches2[10])
+					// kwu.G.Chat.Trace("...GE2NNGS... 対局現在情報☆（＾～＾） gameid[%s], gametype[%s] white_user[%s][%s][%s][%s] black_user[%s][%s][%s][%s]", matches2[1], matches2[2], matches2[3], matches2[4], matches2[5], matches2[6], matches2[7], matches2[8], matches2[9], matches2[10])
 
 					// ゲームID
 					// Original code: @gameid
@@ -378,12 +378,12 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 						// 相手の指し手を受信したのだから、手番はその逆だぜ☆（＾～＾）
 						dia.CurrentPhase = phase.ToNum(phase.FlipColorString(string(matches3[2])))
 
-						fmt.Printf("...GE2NNGS... 指し手☆（＾～＾） code=%s color=%s move=%s MyColor=%s, CurrentPhase=%s\n", matches3[1], matches3[2], matches3[3], phase.ToString(dia.MyColor), phase.ToString(dia.CurrentPhase))
+						// kwu.G.Chat.Trace("...GE2NNGS... 指し手☆（＾～＾） code=%s color=%s move=%s MyColor=%s, CurrentPhase=%s\n", matches3[1], matches3[2], matches3[3], phase.ToString(dia.MyColor), phase.ToString(dia.CurrentPhase))
 						if dia.MyColor == dia.CurrentPhase {
 							// 自分の手番だぜ☆（＾～＾）！
-							fmt.Printf("...GE2NNGS... 相手の手を記憶☆（＾～＾） move=%s\n", matches3[3])
+							// kwu.G.Chat.Trace("...GE2NNGS... 相手の手を記憶☆（＾～＾） move=%s\n", matches3[3])
 							dia.OpponentMove = string(matches3[3]) // 相手の指し手が付いてくるので記憶
-							// fmt.Printf("...GE2NNGS... 自分の手番で一旦ブロッキング☆（＾～＾）")
+							// kwu.G.Chat.Trace("...GE2NNGS... 自分の手番で一旦ブロッキング☆（＾～＾）")
 							// 初回だけここを通るが、以後、ここには戻ってこないぜ☆（＾～＾）
 							// dia.state = clistat.BlockingReceiver
 
@@ -409,9 +409,9 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 						} else {
 							// 相手の手番だぜ☆（＾～＾）！
-							fmt.Printf("...GE2NNGS... 自分の手を記憶☆（＾～＾） move=%s\n", matches3[3])
+							// kwu.G.Chat.Trace("...GE2NNGS... 自分の手を記憶☆（＾～＾） move=%s\n", matches3[3])
 							dia.MyMove = string(matches3[3]) // 自分の指し手が付いてくるので記憶
-							// fmt.Printf("...GE2NNGS... 相手の手番で一旦ブロッキング☆（＾～＾）")
+							// kwu.G.Chat.Trace("...GE2NNGS... 相手の手番で一旦ブロッキング☆（＾～＾）")
 							// 初回だけここを通るが、以後、ここには戻ってこないぜ☆（＾～＾）
 							// dia.state = clistat.BlockingSender
 
@@ -442,10 +442,10 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 		}
 	case clistat.BlockingReceiver:
 		// 申し込まれた方はブロック中です
-		fmt.Printf("...GE2NNGS... 申し込まれた方[%s]のブロッキング☆（＾～＾）", phase.ToString(dia.MyColor))
+		// kwu.G.Chat.Trace("...GE2NNGS... 申し込まれた方[%s]のブロッキング☆（＾～＾）", phase.ToString(dia.MyColor))
 	case clistat.BlockingSender:
 		// 申し込んだ方はブロック中です。
-		fmt.Printf("...GE2NNGS... 申し込んだ方[%s]のブロッキング☆（＾～＾）", phase.ToString(dia.MyColor))
+		// kwu.G.Chat.Trace("...GE2NNGS... 申し込んだ方[%s]のブロッキング☆（＾～＾）", phase.ToString(dia.MyColor))
 	default:
 		// 想定外の遷移だぜ☆（＾～＾）！
 		panic(kwu.G.Chat.Fatal("Unexpected state transition. state=%d", dia.state))
@@ -453,17 +453,17 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 }
 
 func (dia *NngsClientStateDiagram) turn(lis *nngsClientStateDiagramListener) {
-	// fmt.Printf("...GE2NNGS... ターン☆（＾～＾） MyColor=%s, CurrentPhase=%s\n", phase.ToString(dia.MyColor), phase.ToString(dia.CurrentPhase))
+	// kwu.G.Chat.Trace("...GE2NNGS... ターン☆（＾～＾） MyColor=%s, CurrentPhase=%s\n", phase.ToString(dia.MyColor), phase.ToString(dia.CurrentPhase))
 	if dia.MyColor == dia.CurrentPhase {
 		// 自分の手番だぜ☆（＾～＾）！
-		// fmt.Printf("...GE2NNGS... 自分の手番だぜ☆（＾～＾）！\n")
+		// kwu.G.Chat.Trace("...GE2NNGS... 自分の手番だぜ☆（＾～＾）！\n")
 
 		dia.genmove(lis)
 
 		lis.myTurn(dia)
 	} else {
 		// 相手の手番だぜ☆（＾～＾）！
-		// fmt.Printf("...GE2NNGS... 相手の手番だぜ☆（＾～＾）！\n")
+		// kwu.G.Chat.Trace("...GE2NNGS... 相手の手番だぜ☆（＾～＾）！\n")
 		lis.opponentTurn(dia)
 	}
 }
@@ -485,11 +485,11 @@ func (dia *NngsClientStateDiagram) waitForPlayResponse(lis *nngsClientStateDiagr
 
 		if nil != err {
 			if fmt.Sprintf("%s", err) != "EOF" {
-				fmt.Printf("...GE2NNGS<-- エラーだぜ☆（＾～＾）[%s]\n", err)
+				kwu.G.Chat.Error("...GE2NNGS<-- エラーだぜ☆（＾～＾）[%s]\n", err)
 				return
 			}
 			// 送られてくる文字がなければ、ここをずっと通る？
-			// fmt.Printf("...GE2NNGS... EOFだぜ☆（＾～＾）\n")
+			// kwu.G.Chat.Trace("...GE2NNGS... EOFだぜ☆（＾～＾）\n")
 			index = 0
 			continue
 		}
@@ -516,11 +516,11 @@ func (dia *NngsClientStateDiagram) waitForPlayResponse(lis *nngsClientStateDiagr
 					// dia.ChatDebugState()
 
 				} else {
-					kwu.G.Chat.Trace("...GE2NNGS<-- [%s]\n", lineString)
+					kwu.G.Chat.Notice("...GE2NNGS<-- [%s]\n", lineString)
 
 					if lineString == "= " {
 						// `play` の OK かも。
-						kwu.G.Chat.Trace("...GE2NNGS... playのOKかも☆（＾～＾）\n")
+						// kwu.G.Chat.Trace("...GE2NNGS... playのOKかも☆（＾～＾）\n")
 						return
 					}
 				}
@@ -551,11 +551,11 @@ func (dia *NngsClientStateDiagram) waitForGenmoveResponse(lis *nngsClientStateDi
 
 		if nil != err {
 			if fmt.Sprintf("%s", err) != "EOF" {
-				fmt.Printf("...GE2NNGS<-- エラーだぜ☆（＾～＾）[%s]\n", err)
+				kwu.G.Chat.Error("...GE2NNGS<-- エラーだぜ☆（＾～＾）[%s]\n", err)
 				return
 			}
 			// 送られてくる文字がなければ、ここをずっと通る？
-			// fmt.Printf("...GE2NNGS<-- EOFだぜ☆（＾～＾）\n")
+			// kwu.G.Chat.Trace("...GE2NNGS<-- EOFだぜ☆（＾～＾）\n")
 			index = 0
 			continue
 		}
@@ -578,7 +578,7 @@ func (dia *NngsClientStateDiagram) waitForGenmoveResponse(lis *nngsClientStateDi
 						// Example: `= A1`
 						// Example: `= Pass`
 						if bestmove != "" {
-							kwu.G.Chat.Trace("<--GE2NNGS... [%s\n]\n", bestmove)
+							kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", bestmove)
 							oi.LongWrite(dia.writerToServer, []byte(bestmove))
 							oi.LongWrite(dia.writerToServer, []byte("\n"))
 							// myTurn のループ終わり（＾～＾）！
@@ -593,24 +593,25 @@ func (dia *NngsClientStateDiagram) waitForGenmoveResponse(lis *nngsClientStateDi
 					// dia.ChatTraceState()
 
 				} else {
-					kwu.G.Chat.Trace("...GE2NNGS<-- [%s]\n", lineString)
+					kwu.G.Chat.Notice("...GE2NNGS<-- [%s]\n", lineString)
 
-					if lineString == "= " {
-						// `play` の OK かも。
-						kwu.G.Chat.Trace("...GE2NNGS... playのOKかも☆（＾～＾） lineString=[%s]\n", lineString)
-					} else {
-						// サーバーに着手を送信します。１行前の文字列を使います
-						// Example: `= A1`
-						// Example: `= Pass`
-						matches71 := dia.regexBestmove.FindSubmatch(lineBuffer[:index])
-						if 1 < len(matches71) {
-							// 着手
-							bestmove = string(matches71[1])
-							// kwu.G.Chat.Trace("...GE2NNGS... bestmove=[%s]\n", bestmove)
-						} else {
-							kwu.G.Chat.Trace("...GE2NNGS... 空行(手番)。line=[%s] bestmove=[%s] len=[%d]\n", string(lineBuffer[:index]), bestmove, len(matches71))
-						}
+					// if lineString == "= " {
+					// 	// `play` の OK かも。
+					// 	kwu.G.Chat.Trace("...GE2NNGS... playのOKかも☆（＾～＾） lineString=[%s]\n", lineString)
+					// } else {
+					// サーバーに着手を送信します。１行前の文字列を使います
+					// Example: `= A1`
+					// Example: `= Pass`
+					matches71 := dia.regexBestmove.FindSubmatch(lineBuffer[:index])
+					if 1 < len(matches71) {
+						// 着手
+						bestmove = string(matches71[1])
+						// kwu.G.Chat.Trace("...GE2NNGS... bestmove=[%s]\n", bestmove)
+						// } else {
+						// 	// TODO 空行とは限らないだろ、変なコマンドかも（＾～＾）？
+						// 	kwu.G.Chat.Trace("...GE2NNGS... 空行(手番)。line=[%s] bestmove=[%s] len=[%d]\n", string(lineBuffer[:index]), bestmove, len(matches71))
 					}
+					//}
 				}
 
 				index = 0

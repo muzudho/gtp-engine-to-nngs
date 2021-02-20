@@ -55,22 +55,22 @@ func main() {
 	entryConf := ui.LoadEntryConf(entryConfPath) // "./input/default.entryConf.toml"
 
 	// NNGSからのメッセージ受信に対応するプログラムを指定したろ☆（＾～＾）
-	fmt.Printf("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
+	kwu.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
 
 	// 思考エンジンを起動
 	engineStdin, engineStdout := startEngine(entryConf, workdir)
 
-	fmt.Println("...GE2NNGS... (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
+	kwu.G.Chat.Trace("...GE2NNGS... (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
 	c.Spawn(entryConf, &engineStdin, &engineStdout)
 
 	engineStdin.Close()
-	fmt.Println("...GE2NNGS... (^q^) おわり☆！")
+	kwu.G.Chat.Trace("...GE2NNGS... (^q^) おわり☆！")
 }
 
 // 思考エンジンを起動
 func startEngine(entryConf e.EntryConf, workdir *string) (io.WriteCloser, io.ReadCloser) {
 	parameters := strings.Split("--workdir "+*workdir+" "+entryConf.User.EngineCommandOption, " ")
-	fmt.Printf("(^q^) GTP対応の思考エンジンを起動するぜ☆ [%s] [%s]", entryConf.User.EngineCommand, strings.Join(parameters, " "))
+	kwu.G.Chat.Trace("(^q^) GTP対応の思考エンジンを起動するぜ☆ [%s] [%s]", entryConf.User.EngineCommand, strings.Join(parameters, " "))
 	cmd := exec.Command(entryConf.User.EngineCommand, parameters...)
 	stdin, _ := cmd.StdinPipe()
 	stdout, _ := cmd.StdoutPipe()
