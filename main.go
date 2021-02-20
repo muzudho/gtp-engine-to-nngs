@@ -21,17 +21,17 @@ func main() {
 	wdir, err := os.Getwd()
 	if err != nil {
 		// ここでは、ログはまだ設定できてない
-		panic(fmt.Sprintf("<GE2NNGS> wdir=%s", wdir))
+		panic(fmt.Sprintf("...GE2NNGS... wdir=%s", wdir))
 	}
-	fmt.Printf("<GE2NNGS> wdir=%s\n", wdir)
+	fmt.Printf("...GE2NNGS... wdir=%s\n", wdir)
 
 	// コマンドライン引数
 	workdir := flag.String("workdir", wdir, "Working directory path.")
 	flag.Parse()
-	fmt.Printf("<GE2NNGS> flag.Args()=%s\n", flag.Args())
-	fmt.Printf("<GE2NNGS> workdir=%s\n", *workdir)
+	fmt.Printf("...GE2NNGS... flag.Args()=%s\n", flag.Args())
+	fmt.Printf("...GE2NNGS... workdir=%s\n", *workdir)
 	entryConfPath := filepath.Join(*workdir, "input/default.entryConf.toml")
-	fmt.Printf("<GE2NNGS> entryConfPath=%s\n", entryConfPath)
+	fmt.Printf("...GE2NNGS... entryConfPath=%s\n", entryConfPath)
 
 	// グローバル変数の作成
 	u.G = *new(u.GlobalVariables)
@@ -51,20 +51,20 @@ func main() {
 	kwu.G.Chat = *kwu.NewChatter(kwu.G.Log)
 	kwu.G.StderrChat = *kwu.NewStderrChatter(kwu.G.Log)
 
-	// fmt.Println("<GE2NNGS> 設定ファイルを読み込んだろ☆（＾～＾）")
+	// fmt.Println("...GE2NNGS... 設定ファイルを読み込んだろ☆（＾～＾）")
 	entryConf := ui.LoadEntryConf(entryConfPath) // "./input/default.entryConf.toml"
 
 	// NNGSからのメッセージ受信に対応するプログラムを指定したろ☆（＾～＾）
-	fmt.Printf("<GE2NNGS> (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
+	fmt.Printf("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
 
 	// 思考エンジンを起動
 	engineStdin, engineStdout := startEngine(entryConf, workdir)
 
-	fmt.Println("<GE2NNGS> (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
+	fmt.Println("...GE2NNGS... (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
 	c.Spawn(entryConf, &engineStdin, &engineStdout)
 
 	engineStdin.Close()
-	fmt.Println("<GE2NNGS> (^q^) おわり☆！")
+	fmt.Println("...GE2NNGS... (^q^) おわり☆！")
 }
 
 // 思考エンジンを起動

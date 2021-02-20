@@ -40,7 +40,7 @@ func Spawn(entryConf e.EntryConf, engineStdin *io.WriteCloser, engineStdout *io.
 // CallTELNET - 決まった形のメソッド。
 func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer, r telnet.Reader) {
 
-	print("<GE2NNGS> 受信開始☆")
+	print("...GE2NNGS... 受信開始☆")
 	lis := nngsClientStateDiagramListener{}
 
 	dia.writerToServer = w
@@ -53,7 +53,7 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 	// 無限ループ。 一行読み取ります。
 	for scanner.Scan() {
 		// 書き込みます。最後に改行を付けます。
-		kwu.G.Chat.Trace("<GE2NNGS> サーバーへ送信[%s\n]\n", scanner.Bytes())
+		kwu.G.Chat.Trace("<--GE2NNGS... [%s\n]\n", scanner.Bytes())
 		oi.LongWrite(dia.writerToServer, scanner.Bytes())
 		oi.LongWrite(dia.writerToServer, []byte("\n"))
 	}
@@ -135,6 +135,6 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 // Original code: NngsClient.rb/NNGSClient/`def login`
 func setClientMode(writerToServer telnet.Writer) {
 	message := "set client true\n"
-	kwu.G.Chat.Trace("<GE2NNGS> サーバーへ送信[%s]\n", message)
+	kwu.G.Chat.Trace("<--GE2NNGS... [%s]\n", message)
 	oi.LongWrite(writerToServer, []byte(message))
 }
