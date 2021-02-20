@@ -49,6 +49,8 @@ func main() {
 		filepath.Join(*workdir, "output/fatal.log"),
 		filepath.Join(*workdir, "output/print.log"))
 
+	// 既存のログ・ファイルを削除。エンジンが起動時に行う
+
 	// チャッターの作成。 標準出力とロガーを一緒にしただけです。
 	kwu.G.Chat = *kwu.NewChatter(kwu.G.Log)
 	kwu.G.StderrChat = *kwu.NewStderrChatter(kwu.G.Log)
