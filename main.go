@@ -13,6 +13,7 @@ import (
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	"github.com/muzudho/gtp-engine-to-nngs/ui"
 	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
+	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
 )
 
 func main() {
@@ -36,7 +37,7 @@ func main() {
 	u.G = *new(u.GlobalVariables)
 
 	// ロガーの作成。
-	u.G.Log = *u.NewLogger(
+	kwu.G.Log = *kwu.NewLogger(
 		filepath.Join(*workdir, "output/trace.log"),
 		filepath.Join(*workdir, "output/debug.log"),
 		filepath.Join(*workdir, "output/info.log"),
@@ -47,7 +48,8 @@ func main() {
 		filepath.Join(*workdir, "output/print.log"))
 
 	// チャッターの作成。 標準出力とロガーを一緒にしただけです。
-	u.G.Chat = *u.NewChatter(u.G.Log)
+	kwu.G.Chat = *kwu.NewChatter(kwu.G.Log)
+	kwu.G.StderrChat = *kwu.NewStderrChatter(kwu.G.Log)
 
 	// fmt.Println("<GE2NNGS> 設定ファイルを読み込んだろ☆（＾～＾）")
 	entryConf := ui.LoadEntryConf(entryConfPath) // "./input/default.entryConf.toml"

@@ -10,7 +10,7 @@ import (
 	"github.com/muzudho/gtp-engine-to-nngs/controller/clistat"
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
-	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
+	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
 	"github.com/reiver/go-oi"
 	"github.com/reiver/go-telnet"
 )
@@ -104,7 +104,7 @@ type NngsClientStateDiagram struct {
 
 // ChatDebugState - 状態をデバッグ表示
 func (dia *NngsClientStateDiagram) ChatDebugState() {
-	u.G.Chat.Debug("<GE2NNGS> state=%d promptState=%d newlineReadableState=%d\n", dia.state, dia.promptState, dia.newlineReadableState)
+	kwu.G.Chat.Debug("<GE2NNGS> state=%d promptState=%d newlineReadableState=%d\n", dia.state, dia.promptState, dia.newlineReadableState)
 }
 
 func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramListener, subCode int) {
@@ -137,7 +137,7 @@ func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramList
 			// このフェーズは飛ばします。
 			message := "done\nquit\n"
 			fmt.Printf("<GE2NNGS> 得点計算は飛ばすぜ☆（＾～＾）対局も終了するぜ☆（＾～＾）\n")
-			u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s]\n", message)
+			kwu.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s]\n", message)
 			oi.LongWrite(dia.writerToServer, []byte(message))
 		}
 		dia.promptState = 7
@@ -166,10 +166,10 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 			// 自動入力のときは、設定ミスなら強制終了しないと無限ループしてしまうぜ☆（＾～＾）
 			if user == "" {
-				panic(u.G.Chat.Fatal("Need name (UserName)"))
+				panic(kwu.G.Chat.Fatal("Need name (UserName)"))
 			}
 
-			u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", user)
+			kwu.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", user)
 			oi.LongWrite(dia.writerToServer, []byte(user))
 			oi.LongWrite(dia.writerToServer, []byte("\n"))
 
@@ -180,10 +180,10 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 		if line == "1 1" {
 			// パスワードを入れろだぜ☆（＾～＾）
 			if dia.entryConf.Pass() == "" {
-				panic(u.G.Chat.Fatal("Need password"))
+				panic(kwu.G.Chat.Fatal("Need password"))
 			}
 
-			u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", dia.entryConf.User.Pass)
+			kwu.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", dia.entryConf.User.Pass)
 			oi.LongWrite(dia.writerToServer, []byte(dia.entryConf.User.Pass))
 			oi.LongWrite(dia.writerToServer, []byte("\n"))
 			setClientMode(dia.writerToServer)
@@ -192,10 +192,10 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 		} else if line == "Password: " {
 			// パスワードを入れろだぜ☆（＾～＾）
 			if dia.entryConf.Pass() == "" {
-				panic(u.G.Chat.Fatal("Need password"))
+				panic(kwu.G.Chat.Fatal("Need password"))
 			}
 
-			u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", dia.entryConf.User.Pass)
+			kwu.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", dia.entryConf.User.Pass)
 			oi.LongWrite(dia.writerToServer, []byte(dia.entryConf.User.Pass))
 			oi.LongWrite(dia.writerToServer, []byte("\n"))
 			dia.state = clistat.EnteredMyPasswordAndIAmWaitingToBePrompted
@@ -217,7 +217,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 			// 対局を申し込みます。
 			_, configuredColorUpperCase, err := dia.entryConf.MyColor()
 			if err != nil {
-				panic(u.G.Chat.Fatal(err.Error()))
+				panic(kwu.G.Chat.Fatal(err.Error()))
 			}
 
 			fmt.Printf("<GE2NNGS> lis.MyColorを%sに変更☆（＾～＾）\n", configuredColorUpperCase)
@@ -225,7 +225,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 			message := fmt.Sprintf("match %s %s %d %d %d\n", dia.entryConf.OpponentName(), configuredColorUpperCase, dia.entryConf.BoardSize(), dia.entryConf.AvailableTimeMinutes(), dia.entryConf.CanadianTiming())
 			fmt.Printf("<GE2NNGS> 対局を申し込んだぜ☆（＾～＾）")
-			u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s]\n", message)
+			kwu.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s]\n", message)
 			oi.LongWrite(dia.writerToServer, []byte(message))
 		}
 		dia.state = clistat.WaitingInInfo
@@ -243,7 +243,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 			code, err := strconv.Atoi(commandCode)
 			if err != nil {
-				panic(u.G.Chat.Fatal(err.Error())) // 想定外の遷移だぜ☆（＾～＾）！
+				panic(kwu.G.Chat.Fatal(err.Error())) // 想定外の遷移だぜ☆（＾～＾）！
 			}
 			switch code {
 			// Prompt
@@ -269,7 +269,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 						// acceptコマンドを半角空白でスプリットした３番目が、自分の手番
 						matchAcceptTokens := strings.Split(dia.CommandOfMatchAccept, " ")
 						if len(matchAcceptTokens) < 6 {
-							panic(u.G.Chat.Fatal("Error matchAcceptTokens=[%s].", matchAcceptTokens))
+							panic(kwu.G.Chat.Fatal("Error matchAcceptTokens=[%s].", matchAcceptTokens))
 						}
 
 						opponentPlayerName := matchAcceptTokens[1]
@@ -280,18 +280,18 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 						boardSize, err := strconv.ParseUint(matchAcceptTokens[3], 10, 0)
 						if err != nil {
-							panic(u.G.Chat.Fatal(err.Error()))
+							panic(kwu.G.Chat.Fatal(err.Error()))
 						}
 						dia.BoardSize = uint(boardSize)
 						fmt.Printf("<GE2NNGS> ボードサイズは%d☆（＾～＾）", dia.BoardSize)
 
 						configuredColor, _, err := dia.entryConf.MyColor()
 						if err != nil {
-							panic(u.G.Chat.Fatal(err.Error()))
+							panic(kwu.G.Chat.Fatal(err.Error()))
 						}
 
 						if dia.MyColor != configuredColor {
-							panic(u.G.Chat.Fatal("(Err.195) Unexpected phase. MyColor=%d configuredColor=%d.", dia.MyColor, configuredColor))
+							panic(kwu.G.Chat.Fatal("(Err.195) Unexpected phase. MyColor=%d configuredColor=%d.", dia.MyColor, configuredColor))
 						}
 
 						// cmd_match
@@ -333,7 +333,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 					// Original code: @gameid
 					gameID, err := strconv.ParseUint(string(matches2[1]), 10, 0)
 					if err != nil {
-						panic(u.G.Chat.Fatal(err.Error()))
+						panic(kwu.G.Chat.Fatal(err.Error()))
 					}
 					dia.GameID = uint(gameID)
 
@@ -348,7 +348,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 					gameWAvailableSeconds, err := strconv.Atoi(string(matches2[5]))
 					if err != nil {
-						panic(u.G.Chat.Fatal(err.Error()))
+						panic(kwu.G.Chat.Fatal(err.Error()))
 					}
 					dia.GameWAvailableSeconds = gameWAvailableSeconds
 
@@ -361,7 +361,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 					gameBAvailableSeconds, err := strconv.Atoi(string(matches2[9]))
 					if err != nil {
-						panic(u.G.Chat.Fatal(err.Error()))
+						panic(kwu.G.Chat.Fatal(err.Error()))
 					}
 					dia.GameBAvailableSeconds = gameBAvailableSeconds
 
@@ -447,7 +447,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 		fmt.Printf("<GE2NNGS> 申し込んだ方[%s]のブロッキング☆（＾～＾）", phase.ToString(dia.MyColor))
 	default:
 		// 想定外の遷移だぜ☆（＾～＾）！
-		panic(u.G.Chat.Fatal("Unexpected state transition. state=%d", dia.state))
+		panic(kwu.G.Chat.Fatal("Unexpected state transition. state=%d", dia.state))
 	}
 }
 
@@ -507,19 +507,19 @@ func (dia *NngsClientStateDiagram) waitForPlayResponse(lis *nngsClientStateDiagr
 					// 空行
 
 					// if dia.MyColor == dia.CurrentPhase {
-					// 	u.G.Chat.Debug("<GE2NNGS> 空行(手番)。\n")
+					// 	kwu.G.Chat.Debug("<GE2NNGS> 空行(手番)。\n")
 					// } else {
-					// 	u.G.Chat.Debug("<GE2NNGS> 空行(相手番)。\n")
+					// 	kwu.G.Chat.Debug("<GE2NNGS> 空行(相手番)。\n")
 					// }
 
 					// dia.ChatDebugState()
 
 				} else {
-					u.G.Chat.Debug("<GE2NNGS> 受信行[%s]\n", lineString)
+					kwu.G.Chat.Debug("<GE2NNGS> 受信行[%s]\n", lineString)
 
 					if lineString == "= " {
 						// `play` の OK かも。
-						u.G.Chat.Debug("<GE2NNGS> playのOKかも☆（＾～＾）\n")
+						kwu.G.Chat.Debug("<GE2NNGS> playのOKかも☆（＾～＾）\n")
 						return
 					}
 				}
@@ -577,25 +577,25 @@ func (dia *NngsClientStateDiagram) waitForGenmoveResponse(lis *nngsClientStateDi
 						// Example: `= A1`
 						// Example: `= Pass`
 						if bestmove != "" {
-							u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", bestmove)
+							kwu.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", bestmove)
 							oi.LongWrite(dia.writerToServer, []byte(bestmove))
 							oi.LongWrite(dia.writerToServer, []byte("\n"))
 							// myTurn のループ終わり（＾～＾）！
 							return
 						}
-						u.G.Chat.Debug("<GE2NNGS> 空行(手番)。bestmove未決定=[%s]\n", bestmove)
+						kwu.G.Chat.Debug("<GE2NNGS> 空行(手番)。bestmove未決定=[%s]\n", bestmove)
 					} else {
-						u.G.Chat.Debug("<GE2NNGS> 空行(相手番)。\n")
+						kwu.G.Chat.Debug("<GE2NNGS> 空行(相手番)。\n")
 					}
 
 					dia.ChatDebugState()
 
 				} else {
-					u.G.Chat.Debug("<GE2NNGS> 受信行[%s]\n", lineString)
+					kwu.G.Chat.Debug("<GE2NNGS> 受信行[%s]\n", lineString)
 
 					if lineString == "= " {
 						// `play` の OK かも。
-						u.G.Chat.Debug("<GE2NNGS> playのOKかも☆（＾～＾） lineString=[%s]\n", lineString)
+						kwu.G.Chat.Debug("<GE2NNGS> playのOKかも☆（＾～＾） lineString=[%s]\n", lineString)
 					} else {
 						// サーバーに着手を送信します。１行前の文字列を使います
 						// Example: `= A1`
@@ -603,9 +603,9 @@ func (dia *NngsClientStateDiagram) waitForGenmoveResponse(lis *nngsClientStateDi
 						matches71 := dia.regexBestmove.FindSubmatch(lineBuffer[:index])
 						if 1 < len(matches71) {
 							bestmove = string(matches71[1])
-							u.G.Chat.Debug("<GE2NNGS> bestmove=[%s]\n", bestmove)
+							kwu.G.Chat.Debug("<GE2NNGS> bestmove=[%s]\n", bestmove)
 						} else {
-							u.G.Chat.Debug("<GE2NNGS> 空行(手番)。line=[%s] bestmove=[%s] len=[%d]\n", string(lineBuffer[:index]), bestmove, len(matches71))
+							kwu.G.Chat.Debug("<GE2NNGS> 空行(手番)。line=[%s] bestmove=[%s] len=[%d]\n", string(lineBuffer[:index]), bestmove, len(matches71))
 						}
 					}
 				}

@@ -8,7 +8,7 @@ import (
 	"regexp"
 
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
-	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
+	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
 	"github.com/reiver/go-oi"
 	"github.com/reiver/go-telnet"
 )
@@ -53,7 +53,7 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 	// 無限ループ。 一行読み取ります。
 	for scanner.Scan() {
 		// 書き込みます。最後に改行を付けます。
-		u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", scanner.Bytes())
+		kwu.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", scanner.Bytes())
 		oi.LongWrite(dia.writerToServer, scanner.Bytes())
 		oi.LongWrite(dia.writerToServer, []byte("\n"))
 	}
@@ -135,6 +135,6 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 // Original code: NngsClient.rb/NNGSClient/`def login`
 func setClientMode(writerToServer telnet.Writer) {
 	message := "set client true\n"
-	u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s]\n", message)
+	kwu.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s]\n", message)
 	oi.LongWrite(writerToServer, []byte(message))
 }
