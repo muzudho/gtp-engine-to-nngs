@@ -166,7 +166,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 			// 自動入力のときは、設定ミスなら強制終了しないと無限ループしてしまうぜ☆（＾～＾）
 			if user == "" {
-				panic("Need name (UserName)")
+				panic(u.G.Chat.Fatal("Need name (UserName)"))
 			}
 
 			u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", user)
@@ -180,7 +180,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 		if line == "1 1" {
 			// パスワードを入れろだぜ☆（＾～＾）
 			if dia.entryConf.Pass() == "" {
-				panic("Need password")
+				panic(u.G.Chat.Fatal("Need password"))
 			}
 
 			u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", dia.entryConf.User.Pass)
@@ -192,7 +192,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 		} else if line == "Password: " {
 			// パスワードを入れろだぜ☆（＾～＾）
 			if dia.entryConf.Pass() == "" {
-				panic("Need password")
+				panic(u.G.Chat.Fatal("Need password"))
 			}
 
 			u.G.Chat.Debug("<GE2NNGS> サーバーへ送信[%s\n]\n", dia.entryConf.User.Pass)
@@ -215,7 +215,10 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 	case clistat.EnteredClientMode:
 		if dia.entryConf.ApplyFromMe() {
 			// 対局を申し込みます。
-			_, configuredColorUpperCase := dia.entryConf.MyColor()
+			_, configuredColorUpperCase, err := dia.entryConf.MyColor()
+			if err != nil {
+				panic(u.G.Chat.Fatal(err.Error()))
+			}
 
 			fmt.Printf("<GE2NNGS> lis.MyColorを%sに変更☆（＾～＾）\n", configuredColorUpperCase)
 			dia.MyColor = phase.ToNum(configuredColorUpperCase)
@@ -240,7 +243,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 			code, err := strconv.Atoi(commandCode)
 			if err != nil {
-				panic(err) // 想定外の遷移だぜ☆（＾～＾）！
+				panic(u.G.Chat.Fatal(err.Error())) // 想定外の遷移だぜ☆（＾～＾）！
 			}
 			switch code {
 			// Prompt
@@ -266,7 +269,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 						// acceptコマンドを半角空白でスプリットした３番目が、自分の手番
 						matchAcceptTokens := strings.Split(dia.CommandOfMatchAccept, " ")
 						if len(matchAcceptTokens) < 6 {
-							panic(fmt.Sprintf("Error matchAcceptTokens=[%s].", matchAcceptTokens))
+							panic(u.G.Chat.Fatal("Error matchAcceptTokens=[%s].", matchAcceptTokens))
 						}
 
 						opponentPlayerName := matchAcceptTokens[1]
@@ -277,15 +280,18 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 						boardSize, err := strconv.ParseUint(matchAcceptTokens[3], 10, 0)
 						if err != nil {
-							panic(err)
+							panic(u.G.Chat.Fatal(err.Error()))
 						}
 						dia.BoardSize = uint(boardSize)
 						fmt.Printf("<GE2NNGS> ボードサイズは%d☆（＾～＾）", dia.BoardSize)
 
-						configuredColor, _ := dia.entryConf.MyColor()
+						configuredColor, _, err := dia.entryConf.MyColor()
+						if err != nil {
+							panic(u.G.Chat.Fatal(err.Error()))
+						}
 
 						if dia.MyColor != configuredColor {
-							panic(fmt.Sprintf("(Err.195) Unexpected phase. MyColor=%d configuredColor=%d.", dia.MyColor, configuredColor))
+							panic(u.G.Chat.Fatal("(Err.195) Unexpected phase. MyColor=%d configuredColor=%d.", dia.MyColor, configuredColor))
 						}
 
 						// cmd_match
@@ -327,7 +333,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 					// Original code: @gameid
 					gameID, err := strconv.ParseUint(string(matches2[1]), 10, 0)
 					if err != nil {
-						panic(err)
+						panic(u.G.Chat.Fatal(err.Error()))
 					}
 					dia.GameID = uint(gameID)
 
@@ -342,7 +348,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 					gameWAvailableSeconds, err := strconv.Atoi(string(matches2[5]))
 					if err != nil {
-						panic(err)
+						panic(u.G.Chat.Fatal(err.Error()))
 					}
 					dia.GameWAvailableSeconds = gameWAvailableSeconds
 
@@ -355,7 +361,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 
 					gameBAvailableSeconds, err := strconv.Atoi(string(matches2[9]))
 					if err != nil {
-						panic(err)
+						panic(u.G.Chat.Fatal(err.Error()))
 					}
 					dia.GameBAvailableSeconds = gameBAvailableSeconds
 
@@ -441,7 +447,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 		fmt.Printf("<GE2NNGS> 申し込んだ方[%s]のブロッキング☆（＾～＾）", phase.ToString(dia.MyColor))
 	default:
 		// 想定外の遷移だぜ☆（＾～＾）！
-		panic(fmt.Sprintf("Unexpected state transition. state=%d", dia.state))
+		panic(u.G.Chat.Fatal("Unexpected state transition. state=%d", dia.state))
 	}
 }
 

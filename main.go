@@ -19,6 +19,7 @@ func main() {
 	// Working directory
 	wdir, err := os.Getwd()
 	if err != nil {
+		// ここでは、ログはまだ設定できてない
 		panic(fmt.Sprintf("<GE2NNGS> wdir=%s", wdir))
 	}
 	fmt.Printf("<GE2NNGS> wdir=%s\n", wdir)

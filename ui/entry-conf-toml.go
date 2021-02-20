@@ -15,8 +15,7 @@ func LoadEntryConf(path string) e.EntryConf {
 	// ファイル読込
 	fileData, err := ioutil.ReadFile(path)
 	if err != nil {
-		u.G.Chat.Fatal("path=%s", path)
-		panic(err)
+		panic(u.G.Chat.Fatal("path=%s err=%s", path, err))
 	}
 
 	debugPrintToml(fileData)
@@ -37,7 +36,7 @@ func debugPrintToml(fileData []byte) {
 	// Toml解析
 	tomlTree, err := toml.Load(string(fileData))
 	if err != nil {
-		panic(err)
+		panic(u.G.Chat.Fatal(err.Error()))
 	}
 	fmt.Println("<GE2NNGS> Input:")
 	fmt.Printf("<GE2NNGS> Server.Host=%s\n", tomlTree.Get("Server.Host").(string))

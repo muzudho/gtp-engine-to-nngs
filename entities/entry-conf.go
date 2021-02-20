@@ -101,7 +101,7 @@ func (config EntryConf) Phase() string {
 }
 
 // MyColor - 自分の石の色
-func (config EntryConf) MyColor() (phase.Phase, string) {
+func (config EntryConf) MyColor() (phase.Phase, string, error) {
 	configuredColorUpperCase := strings.ToUpper(config.MatchApplication.Phase)
 	myPhase := phase.PhaseNone
 	switch configuredColorUpperCase {
@@ -110,10 +110,10 @@ func (config EntryConf) MyColor() (phase.Phase, string) {
 	case "B":
 		myPhase = phase.Black
 	default:
-		panic(fmt.Sprintf("Unexpected MatchApplication.Phase [%s].", config.MatchApplication.Phase))
+		return 0, "", fmt.Errorf("Unexpected MatchApplication.Phase [%s]", config.MatchApplication.Phase)
 	}
 
-	return myPhase, configuredColorUpperCase
+	return myPhase, configuredColorUpperCase, nil
 }
 
 // BoardSize - 何路盤
