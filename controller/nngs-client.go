@@ -33,9 +33,9 @@ func Spawn(engineConf kwe.EngineConf, entryConf e.EntryConf, engineStdin *io.Wri
 		regexDecline2:          *regexp.MustCompile("You decline the match offer from"),
 		regexOneSeven:          *regexp.MustCompile("1 7"),
 		regexGame:              *regexp.MustCompile("Game (\\d+) ([a-zA-Z]): (\\S+) \\((\\S+) (\\S+) (\\S+)\\) vs (\\S+) \\((\\S+) (\\S+) (\\S+)\\)"),
-		regexMove:              *regexp.MustCompile("\\s*(\\d+)\\(([BWbw])\\): ([A-Z]\\d+|Pass)"),
+		regexNngsMove:          *regexp.MustCompile("\\s*(\\d+)\\(([BWbw])\\): ([A-Z]\\d+|Pass)"),
 		regexAcceptCommand:     *regexp.MustCompile("match \\S+ \\S+ (\\d+) "),
-		regexBestmove:          *regexp.MustCompile("= ([A-Z]\\d+|Pass)")}
+		regexEngineBestmove:    *regexp.MustCompile("= ([A-Z]\\d+|pass)")}
 	return telnet.DialToAndCall(fmt.Sprintf("%s:%d", entryConf.Server.Host, entryConf.Server.Port), nngsClientStateDiagram)
 }
 

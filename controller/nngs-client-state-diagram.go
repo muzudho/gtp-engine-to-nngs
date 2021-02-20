@@ -63,10 +63,11 @@ type NngsClientStateDiagram struct {
 	regexGame              regexp.Regexp
 
 	// Example: `15 Game 2 I: kifuwarabe (0 2289 -1) vs kifuwarabi (0 2298 -1)`.
-	regexMove          regexp.Regexp
+	regexNngsMove      regexp.Regexp
 	regexAcceptCommand regexp.Regexp
 	// Example: `= A1`
-	regexBestmove regexp.Regexp
+	// Example: `= pass`
+	regexEngineBestmove regexp.Regexp
 
 	// MyColor - 自分の手番の色
 	MyColor kwphase.Phase
@@ -373,7 +374,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 				} else {
 
 					// 指し手はこっちだぜ☆（＾～＾）
-					matches3 := dia.regexMove.FindSubmatch(promptStateBytes)
+					matches3 := dia.regexNngsMove.FindSubmatch(promptStateBytes)
 					if 3 < len(matches3) {
 						// Original code: @lastmove = [$1, $2, $3]
 
@@ -578,7 +579,7 @@ func (dia *NngsClientStateDiagram) waitForGenmoveResponse(lis *nngsClientStateDi
 					if dia.MyColor == dia.CurrentPhase {
 						// サーバーに着手を送信します。１行前の文字列を使います
 						// Example: `= A1`
-						// Example: `= Pass`
+						// Example: `= pass`
 						if bestmove != "" {
 							kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", bestmove)
 							oi.LongWrite(dia.writerToServer, []byte(bestmove))
@@ -603,8 +604,8 @@ func (dia *NngsClientStateDiagram) waitForGenmoveResponse(lis *nngsClientStateDi
 					// } else {
 					// サーバーに着手を送信します。１行前の文字列を使います
 					// Example: `= A1`
-					// Example: `= Pass`
-					matches71 := dia.regexBestmove.FindSubmatch(lineBuffer[:index])
+					// Example: `= pass`
+					matches71 := dia.regexEngineBestmove.FindSubmatch(lineBuffer[:index])
 					if 1 < len(matches71) {
 						// 着手
 						bestmove = string(matches71[1])

@@ -1,5 +1,7 @@
 # References
 
+* GTP
+  * [19. The Go Text Protocol](https://www.gnu.org/software/gnugo/gnugo_19.html)
 * Golang
   * Telnet
     * Go言語のライブラリは同名の個人製作のものがいっぱいあるので、検索して、一番いいライブラリを選んでください。
