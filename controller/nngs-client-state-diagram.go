@@ -10,6 +10,7 @@ import (
 	"github.com/muzudho/gtp-engine-to-nngs/controller/clistat"
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
+	kwe "github.com/muzudho/kifuwarabe-gtp/entities"
 	kwphase "github.com/muzudho/kifuwarabe-gtp/entities/phase"
 	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
 	"github.com/reiver/go-oi"
@@ -23,7 +24,8 @@ type NngsClientStateDiagram struct {
 	// EngineStdin - GTP Engine stdin
 	EngineStdout *io.ReadCloser
 
-	entryConf e.EntryConf
+	entryConf  e.EntryConf
+	engineConf kwe.EngineConf
 
 	// 状態遷移
 	state clistat.Clistat
@@ -163,7 +165,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 			// あなたの名前を入力してください。
 
 			// 設定ファイルから自動で入力するぜ☆（＾ｑ＾）
-			user := dia.entryConf.UserName()
+			user := dia.engineConf.Profile.Name
 
 			// 自動入力のときは、設定ミスなら強制終了しないと無限ループしてしまうぜ☆（＾～＾）
 			if user == "" {
@@ -180,24 +182,24 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 	case clistat.EnteredMyName:
 		if line == "1 1" {
 			// パスワードを入れろだぜ☆（＾～＾）
-			if dia.entryConf.Pass() == "" {
+			if dia.engineConf.Profile.Pass == "" {
 				panic(kwu.G.Chat.Fatal("Need password"))
 			}
 
-			kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", dia.entryConf.User.Pass)
-			oi.LongWrite(dia.writerToServer, []byte(dia.entryConf.User.Pass))
+			kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", dia.engineConf.Profile.Pass)
+			oi.LongWrite(dia.writerToServer, []byte(dia.engineConf.Profile.Pass))
 			oi.LongWrite(dia.writerToServer, []byte("\n"))
 			setClientMode(dia.writerToServer)
 			dia.state = clistat.EnteredClientMode
 
 		} else if line == "Password: " {
 			// パスワードを入れろだぜ☆（＾～＾）
-			if dia.entryConf.Pass() == "" {
+			if dia.engineConf.Profile.Pass == "" {
 				panic(kwu.G.Chat.Fatal("Need password"))
 			}
 
-			kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", dia.entryConf.User.Pass)
-			oi.LongWrite(dia.writerToServer, []byte(dia.entryConf.User.Pass))
+			kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", dia.engineConf.Profile.Pass)
+			oi.LongWrite(dia.writerToServer, []byte(dia.engineConf.Profile.Pass))
 			oi.LongWrite(dia.writerToServer, []byte("\n"))
 			dia.state = clistat.EnteredMyPasswordAndIAmWaitingToBePrompted
 

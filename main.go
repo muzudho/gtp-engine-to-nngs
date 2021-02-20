@@ -13,6 +13,7 @@ import (
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	"github.com/muzudho/gtp-engine-to-nngs/ui"
 	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
+	kwui "github.com/muzudho/kifuwarabe-gtp/ui"
 	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
 )
 
@@ -30,7 +31,8 @@ func main() {
 	flag.Parse()
 	fmt.Printf("...GE2NNGS... flag.Args()=%s\n", flag.Args())
 	fmt.Printf("...GE2NNGS... workdir=%s\n", *workdir)
-	entryConfPath := filepath.Join(*workdir, "input/default.entryConf.toml")
+	entryConfPath := filepath.Join(*workdir, "input/entry.conf.toml")
+	engineConfPath := filepath.Join(*workdir, "input/engine.conf.toml")
 	fmt.Printf("...GE2NNGS... entryConfPath=%s\n", entryConfPath)
 
 	// グローバル変数の作成
@@ -52,7 +54,8 @@ func main() {
 	kwu.G.StderrChat = *kwu.NewStderrChatter(kwu.G.Log)
 
 	// fmt.Println("...GE2NNGS... 設定ファイルを読み込んだろ☆（＾～＾）")
-	entryConf := ui.LoadEntryConf(entryConfPath) // "./input/default.entryConf.toml"
+	engineConf := kwui.LoadEngineConf(engineConfPath)
+	entryConf := ui.LoadEntryConf(entryConfPath)
 
 	// NNGSからのメッセージ受信に対応するプログラムを指定したろ☆（＾～＾）
 	kwu.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
@@ -61,7 +64,7 @@ func main() {
 	engineStdin, engineStdout := startEngine(entryConf, workdir)
 
 	kwu.G.Chat.Trace("...GE2NNGS... (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
-	c.Spawn(entryConf, &engineStdin, &engineStdout)
+	c.Spawn(engineConf, entryConf, &engineStdin, &engineStdout)
 
 	engineStdin.Close()
 	kwu.G.Chat.Trace("...GE2NNGS... (^q^) おわり☆！")

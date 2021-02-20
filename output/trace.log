@@ -1,7 +1,7 @@
-[2021-02-18 22:37:10] # GoGo プログラム開始☆（＾～＾）
-[2021-02-18 22:37:47] # GoGo プログラム開始☆（＾～＾）
-[2021-02-18 22:46:04] # GoGo プログラム開始☆（＾～＾）
-[2021-02-18 22:46:28] # GoGo プログラム開始☆（＾～＾）
-[2021-02-18 22:53:12] # GoGo プログラム開始☆（＾～＾）
-[2021-02-18 22:53:19] # GoGo プログラム開始☆（＾～＾）
-[2021-02-18 22:56:21] # GoGo プログラム開始☆（＾～＾）
+[2021-02-21 03:14:26] <Engine> KifuwarabeGoGo プログラム開始☆（＾～＾）
+[2021-02-21 03:14:26] <Engine> Author: Satoshi Takahashi
+[2021-02-21 03:14:26] <Engine> This is a GTP engine.
+[2021-02-21 03:14:26] <Engine> wdir=C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs
+[2021-02-21 03:14:26] <Engine> flag.Args()=[]
+[2021-02-21 03:14:26] <Engine> workdir=C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs
+[2021-02-21 03:14:26] <Engine> entryConfPath=C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs\input\default.entryConf.toml

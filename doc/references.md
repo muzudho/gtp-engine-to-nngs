@@ -6,3 +6,5 @@
     * [https://godoc.org/github.com/ziutek/telnet](https://godoc.org/github.com/ziutek/telnet)
   * Troubleshooting
     * [Golang にて invalid indirect of xxxx (type Xxxxx) の対応](http://psychedelicnekopunch.com/archives/1422)
+  * Update package
+    * `go get -u all`

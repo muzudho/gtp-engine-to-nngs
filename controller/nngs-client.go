@@ -8,6 +8,7 @@ import (
 	"regexp"
 
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
+	kwe "github.com/muzudho/kifuwarabe-gtp/entities"
 	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
 	"github.com/reiver/go-oi"
 	"github.com/reiver/go-telnet"
@@ -15,11 +16,12 @@ import (
 
 // Spawn - クライアント接続
 // * `engineStdin` - GTP Engine stdin
-func Spawn(entryConf e.EntryConf, engineStdin *io.WriteCloser, engineStdout *io.ReadCloser) error {
+func Spawn(engineConf kwe.EngineConf, entryConf e.EntryConf, engineStdin *io.WriteCloser, engineStdout *io.ReadCloser) error {
 	// NNGSクライアントの状態遷移図
 	nngsClientStateDiagram := NngsClientStateDiagram{
 		EngineStdin:  engineStdin,
 		EngineStdout: engineStdout,
+		engineConf:   engineConf,
 		entryConf:    entryConf,
 		// nngsClientStateDiagram: *new(NngsClientStateDiagram),
 		index:                  0,
