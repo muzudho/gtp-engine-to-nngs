@@ -20,5 +20,5 @@ func (lis *nngsClientStateDiagramListener) myTurn(dia *NngsClientStateDiagram) {
 func (lis *nngsClientStateDiagramListener) opponentTurn(dia *NngsClientStateDiagram) {
 	print("****** wating for his move ******\n")
 	// ここでは　相手の着手は　分からないぜ（＾～＾）
-	// kwu.G.Chat.Debug("<GE2NNGS> MyMove=[%s] OpponentMove=[%s]\n", dia.MyMove, dia.OpponentMove)
+	// kwu.G.Chat.Trace("<GE2NNGS> MyMove=[%s] OpponentMove=[%s]\n", dia.MyMove, dia.OpponentMove)
 }

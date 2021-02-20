@@ -1,18 +1,9 @@
 package phase
 
-import "fmt"
+import (
+	"fmt"
 
-// Phase - 黒手番、または白手番。
-type Phase int
-
-// state
-const (
-	// None - 開始。
-	PhaseNone Phase = iota
-	// Black - 自分のアカウント名を入力しました
-	Black
-	// White - 自分のパスワードを入力し、そしてプロンプトを待っています
-	White
+	"github.com/muzudho/kifuwarabe-gtp/entities/phase"
 )
 
 // FlipColorString - 色を反転
@@ -32,28 +23,28 @@ func FlipColorString(color string) string {
 }
 
 // ToString - 色を大文字アルファベットに変換
-func ToString(phase Phase) string {
-	switch phase {
-	case Black:
+func ToString(ph phase.Phase) string {
+	switch ph {
+	case phase.Black:
 		return "B"
-	case White:
+	case phase.White:
 		return "W"
 	default:
-		panic(fmt.Sprintf("Unexpected phase=[%d]", phase))
+		panic(fmt.Sprintf("Unexpected phase=[%d]", ph))
 	}
 }
 
 // ToNum - アルファベットを色に変換
-func ToNum(color string) Phase {
+func ToNum(color string) phase.Phase {
 	switch color {
 	case "B":
-		return Black
+		return phase.Black
 	case "W":
-		return White
+		return phase.White
 	case "b":
-		return Black
+		return phase.Black
 	case "w":
-		return White
+		return phase.White
 	default:
 		panic(fmt.Sprintf("Unexpected color=[%s]", color))
 	}

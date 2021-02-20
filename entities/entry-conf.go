@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
+	kwphase "github.com/muzudho/kifuwarabe-gtp/entities/phase"
 )
 
 // EntryConf - 参加設定。
@@ -101,14 +101,14 @@ func (config EntryConf) Phase() string {
 }
 
 // MyColor - 自分の石の色
-func (config EntryConf) MyColor() (phase.Phase, string, error) {
+func (config EntryConf) MyColor() (kwphase.Phase, string, error) {
 	configuredColorUpperCase := strings.ToUpper(config.MatchApplication.Phase)
-	myPhase := phase.PhaseNone
+	myPhase := kwphase.None
 	switch configuredColorUpperCase {
 	case "W":
-		myPhase = phase.White
+		myPhase = kwphase.White
 	case "B":
-		myPhase = phase.Black
+		myPhase = kwphase.Black
 	default:
 		return 0, "", fmt.Errorf("Unexpected MatchApplication.Phase [%s]", config.MatchApplication.Phase)
 	}
