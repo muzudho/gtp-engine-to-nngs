@@ -53,6 +53,10 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 	// scanner - 標準入力を監視します。
 	scanner := bufio.NewScanner(os.Stdin)
 	// 無限ループ。 一行読み取ります。
+
+	kwu.G.Log.FlushAllLogs()
+
+Loop:
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
 		// 書き込みます。最後に改行を付けます。
@@ -62,11 +66,14 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 
 		if string(bytes) == "quit" {
 			// エンジンは終了しました
-			break
+			kwu.G.Chat.Trace("...GE2NNGS... エンジンをQuitさせるぜ☆（＾～＾）")
+			break Loop
 		}
-	}
-	kwu.G.Chat.Trace("...GE2NNGS... Telnetを終了するぜ☆（＾～＾）")
 
+		kwu.G.Log.FlushAllLogs()
+	}
+
+	kwu.G.Chat.Trace("...GE2NNGS... Telnetを終了するぜ☆（＾～＾）")
 }
 
 // サーバーから送られてくるメッセージを待ち構えるループです。

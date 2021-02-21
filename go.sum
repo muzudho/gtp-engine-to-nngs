@@ -20,6 +20,8 @@ github.com/muzudho/kifuwarabe-gtp v0.0.0-20210221143311-4a7342e460a3 h1:vII1uhla
 github.com/muzudho/kifuwarabe-gtp v0.0.0-20210221143311-4a7342e460a3/go.mod h1:7siUfeJLBGzetOlMk0jnFvqEqgoZfZTnbuiYnb2mLxg=
 github.com/muzudho/kifuwarabe-gtp v0.0.0-20210221150225-f75f9e5728df h1:mBVti01zwJta70LJaT5rG0eO6ameAFCReou6WgV/YqM=
 github.com/muzudho/kifuwarabe-gtp v0.0.0-20210221150225-f75f9e5728df/go.mod h1:7siUfeJLBGzetOlMk0jnFvqEqgoZfZTnbuiYnb2mLxg=
+github.com/muzudho/kifuwarabe-gtp v0.0.0-20210221180831-f25a5961ac49 h1:/JFx8t+4jzk+RYoBD2++xFw6wgfxX+C9i0a1ScdJW4k=
+github.com/muzudho/kifuwarabe-gtp v0.0.0-20210221180831-f25a5961ac49/go.mod h1:7siUfeJLBGzetOlMk0jnFvqEqgoZfZTnbuiYnb2mLxg=
 github.com/pelletier/go-toml v1.8.1 h1:1Nf83orprkJyknT6h7zbuEGUEjcyVlCxSUGTENmNCRM=
 github.com/pelletier/go-toml v1.8.1/go.mod h1:T2/BmBdy8dvIRq1a/8aqjN41wvWlN4lrapLU/GW4pbc=
 github.com/reiver/go-oi v1.0.0 h1:nvECWD7LF+vOs8leNGV/ww+F2iZKf3EYjYZ527turzM=

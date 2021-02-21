@@ -51,7 +51,10 @@ func main() {
 		filepath.Join(*workdir, "output/print.log"))
 
 	// 既存のログ・ファイルを削除。エンジンが起動時に行う
+
+	// ログ・ファイルの開閉
 	kwu.G.Log.OpenAllLogs()
+	defer kwu.G.Log.CloseAllLogs()
 
 	// チャッターの作成。 標準出力とロガーを一緒にしただけです。
 	kwu.G.Chat = *kwu.NewChatter(kwu.G.Log)
@@ -79,7 +82,6 @@ func main() {
 
 	engineStdin.Close()
 	kwu.G.Chat.Trace("...GE2NNGS... (^q^) おわり☆！")
-	kwu.G.Log.CloseAllLogs()
 }
 
 // 思考エンジンを起動
