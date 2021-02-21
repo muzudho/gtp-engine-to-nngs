@@ -20,5 +20,8 @@ go get -v -u github.com/reiver/go-telnet
 Build:  
 
 ```shell
+# 自作のパッケージを更新(再インストール)したいなら
+# go get -u all
+
 go build
 ```

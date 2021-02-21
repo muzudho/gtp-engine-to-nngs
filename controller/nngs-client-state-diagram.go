@@ -139,11 +139,9 @@ func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramList
 			// 本来は 死に石 を選んだりするフェーズだが、
 			// コンピューター囲碁大会では 思考エンジンの自己申告だけ聞き取るので、
 			// このフェーズは飛ばします。
-			message := "done\nquit\n"
-			kwu.G.Chat.Trace("...GE2NNGS... 得点計算は飛ばすぜ☆（＾～＾）対局も終了するぜ☆（＾～＾）\n")
-			kwu.G.Chat.Notice("<--GE2NNGS... [%s]\n", message)
-			oi.LongWrite(dia.writerToServer, []byte(message))
 			dia.done(lis)
+
+			// 思考エンジン・アプリケーションも終了させます。
 			dia.quit(lis)
 		}
 		dia.promptState = 7
