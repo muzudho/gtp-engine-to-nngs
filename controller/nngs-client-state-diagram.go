@@ -265,6 +265,8 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 				promptStateNum, err := strconv.Atoi(promptState)
 				if err == nil {
 					if dia.promptDiagram(lis, promptStateNum) {
+						// このアプリを終了します
+						kwu.G.Chat.Trace("...GE2NNGS... End parse\n")
 						return true
 					}
 				}
@@ -326,6 +328,8 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 				} else if dia.regexOneSeven.Match(promptStateBytes) {
 					kwu.G.Chat.Trace("[サブ遷移へ☆]")
 					if dia.promptDiagram(lis, 7) {
+						// このアプリを終了します
+						kwu.G.Chat.Trace("...GE2NNGS... End parse\n")
 						return true
 					}
 				} else {

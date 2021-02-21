@@ -34,6 +34,7 @@ func main() {
 	entryConfPath := filepath.Join(*workdir, "input/entry.conf.toml")
 	engineConfPath := filepath.Join(*workdir, "input/engine.conf.toml")
 	fmt.Printf("...GE2NNGS... entryConfPath=%s\n", entryConfPath)
+	fmt.Printf("...GE2NNGS... engineConfPath=%s\n", engineConfPath)
 
 	// グローバル変数の作成
 	u.G = *new(u.GlobalVariables)

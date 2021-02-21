@@ -54,10 +54,16 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 	scanner := bufio.NewScanner(os.Stdin)
 	// 無限ループ。 一行読み取ります。
 	for scanner.Scan() {
+		bytes := scanner.Bytes()
 		// 書き込みます。最後に改行を付けます。
-		kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", scanner.Bytes())
-		oi.LongWrite(dia.writerToServer, scanner.Bytes())
+		kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", bytes)
+		oi.LongWrite(dia.writerToServer, bytes)
 		oi.LongWrite(dia.writerToServer, []byte("\n"))
+
+		if string(bytes) == "quit" {
+			// エンジンは終了しました
+			break
+		}
 	}
 }
 
@@ -82,7 +88,8 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 
 			// 改行を受け取る前にパースしてしまおう☆（＾～＾）早とちりするかも知れないけど☆（＾～＾）
 			if dia.parse(lis) {
-				// アプリケーション終了
+				// このアプリを終了します
+				kwu.G.Chat.Trace("...GE2NNGS... End read\n")
 				return
 			}
 
@@ -126,7 +133,8 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 				// 対局が始まってしまえば、改行は送られてくると考えろだぜ☆（＾～＾）
 				// 1行をパースします
 				if dia.parse(lis) {
-					// アプリケーション終了
+					// このアプリを終了します
+					kwu.G.Chat.Trace("...GE2NNGS... End read\n")
 					return
 				}
 				dia.index = 0

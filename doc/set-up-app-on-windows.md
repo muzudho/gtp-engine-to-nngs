@@ -17,6 +17,8 @@ Telnet:
 go get -v -u github.com/reiver/go-telnet
 ```
 
+## Install
+
 Build:  
 
 ```shell
