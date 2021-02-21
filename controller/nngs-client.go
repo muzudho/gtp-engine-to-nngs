@@ -65,6 +65,8 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 			break
 		}
 	}
+	kwu.G.Chat.Trace("...GE2NNGS... Telnetを終了するぜ☆（＾～＾）")
+
 }
 
 // サーバーから送られてくるメッセージを待ち構えるループです。

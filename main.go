@@ -82,7 +82,7 @@ func startEngine(entryConf e.EntryConf, workdir *string) (io.WriteCloser, io.Rea
 	stdout, _ := cmd.StdoutPipe()
 	err := cmd.Start()
 	if err != nil {
-		panic(err)
+		panic(kwu.G.Chat.Fatal(err.Error()))
 	}
 	return stdin, stdout
 }
