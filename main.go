@@ -57,8 +57,15 @@ func main() {
 	kwu.G.StderrChat = *kwu.NewStderrChatter(kwu.G.Log)
 
 	// fmt.Println("...GE2NNGS... 設定ファイルを読み込んだろ☆（＾～＾）")
-	engineConf := kwui.LoadEngineConf(engineConfPath)
-	entryConf := ui.LoadEntryConf(entryConfPath)
+	engineConf, err := kwui.LoadEngineConf(engineConfPath)
+	if err != nil {
+		panic(kwu.G.Chat.Fatal("engineConfPath=[%s] err=[%s]", engineConfPath, err))
+	}
+
+	entryConf, err := ui.LoadEntryConf(entryConfPath)
+	if err != nil {
+		panic(kwu.G.Chat.Fatal("entryConfPath=[%s] err=[%s]", entryConfPath, err))
+	}
 
 	// NNGSからのメッセージ受信に対応するプログラムを指定したろ☆（＾～＾）
 	kwu.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
@@ -74,7 +81,7 @@ func main() {
 }
 
 // 思考エンジンを起動
-func startEngine(entryConf e.EntryConf, workdir *string) (io.WriteCloser, io.ReadCloser) {
+func startEngine(entryConf *e.EntryConf, workdir *string) (io.WriteCloser, io.ReadCloser) {
 	parameters := strings.Split("--workdir "+*workdir+" "+entryConf.User.EngineCommandOption, " ")
 	kwu.G.Chat.Trace("(^q^) GTP対応の思考エンジンを起動するぜ☆ [%s] [%s]", entryConf.User.EngineCommand, strings.Join(parameters, " "))
 	cmd := exec.Command(entryConf.User.EngineCommand, parameters...)
