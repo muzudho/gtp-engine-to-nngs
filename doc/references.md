@@ -10,3 +10,5 @@
     * [Golang にて invalid indirect of xxxx (type Xxxxx) の対応](http://psychedelicnekopunch.com/archives/1422)
   * Update package
     * `go get -u all`
+  * Exit
+    * [https://sharpknock.com/posts/programming/golang-exit.html](https://sharpknock.com/posts/programming/golang-exit.html)

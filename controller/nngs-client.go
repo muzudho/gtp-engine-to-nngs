@@ -81,7 +81,10 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 			// }
 
 			// 改行を受け取る前にパースしてしまおう☆（＾～＾）早とちりするかも知れないけど☆（＾～＾）
-			dia.parse(lis)
+			if dia.parse(lis) {
+				// アプリケーション終了
+				return
+			}
 
 			// `Login:` のように 改行が送られてこないケースはあるが、
 			// 対局が始まってしまえば、改行は送られてくると考えろだぜ☆（＾～＾）
@@ -122,7 +125,10 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 				// `Login:` のように 改行が送られてこないケースはあるが、
 				// 対局が始まってしまえば、改行は送られてくると考えろだぜ☆（＾～＾）
 				// 1行をパースします
-				dia.parse(lis)
+				if dia.parse(lis) {
+					// アプリケーション終了
+					return
+				}
 				dia.index = 0
 
 			} else {

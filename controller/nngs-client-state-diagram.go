@@ -111,7 +111,8 @@ type NngsClientStateDiagram struct {
 // 	kwu.G.Chat.Trace("...GE2NNGS... state=%d promptState=%d newlineReadableState=%d\n", dia.state, dia.promptState, dia.newlineReadableState)
 // }
 
-func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramListener, subCode int) {
+// アプリケーションを終了するなら 真 を返します
+func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramListener, subCode int) bool {
 	switch subCode {
 	// Info
 	case 5:
@@ -122,6 +123,10 @@ func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramList
 
 		if dia.promptState == 7 {
 			lis.matchEnd() // 対局終了
+
+			// このアプリを終了します
+			kwu.G.Chat.Notice("...GE2NNGS... Match end\n")
+			return true // runtime.Goexit()
 		}
 		dia.promptState = 5
 	// PlayingGo
@@ -148,10 +153,13 @@ func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramList
 	default:
 		// "1 1" とか来ても無視しろだぜ☆（＾～＾）
 	}
+
+	return false
 }
 
 // サーバーから送られてくるメッセージを解析します
-func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
+// アプリケーションを終了するなら 真 を返します
+func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bool {
 	// 現在読み取り中の文字なので、早とちりするかも知れないぜ☆（＾～＾）
 	line := string(dia.lineBuffer[:dia.index])
 
@@ -256,7 +264,9 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 				promptState := string(promptStateBytes)
 				promptStateNum, err := strconv.Atoi(promptState)
 				if err == nil {
-					dia.promptDiagram(lis, promptStateNum)
+					if dia.promptDiagram(lis, promptStateNum) {
+						return true
+					}
 				}
 			// Info
 			case 9:
@@ -315,7 +325,9 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 					kwu.G.Chat.Trace("[対局はキャンセルされたぜ☆]")
 				} else if dia.regexOneSeven.Match(promptStateBytes) {
 					kwu.G.Chat.Trace("[サブ遷移へ☆]")
-					dia.promptDiagram(lis, 7)
+					if dia.promptDiagram(lis, 7) {
+						return true
+					}
 				} else {
 					// "9 1 5" とか来るが、無視しろだぜ☆（＾～＾）
 				}
@@ -452,6 +464,8 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 		// 想定外の遷移だぜ☆（＾～＾）！
 		panic(kwu.G.Chat.Fatal("Unexpected state transition. state=%d", dia.state))
 	}
+
+	return false
 }
 
 func (dia *NngsClientStateDiagram) turn(lis *nngsClientStateDiagramListener) {
