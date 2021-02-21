@@ -143,6 +143,8 @@ func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramList
 			kwu.G.Chat.Trace("...GE2NNGS... 得点計算は飛ばすぜ☆（＾～＾）対局も終了するぜ☆（＾～＾）\n")
 			kwu.G.Chat.Notice("<--GE2NNGS... [%s]\n", message)
 			oi.LongWrite(dia.writerToServer, []byte(message))
+			dia.done(lis)
+			dia.quit(lis)
 		}
 		dia.promptState = 7
 	default:
@@ -150,12 +152,13 @@ func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramList
 	}
 }
 
+// サーバーから送られてくるメッセージを解析します
 func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 	// 現在読み取り中の文字なので、早とちりするかも知れないぜ☆（＾～＾）
 	line := string(dia.lineBuffer[:dia.index])
 
 	if dia.newlineReadableState == 2 {
-		print(fmt.Sprintf("受信[%s]\n", line))
+		kwu.G.Chat.Notice("-->GE2NNGS... [%s]\n", line)
 	}
 
 	switch dia.state {
@@ -309,11 +312,11 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 					// dia.turnState = 10
 
 				} else if dia.regexDecline1.Match(promptStateBytes) {
-					print("[対局はキャンセルされたぜ☆]")
+					kwu.G.Chat.Trace("[対局はキャンセルされたぜ☆]")
 				} else if dia.regexDecline2.Match(promptStateBytes) {
-					print("[対局はキャンセルされたぜ☆]")
+					kwu.G.Chat.Trace("[対局はキャンセルされたぜ☆]")
 				} else if dia.regexOneSeven.Match(promptStateBytes) {
-					print("[サブ遷移へ☆]")
+					kwu.G.Chat.Trace("[サブ遷移へ☆]")
 					dia.promptDiagram(lis, 7)
 				} else {
 					// "9 1 5" とか来るが、無視しろだぜ☆（＾～＾）
@@ -323,8 +326,6 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) {
 			// Example: `15   4(B): J4`.
 			// A1 かもしれないし、 A12 かも知れず、いつコマンドが完了するか分からないので、２回以上実行されることはある。
 			case 15:
-				// print("15だぜ☆")
-
 				// 対局中、ゲーム情報は 指し手の前に毎回流れてくるぜ☆（＾～＾）
 				// 自分が指すタイミングと、相手が指すタイミングのどちらでも流れてくるぜ☆（＾～＾）
 				// とりあえずゲーム情報を全部変数に入れとけばあとで使える☆（＾～＾）
@@ -473,8 +474,6 @@ func (dia *NngsClientStateDiagram) turn(lis *nngsClientStateDiagramListener) {
 
 // play コマンドの応答を待ちます
 func (dia *NngsClientStateDiagram) waitForPlayResponse(lis *nngsClientStateDiagramListener) {
-	print("****** Board updating ... ******\n")
-
 	var buffer [1]byte // これが満たされるまで待つ。1バイト。
 
 	// ただのライン・バッファー

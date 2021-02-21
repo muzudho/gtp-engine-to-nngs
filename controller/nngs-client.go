@@ -42,7 +42,7 @@ func Spawn(engineConf kwe.EngineConf, entryConf e.EntryConf, engineStdin *io.Wri
 // CallTELNET - 決まった形のメソッド。
 func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer, r telnet.Reader) {
 
-	print("...GE2NNGS... 受信開始☆")
+	kwu.G.Chat.Trace("...GE2NNGS... 受信開始☆")
 	lis := nngsClientStateDiagramListener{}
 
 	dia.writerToServer = w
@@ -74,11 +74,11 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 			dia.lineBuffer[dia.index] = bytes[0]
 			dia.index++
 
-			if dia.newlineReadableState < 2 {
-				// サーバーから１文字送られてくるたび、表示。
-				// [受信] 割り込みで 改行がない行も届くので、改行が届くまで待つという処理ができません。
-				print(string(bytes))
-			}
+			// if dia.newlineReadableState < 2 {
+			// 	// サーバーから１文字送られてくるたび、表示。
+			// 	// [受信] 割り込みで 改行がない行も届くので、改行が届くまで待つという処理ができません。
+			// 	print(string(bytes))
+			// }
 
 			// 改行を受け取る前にパースしてしまおう☆（＾～＾）早とちりするかも知れないけど☆（＾～＾）
 			dia.parse(lis)
@@ -89,7 +89,7 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 				dia.index = 0
 
 				if dia.newlineReadableState == 1 {
-					print("[行単位入力へ切替(^q^)]")
+					kwu.G.Chat.Trace("[行単位入力へ切替(^q^)]")
 					dia.newlineReadableState = 2
 					break // for文を抜ける
 				}

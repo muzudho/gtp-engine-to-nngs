@@ -27,3 +27,9 @@ func (dia *NngsClientStateDiagram) genmove(lis *nngsClientStateDiagramListener) 
 	// Response
 	dia.waitForGenmoveResponse(lis)
 }
+
+func (dia *NngsClientStateDiagram) done(lis *nngsClientStateDiagramListener) {
+}
+
+func (dia *NngsClientStateDiagram) quit(lis *nngsClientStateDiagramListener) {
+}
