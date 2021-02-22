@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -13,6 +12,7 @@ import (
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	"github.com/muzudho/gtp-engine-to-nngs/ui"
 	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
+	kwe "github.com/muzudho/kifuwarabe-gtp/entities"
 	kwui "github.com/muzudho/kifuwarabe-gtp/ui"
 	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
 )
@@ -63,37 +63,41 @@ func main() {
 	// fmt.Println("...GE2NNGS... 設定ファイルを読み込んだろ☆（＾～＾）")
 	engineConf, err := kwui.LoadEngineConf(engineConfPath)
 	if err != nil {
-		panic(kwu.G.Chat.Fatal("engineConfPath=[%s] err=[%s]", engineConfPath, err))
+		panic(kwu.G.Chat.Fatal("engineConfPath=[%s] err=[%s]\n", engineConfPath, err))
 	}
 
 	entryConf, err := ui.LoadEntryConf(entryConfPath)
 	if err != nil {
-		panic(kwu.G.Chat.Fatal("entryConfPath=[%s] err=[%s]", entryConfPath, err))
+		panic(kwu.G.Chat.Fatal("entryConfPath=[%s] err=[%s]\n", entryConfPath, err))
 	}
 
 	// NNGSからのメッセージ受信に対応するプログラムを指定したろ☆（＾～＾）
-	kwu.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]", entryConf.User.InterfaceType)
+	kwu.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]\n", entryConf.User.InterfaceType)
 
 	// 思考エンジンを起動
-	engineStdin, engineStdout := startEngine(entryConf, workdir)
+	startEngine(engineConf, entryConf, workdir)
 
-	kwu.G.Chat.Trace("...GE2NNGS... (^q^) 何か文字を打てだぜ☆ 終わりたかったら [Ctrl]+[C]☆")
-	c.Spawn(engineConf, entryConf, &engineStdin, &engineStdout)
-
-	engineStdin.Close()
-	kwu.G.Chat.Trace("...GE2NNGS... (^q^) おわり☆！")
+	kwu.G.Chat.Trace("...GE2NNGS... (^q^) おわり☆！\n")
 }
 
 // 思考エンジンを起動
-func startEngine(entryConf *e.EntryConf, workdir *string) (io.WriteCloser, io.ReadCloser) {
+func startEngine(engineConf *kwe.EngineConf, entryConf *e.EntryConf, workdir *string) {
 	parameters := strings.Split("--workdir "+*workdir+" "+entryConf.User.EngineCommandOption, " ")
-	kwu.G.Chat.Trace("(^q^) GTP対応の思考エンジンを起動するぜ☆ [%s] [%s]", entryConf.User.EngineCommand, strings.Join(parameters, " "))
+	kwu.G.Chat.Trace("(^q^) GTP対応の思考エンジンを起動するぜ☆ 途中で終わりたかったら [Ctrl]+[C]\n")
+	kwu.G.Chat.Trace("(^q^) command=[%s] argumentList=[%s]\n", entryConf.User.EngineCommand, strings.Join(parameters, " "))
 	cmd := exec.Command(entryConf.User.EngineCommand, parameters...)
-	stdin, _ := cmd.StdinPipe()
-	stdout, _ := cmd.StdoutPipe()
+
+	engineStdin, _ := cmd.StdinPipe()
+	defer engineStdin.Close()
+
+	engineStdout, _ := cmd.StdoutPipe()
+	defer engineStdout.Close()
+
 	err := cmd.Start()
 	if err != nil {
 		panic(kwu.G.Chat.Fatal(err.Error()))
 	}
-	return stdin, stdout
+
+	c.Spawn(engineConf, entryConf, &engineStdin, &engineStdout)
+	// cmd.Wait()
 }

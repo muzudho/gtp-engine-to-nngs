@@ -64,6 +64,8 @@ Loop:
 		oi.LongWrite(dia.writerToServer, bytes)
 		oi.LongWrite(dia.writerToServer, []byte("\n"))
 
+		// "quit" メッセージを送信したエンジンは、その直後にアプリケーション終了するので、接続も切れる。
+		// すると Scan() は "quit" メッセージを受け取れない。
 		if string(bytes) == "quit" {
 			// エンジンは終了しました
 			kwu.G.Chat.Trace("...GE2NNGS... エンジンをQuitさせるぜ☆（＾～＾）")
@@ -98,7 +100,9 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 			// 改行を受け取る前にパースしてしまおう☆（＾～＾）早とちりするかも知れないけど☆（＾～＾）
 			if dia.parse(lis) {
 				// このアプリを終了します
-				kwu.G.Chat.Trace("...GE2NNGS... End read\n")
+				kwu.G.Chat.Trace("...GE2NNGS... End read loop A\n")
+				// 標準入力のスキャンに、 "quit" を送り付けます。
+				kwu.G.Chat.Print("quit\n")
 				return
 			}
 
@@ -143,7 +147,9 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 				// 1行をパースします
 				if dia.parse(lis) {
 					// このアプリを終了します
-					kwu.G.Chat.Trace("...GE2NNGS... End read\n")
+					kwu.G.Chat.Trace("...GE2NNGS... End read loop B\n")
+					// 標準入力のスキャンに、 "quit" を送り付けます。
+					kwu.G.Chat.Print("quit\n")
 					return
 				}
 				dia.index = 0

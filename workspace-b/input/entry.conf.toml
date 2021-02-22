@@ -35,7 +35,7 @@ OpponentName = "kifuwarabe"
 Phase = 'B'
 
 # 何路盤
-BoardSize = 19
+BoardSize = 9
 
 # 持ち時間（分）
 AvailableTimeMinutes = 40
