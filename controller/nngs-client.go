@@ -41,42 +41,17 @@ func Spawn(engineConf *kwe.EngineConf, entryConf *e.EntryConf, engineStdin *io.W
 // CallTELNET - 決まった形のメソッド。サーバーに対して読み書きできます
 func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer, r telnet.Reader) {
 
-	kwu.G.Chat.Trace("...GE2NNGS... 受信開始☆")
+	kwu.G.Chat.Trace("...GE2NNGS... Start Telnet")
 	lis := nngsClientStateDiagramListener{}
 
 	dia.writerToServer = w
 	dia.readerFromServer = r
 
-	//go dia.read(&lis)
 	dia.read(&lis)
-
-	// scanner - 標準入力を監視します。
-	// scanner := bufio.NewScanner(os.Stdin)
 
 	kwu.G.Log.FlushAllLogs()
 
-	/*
-		Loop:
-			for scanner.Scan() {
-				bytes := scanner.Bytes()
-				// 書き込みます。最後に改行を付けます。
-				kwu.G.Chat.Notice("<--★GE2NNGS... [%s\n]\n", bytes)
-				oi.LongWrite(dia.writerToServer, bytes)
-				oi.LongWrite(dia.writerToServer, []byte("\n"))
-
-				// "quit" メッセージを送信したエンジンは、その直後にアプリケーション終了するので、接続も切れる。
-				// すると Scan() は "quit" メッセージを受け取れない。
-				if string(bytes) == "quit" {
-					// エンジンは終了しました
-					kwu.G.Chat.Trace("...GE2NNGS... エンジンをQuitさせるぜ☆（＾～＾）")
-					break Loop
-				}
-
-				kwu.G.Log.FlushAllLogs()
-			}
-	*/
-
-	kwu.G.Chat.Trace("...GE2NNGS... Telnetを終了するぜ☆（＾～＾）")
+	kwu.G.Chat.Trace("...GE2NNGS... End Telnet")
 }
 
 // サーバーから送られてくるメッセージを待ち構えるループです。
