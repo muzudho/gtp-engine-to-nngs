@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"os"
@@ -39,7 +38,7 @@ func Spawn(engineConf *kwe.EngineConf, entryConf *e.EntryConf, engineStdin *io.W
 	return telnet.DialToAndCall(fmt.Sprintf("%s:%d", entryConf.Server.Host, entryConf.Server.Port), nngsClientStateDiagram)
 }
 
-// CallTELNET - 決まった形のメソッド。
+// CallTELNET - 決まった形のメソッド。サーバーに対して読み書きできます
 func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer, r telnet.Reader) {
 
 	kwu.G.Chat.Trace("...GE2NNGS... 受信開始☆")
@@ -48,32 +47,34 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 	dia.writerToServer = w
 	dia.readerFromServer = r
 
-	go dia.read(&lis)
+	//go dia.read(&lis)
+	dia.read(&lis)
 
 	// scanner - 標準入力を監視します。
-	scanner := bufio.NewScanner(os.Stdin)
-	// 無限ループ。 一行読み取ります。
+	// scanner := bufio.NewScanner(os.Stdin)
 
 	kwu.G.Log.FlushAllLogs()
 
-Loop:
-	for scanner.Scan() {
-		bytes := scanner.Bytes()
-		// 書き込みます。最後に改行を付けます。
-		kwu.G.Chat.Notice("<--GE2NNGS... [%s\n]\n", bytes)
-		oi.LongWrite(dia.writerToServer, bytes)
-		oi.LongWrite(dia.writerToServer, []byte("\n"))
+	/*
+		Loop:
+			for scanner.Scan() {
+				bytes := scanner.Bytes()
+				// 書き込みます。最後に改行を付けます。
+				kwu.G.Chat.Notice("<--★GE2NNGS... [%s\n]\n", bytes)
+				oi.LongWrite(dia.writerToServer, bytes)
+				oi.LongWrite(dia.writerToServer, []byte("\n"))
 
-		// "quit" メッセージを送信したエンジンは、その直後にアプリケーション終了するので、接続も切れる。
-		// すると Scan() は "quit" メッセージを受け取れない。
-		if string(bytes) == "quit" {
-			// エンジンは終了しました
-			kwu.G.Chat.Trace("...GE2NNGS... エンジンをQuitさせるぜ☆（＾～＾）")
-			break Loop
-		}
+				// "quit" メッセージを送信したエンジンは、その直後にアプリケーション終了するので、接続も切れる。
+				// すると Scan() は "quit" メッセージを受け取れない。
+				if string(bytes) == "quit" {
+					// エンジンは終了しました
+					kwu.G.Chat.Trace("...GE2NNGS... エンジンをQuitさせるぜ☆（＾～＾）")
+					break Loop
+				}
 
-		kwu.G.Log.FlushAllLogs()
-	}
+				kwu.G.Log.FlushAllLogs()
+			}
+	*/
 
 	kwu.G.Chat.Trace("...GE2NNGS... Telnetを終了するぜ☆（＾～＾）")
 }
@@ -102,7 +103,8 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 				// このアプリを終了します
 				kwu.G.Chat.Trace("...GE2NNGS... End read loop A\n")
 				// 標準入力のスキャンに、 "quit" を送り付けます。
-				kwu.G.Chat.Print("quit\n")
+				fmt.Fprintf(os.Stdin, "quit\n")
+				kwu.G.Log.Trace("...GE2NNGS... quit\n")
 				return
 			}
 
@@ -149,7 +151,8 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 					// このアプリを終了します
 					kwu.G.Chat.Trace("...GE2NNGS... End read loop B\n")
 					// 標準入力のスキャンに、 "quit" を送り付けます。
-					kwu.G.Chat.Print("quit\n")
+					fmt.Fprintf(os.Stdin, "quit\n")
+					kwu.G.Log.Trace("...GE2NNGS... quit\n")
 					return
 				}
 				dia.index = 0

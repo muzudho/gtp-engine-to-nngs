@@ -1,7 +1,0 @@
-[2021-02-21 03:14:26] <Engine> KifuwarabeGoGo プログラム開始☆（＾～＾）
-[2021-02-21 03:14:26] <Engine> Author: Satoshi Takahashi
-[2021-02-21 03:14:26] <Engine> This is a GTP engine.
-[2021-02-21 03:14:26] <Engine> wdir=C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs
-[2021-02-21 03:14:26] <Engine> flag.Args()=[]
-[2021-02-21 03:14:26] <Engine> workdir=C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs
-[2021-02-21 03:14:26] <Engine> entryConfPath=C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs\input\default.entryConf.toml
