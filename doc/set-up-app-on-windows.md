@@ -22,6 +22,9 @@ go get -v -u github.com/reiver/go-telnet
 Build:  
 
 ```shell
+# 使っていないパッケージを、インストールのリストから削除するなら
+# go mod tidy
+
 # 自作のパッケージを更新(再インストール)したいなら
 # go get -u all
 

@@ -1,5 +1,7 @@
 workspace-b/output/*.log
+workspace-b/output/connector/*.log
 workspace-w/output/*.log
+workspace-w/output/connector/*.log
 
 # Binaries for programs and plugins
 *.exe

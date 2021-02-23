@@ -10,8 +10,8 @@ import (
 
 	c "github.com/muzudho/gtp-engine-to-nngs/controller"
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
+	g "github.com/muzudho/gtp-engine-to-nngs/global"
 	"github.com/muzudho/gtp-engine-to-nngs/ui"
-	u "github.com/muzudho/gtp-engine-to-nngs/usecases"
 	kwe "github.com/muzudho/kifuwarabe-gtp/entities"
 	kwui "github.com/muzudho/kifuwarabe-gtp/ui"
 	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
@@ -37,55 +37,58 @@ func main() {
 	fmt.Printf("...GE2NNGS... engineConfPath=%s\n", engineConfPath)
 
 	// グローバル変数の作成
-	u.G = *new(u.GlobalVariables)
+	g.G = *new(g.GlobalVariables)
 
 	// ロガーの作成。
-	kwu.G.Log = *kwu.NewLogger(
-		filepath.Join(*workdir, "output/trace.log"),
-		filepath.Join(*workdir, "output/debug.log"),
-		filepath.Join(*workdir, "output/info.log"),
-		filepath.Join(*workdir, "output/notice.log"),
-		filepath.Join(*workdir, "output/warn.log"),
-		filepath.Join(*workdir, "output/error.log"),
-		filepath.Join(*workdir, "output/fatal.log"),
-		filepath.Join(*workdir, "output/print.log"))
+	g.G.Log = *kwu.NewLogger(
+		filepath.Join(*workdir, "output/connector/trace.log"),
+		filepath.Join(*workdir, "output/connector/debug.log"),
+		filepath.Join(*workdir, "output/connector/info.log"),
+		filepath.Join(*workdir, "output/connector/notice.log"),
+		filepath.Join(*workdir, "output/connector/warn.log"),
+		filepath.Join(*workdir, "output/connector/error.log"),
+		filepath.Join(*workdir, "output/connector/fatal.log"),
+		filepath.Join(*workdir, "output/connector/print.log"))
 
-	// 既存のログ・ファイルを削除。エンジンが起動時に行う
+	// 既存のログ・ファイルを削除。
+	g.G.Log.RemoveAllOldLogs()
 
-	// ログ・ファイルの開閉
-	kwu.G.Log.OpenAllLogs()
-	defer kwu.G.Log.CloseAllLogs()
+	// // ログ・ファイルの開閉
+	g.G.Log.OpenAllLogs()
+	defer g.G.Log.CloseAllLogs()
 
-	// チャッターの作成。 標準出力とロガーを一緒にしただけです。
-	kwu.G.Chat = *kwu.NewChatter(kwu.G.Log)
-	kwu.G.StderrChat = *kwu.NewStderrChatter(kwu.G.Log)
+	// チャッターの作成も、エンジンが起動時に行う
+	g.G.Chat = *kwu.NewChatter(g.G.Log)
+	g.G.StderrChat = *kwu.NewStderrChatter(g.G.Log)
 
-	kwu.G.Chat.Trace("...GE2NNGS... Start program\n")
+	g.G.Chat.Trace("...GE2NNGS... Start program\n")
 
 	// 設定ファイル読込
 	engineConf, err := kwui.LoadEngineConf(engineConfPath)
 	if err != nil {
-		panic(kwu.G.Chat.Fatal("...GE2NNGS... engineConfPath=[%s] err=[%s]\n", engineConfPath, err))
+		panic(g.G.Chat.Fatal("...GE2NNGS... engineConfPath=[%s] err=[%s]\n", engineConfPath, err))
 	}
 
 	connectorConf, err := ui.LoadConnectorConf(connectorConfPath)
 	if err != nil {
-		panic(kwu.G.Chat.Fatal("...GE2NNGS... connectorConfPath=[%s] err=[%s]\n", connectorConfPath, err))
+		panic(g.G.Chat.Fatal("...GE2NNGS... connectorConfPath=[%s] err=[%s]\n", connectorConfPath, err))
 	}
 
-	kwu.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]\n", connectorConf.User.InterfaceType)
+	g.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]\n", connectorConf.User.InterfaceType)
 
 	// 思考エンジンを起動
 	startEngine(engineConf, connectorConf, workdir)
 
-	kwu.G.Chat.Trace("...GE2NNGS... End program\n")
+	g.G.Chat.Trace("...GE2NNGS... End program\n")
 }
 
 // 思考エンジンを起動
 func startEngine(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, workdir *string) {
 	parameters := strings.Split("--workdir "+*workdir+" "+connectorConf.User.EngineCommandOption, " ")
-	kwu.G.Chat.Trace("...GE2NNGS... (^q^) GTP対応の思考エンジンを起動するぜ☆ 途中で終わりたかったら [Ctrl]+[C]\n")
-	kwu.G.Chat.Trace("...GE2NNGS... (^q^) command=[%s] argumentList=[%s]\n", connectorConf.User.EngineCommand, strings.Join(parameters, " "))
+	parametersString := strings.Join(parameters, " ")
+	parametersString = strings.TrimRight(parametersString, " ")
+	g.G.Chat.Trace("...GE2NNGS... (^q^) GTP対応の思考エンジンを起動するぜ☆ 途中で終わりたかったら [Ctrl]+[C]\n")
+	g.G.Chat.Trace("...GE2NNGS... (^q^) command=[%s] argumentList=[%s]\n", connectorConf.User.EngineCommand, parametersString)
 	cmd := exec.Command(connectorConf.User.EngineCommand, parameters...)
 
 	engineStdin, _ := cmd.StdinPipe()
@@ -96,9 +99,9 @@ func startEngine(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, wor
 
 	err := cmd.Start()
 	if err != nil {
-		panic(kwu.G.Chat.Fatal(fmt.Sprintf("...GE2NNGS... %s", err)))
+		panic(g.G.Chat.Fatal(fmt.Sprintf("...GE2NNGS... cmd.Start() --> %s", err)))
 	}
 
-	c.Spawn(engineConf, connectorConf, &engineStdin, &engineStdout)
-	// cmd.Wait()
+	c.SpawnServerConnection(engineConf, connectorConf, &engineStdin, &engineStdout)
+	cmd.Wait()
 }

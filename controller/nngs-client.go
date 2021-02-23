@@ -6,15 +6,15 @@ import (
 	"regexp"
 
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
+	g "github.com/muzudho/gtp-engine-to-nngs/global"
 	kwe "github.com/muzudho/kifuwarabe-gtp/entities"
-	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
 	"github.com/reiver/go-oi"
 	"github.com/reiver/go-telnet"
 )
 
-// Spawn - クライアント接続
+// SpawnServerConnection - サーバーとのTelnet接続
 // * `engineStdin` - GTP Engine stdin
-func Spawn(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, engineStdin *io.WriteCloser, engineStdout *io.ReadCloser) error {
+func SpawnServerConnection(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, engineStdin *io.WriteCloser, engineStdout *io.ReadCloser) error {
 	// NNGSクライアントの状態遷移図
 	nngsClientStateDiagram := NngsClientStateDiagram{
 		EngineStdin:   engineStdin,
@@ -40,7 +40,7 @@ func Spawn(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, engineStd
 // CallTELNET - 決まった形のメソッド。サーバーに対して読み書きできます
 func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer, r telnet.Reader) {
 
-	kwu.G.Chat.Trace("...GE2NNGS... Start Telnet")
+	g.G.Chat.Trace("...GE2NNGS... Start Telnet")
 	lis := nngsClientStateDiagramListener{}
 
 	dia.writerToServer = w
@@ -48,14 +48,14 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 
 	dia.read(&lis)
 
-	kwu.G.Log.FlushAllLogs()
+	g.G.Log.FlushAllLogs()
 
 	// プロセスが終了しても、子プロセスは自動的には終了しませんので、
 	// エンジンの終了を試みます
-	kwu.G.Chat.Trace("...GE2NNGS... Try quit engine")
+	g.G.Chat.Trace("...GE2NNGS... Try quit engine")
 	dia.quitEngine(&lis)
 
-	kwu.G.Chat.Trace("...GE2NNGS... End Telnet")
+	g.G.Chat.Trace("...GE2NNGS... End Telnet")
 }
 
 // サーバーから送られてくるメッセージを待ち構えるループです。
@@ -74,7 +74,7 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 			// 改行を受け取る前にパースしてしまおう☆（＾～＾）早とちりするかも知れないけど☆（＾～＾）
 			if dia.parse(lis) {
 				// このアプリを終了します
-				kwu.G.Chat.Trace("...GE2NNGS... End read loop A\n")
+				g.G.Chat.Trace("...GE2NNGS... End read loop A\n")
 				return
 			}
 
@@ -84,7 +84,7 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 				dia.index = 0
 
 				if dia.newlineReadableState == 1 {
-					kwu.G.Chat.Trace("[行単位入力へ切替(^q^)]")
+					g.G.Chat.Trace("[行単位入力へ切替(^q^)]")
 					dia.newlineReadableState = 2
 					break // for文を抜ける
 				}
@@ -119,7 +119,7 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 				// 1行をパースします
 				if dia.parse(lis) {
 					// このアプリを終了します
-					kwu.G.Chat.Trace("...GE2NNGS... End read loop B\n")
+					g.G.Chat.Trace("...GE2NNGS... End read loop B\n")
 					return
 				}
 				dia.index = 0
@@ -136,6 +136,6 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 // Original code: NngsClient.rb/NNGSClient/`def login`
 func setClientMode(writerToServer telnet.Writer) {
 	message := "set client true\n"
-	kwu.G.Chat.Notice("<--GE2NNGS... [%s]\n", message)
+	g.G.Chat.Notice("<--GE2NNGS... [%s]\n", message)
 	oi.LongWrite(writerToServer, []byte(message))
 }
