@@ -53,7 +53,7 @@ func main() {
 	// 既存のログ・ファイルを削除。
 	g.G.Log.RemoveAllOldLogs()
 
-	// // ログ・ファイルの開閉
+	// ログ・ファイルの開閉
 	err = g.G.Log.OpenAllLogs()
 	if err != nil {
 		// ログ・ファイルを開くのに失敗したのだから、ログ・ファイルへは書き込めません
@@ -107,6 +107,7 @@ func startEngine(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, wor
 		panic(g.G.Chat.Fatal(fmt.Sprintf("...GE2NNGS... cmd.Start() --> %s", err)))
 	}
 
+	g.G.Chat.Trace("...GE2NNGS... SpawnServerConnection\n", connectorConf.User.EngineCommand, parametersString)
 	c.SpawnServerConnection(engineConf, connectorConf, &engineStdin, &engineStdout)
 	cmd.Wait()
 }

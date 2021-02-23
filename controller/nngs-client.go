@@ -34,13 +34,15 @@ func SpawnServerConnection(engineConf *kwe.EngineConf, connectorConf *e.Connecto
 		regexNngsMove:          *regexp.MustCompile("\\s*(\\d+)\\(([BWbw])\\): ([A-Z]\\d+|Pass)"),
 		regexAcceptCommand:     *regexp.MustCompile("match \\S+ \\S+ (\\d+) "),
 		regexEngineBestmove:    *regexp.MustCompile("= ([A-Z]\\d+|pass)")}
+
+	g.G.Chat.Trace("...GE2NNGS... telnet.DialToAndCall\n")
 	return telnet.DialToAndCall(fmt.Sprintf("%s:%d", connectorConf.Server.Host, connectorConf.Server.Port), nngsClientStateDiagram)
 }
 
 // CallTELNET - 決まった形のメソッド。サーバーに対して読み書きできます
 func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer, r telnet.Reader) {
 
-	g.G.Chat.Trace("...GE2NNGS... Start Telnet")
+	g.G.Chat.Trace("...GE2NNGS... Start Telnet\n")
 	lis := nngsClientStateDiagramListener{}
 
 	dia.writerToServer = w
@@ -52,10 +54,10 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 
 	// プロセスが終了しても、子プロセスは自動的には終了しませんので、
 	// エンジンの終了を試みます
-	g.G.Chat.Trace("...GE2NNGS... Try quit engine")
+	g.G.Chat.Trace("...GE2NNGS... Try quit engine\n")
 	dia.quitEngine(&lis)
 
-	g.G.Chat.Trace("...GE2NNGS... End Telnet")
+	g.G.Chat.Trace("...GE2NNGS... End Telnet\n")
 }
 
 // サーバーから送られてくるメッセージを待ち構えるループです。
