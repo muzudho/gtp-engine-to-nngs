@@ -34,7 +34,7 @@ func LoadConnectorConf(path string) (*e.ConnectorConf, error) {
 // 	// Toml解析
 // 	tomlTree, err := toml.Load(string(fileData))
 // 	if err != nil {
-// 		panic(kwu.G.Chat.Fatal(err.Error()))
+//		panic(kwu.G.Chat.Fatal(fmt.Sprintf("...GE2NNGS... %s", err)))
 // 	}
 // 	kwu.G.Chat.Trace("...GE2NNGS... Input:\n")
 // 	kwu.G.Chat.Trace("...GE2NNGS... Server.Host=%s\n", tomlTree.Get("Server.Host").(string))

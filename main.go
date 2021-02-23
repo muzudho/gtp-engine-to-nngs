@@ -60,31 +60,32 @@ func main() {
 	kwu.G.Chat = *kwu.NewChatter(kwu.G.Log)
 	kwu.G.StderrChat = *kwu.NewStderrChatter(kwu.G.Log)
 
-	// fmt.Println("...GE2NNGS... 設定ファイルを読み込んだろ☆（＾～＾）")
+	kwu.G.Chat.Trace("...GE2NNGS... Start program\n")
+
+	// 設定ファイル読込
 	engineConf, err := kwui.LoadEngineConf(engineConfPath)
 	if err != nil {
-		panic(kwu.G.Chat.Fatal("engineConfPath=[%s] err=[%s]\n", engineConfPath, err))
+		panic(kwu.G.Chat.Fatal("...GE2NNGS... engineConfPath=[%s] err=[%s]\n", engineConfPath, err))
 	}
 
 	connectorConf, err := ui.LoadConnectorConf(connectorConfPath)
 	if err != nil {
-		panic(kwu.G.Chat.Fatal("connectorConfPath=[%s] err=[%s]\n", connectorConfPath, err))
+		panic(kwu.G.Chat.Fatal("...GE2NNGS... connectorConfPath=[%s] err=[%s]\n", connectorConfPath, err))
 	}
 
-	// NNGSからのメッセージ受信に対応するプログラムを指定したろ☆（＾～＾）
 	kwu.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]\n", connectorConf.User.InterfaceType)
 
 	// 思考エンジンを起動
 	startEngine(engineConf, connectorConf, workdir)
 
-	kwu.G.Chat.Trace("...GE2NNGS... (^q^) おわり☆！\n")
+	kwu.G.Chat.Trace("...GE2NNGS... End program\n")
 }
 
 // 思考エンジンを起動
 func startEngine(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, workdir *string) {
 	parameters := strings.Split("--workdir "+*workdir+" "+connectorConf.User.EngineCommandOption, " ")
-	kwu.G.Chat.Trace("(^q^) GTP対応の思考エンジンを起動するぜ☆ 途中で終わりたかったら [Ctrl]+[C]\n")
-	kwu.G.Chat.Trace("(^q^) command=[%s] argumentList=[%s]\n", connectorConf.User.EngineCommand, strings.Join(parameters, " "))
+	kwu.G.Chat.Trace("...GE2NNGS... (^q^) GTP対応の思考エンジンを起動するぜ☆ 途中で終わりたかったら [Ctrl]+[C]\n")
+	kwu.G.Chat.Trace("...GE2NNGS... (^q^) command=[%s] argumentList=[%s]\n", connectorConf.User.EngineCommand, strings.Join(parameters, " "))
 	cmd := exec.Command(connectorConf.User.EngineCommand, parameters...)
 
 	engineStdin, _ := cmd.StdinPipe()
@@ -95,7 +96,7 @@ func startEngine(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, wor
 
 	err := cmd.Start()
 	if err != nil {
-		panic(kwu.G.Chat.Fatal(err.Error()))
+		panic(kwu.G.Chat.Fatal(fmt.Sprintf("...GE2NNGS... %s", err)))
 	}
 
 	c.Spawn(engineConf, connectorConf, &engineStdin, &engineStdout)
