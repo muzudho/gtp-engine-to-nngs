@@ -66,6 +66,8 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 	p := buffer[:]
 
 	for {
+		g.G.Log.FlushAllLogs()
+
 		n, err := dia.readerFromServer.Read(p) // 送られてくる文字がなければ、ここでブロックされます。
 
 		if n > 0 {
@@ -101,6 +103,8 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 	// サーバーから改行が送られてくるものと考えるぜ☆（＾～＾）
 	// これで、１行ずつ読み込めるな☆（＾～＾）
 	for {
+		g.G.Log.FlushAllLogs()
+
 		n, err := dia.readerFromServer.Read(p) // サーバーから送られてくる文字がなければ、ここでブロックされます。
 
 		if nil != err {
