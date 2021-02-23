@@ -54,7 +54,12 @@ func main() {
 	g.G.Log.RemoveAllOldLogs()
 
 	// // ログ・ファイルの開閉
-	g.G.Log.OpenAllLogs()
+	err = g.G.Log.OpenAllLogs()
+	if err != nil {
+		// ログ・ファイルを開くのに失敗したのだから、ログ・ファイルへは書き込めません
+		panic(fmt.Sprintf("...GE2NNGS... %s", err))
+	}
+
 	defer g.G.Log.CloseAllLogs()
 
 	// チャッターの作成も、エンジンが起動時に行う
