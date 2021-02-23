@@ -126,7 +126,7 @@ func (dia *NngsClientStateDiagram) promptDiagram(lis *nngsClientStateDiagramList
 
 			// このアプリを終了します
 			kwu.G.Chat.Notice("...GE2NNGS... Match end\n")
-			return true // runtime.Goexit()
+			return true
 		}
 		dia.promptState = 5
 	// PlayingGo

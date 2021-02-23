@@ -3,7 +3,6 @@ package controller
 import (
 	"fmt"
 	"io"
-	"os"
 	"regexp"
 
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
@@ -51,6 +50,11 @@ func (dia NngsClientStateDiagram) CallTELNET(ctx telnet.Context, w telnet.Writer
 
 	kwu.G.Log.FlushAllLogs()
 
+	// プロセスが終了しても、子プロセスは自動的には終了しませんので、
+	// エンジンの終了を試みます
+	kwu.G.Chat.Trace("...GE2NNGS... Try quit engine")
+	dia.quitEngine(&lis)
+
 	kwu.G.Chat.Trace("...GE2NNGS... End Telnet")
 }
 
@@ -67,19 +71,10 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 			dia.lineBuffer[dia.index] = bytes[0]
 			dia.index++
 
-			// if dia.newlineReadableState < 2 {
-			// 	// サーバーから１文字送られてくるたび、表示。
-			// 	// [受信] 割り込みで 改行がない行も届くので、改行が届くまで待つという処理ができません。
-			// 	print(string(bytes))
-			// }
-
 			// 改行を受け取る前にパースしてしまおう☆（＾～＾）早とちりするかも知れないけど☆（＾～＾）
 			if dia.parse(lis) {
 				// このアプリを終了します
 				kwu.G.Chat.Trace("...GE2NNGS... End read loop A\n")
-				// 標準入力のスキャンに、 "quit" を送り付けます。
-				fmt.Fprintf(os.Stdin, "quit\n")
-				kwu.G.Log.Trace("...GE2NNGS... quit\n")
 				return
 			}
 
@@ -125,9 +120,6 @@ func (dia *NngsClientStateDiagram) read(lis *nngsClientStateDiagramListener) {
 				if dia.parse(lis) {
 					// このアプリを終了します
 					kwu.G.Chat.Trace("...GE2NNGS... End read loop B\n")
-					// 標準入力のスキャンに、 "quit" を送り付けます。
-					fmt.Fprintf(os.Stdin, "quit\n")
-					kwu.G.Log.Trace("...GE2NNGS... quit\n")
 					return
 				}
 				dia.index = 0

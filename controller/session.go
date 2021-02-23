@@ -45,10 +45,16 @@ func (dia *NngsClientStateDiagram) quit(lis *nngsClientStateDiagramListener) {
 	kwu.G.Chat.Trace("...GE2NNGS... アプリケーションも終了するぜ☆（＾～＾）\n")
 
 	// エンジンへ。返無用。
-	kwu.G.Chat.Notice("...GE2NNGS--> [%s]\n", message)
-	(*dia.EngineStdin).Write([]byte(message))
+	dia.quitEngine(lis)
 
 	// サーバーへ
 	kwu.G.Chat.Notice("<--GE2NNGS... [%s]\n", message)
 	oi.LongWrite(dia.writerToServer, []byte(message))
+}
+
+func (dia *NngsClientStateDiagram) quitEngine(lis *nngsClientStateDiagramListener) {
+	// エンジンへ。返無用。
+	message := "quit\n"
+	kwu.G.Chat.Notice("...GE2NNGS--> [%s]\n", message)
+	(*dia.EngineStdin).Write([]byte(message))
 }
