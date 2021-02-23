@@ -24,8 +24,8 @@ type NngsClientStateDiagram struct {
 	// EngineStdin - GTP Engine stdin
 	EngineStdout *io.ReadCloser
 
-	entryConf  e.EntryConf
-	engineConf kwe.EngineConf
+	connectorConf e.ConnectorConf
+	engineConf    kwe.EngineConf
 
 	// 状態遷移
 	state clistat.Clistat
@@ -226,9 +226,9 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 			dia.state = clistat.EnteredClientMode
 		}
 	case clistat.EnteredClientMode:
-		if dia.entryConf.ApplyFromMe() {
+		if dia.connectorConf.ApplyFromMe() {
 			// 対局を申し込みます。
-			_, configuredColorUpperCase, err := dia.entryConf.MyColor()
+			_, configuredColorUpperCase, err := dia.connectorConf.MyColor()
 			if err != nil {
 				panic(kwu.G.Chat.Fatal(err.Error()))
 			}
@@ -236,7 +236,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 			kwu.G.Log.Trace("...GE2NNGS... lis.MyColorを%sに変更☆（＾～＾）\n", configuredColorUpperCase)
 			dia.MyColor = phase.ToNum(configuredColorUpperCase)
 
-			message := fmt.Sprintf("match %s %s %d %d %d\n", dia.entryConf.OpponentName(), configuredColorUpperCase, dia.entryConf.BoardSize(), dia.entryConf.AvailableTimeMinutes(), dia.entryConf.CanadianTiming())
+			message := fmt.Sprintf("match %s %s %d %d %d\n", dia.connectorConf.OpponentName(), configuredColorUpperCase, dia.connectorConf.BoardSize(), dia.connectorConf.AvailableTimeMinutes(), dia.connectorConf.CanadianTiming())
 			kwu.G.Log.Trace("...GE2NNGS... 対局を申し込んだぜ☆（＾～＾）")
 			kwu.G.Chat.Notice("<--GE2NNGS... [%s]\n", message)
 			oi.LongWrite(dia.writerToServer, []byte(message))
@@ -302,7 +302,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 						dia.BoardSize = uint(boardSize)
 						// kwu.G.Chat.Trace("...GE2NNGS... ボードサイズは%d☆（＾～＾）", dia.BoardSize)
 
-						configuredColor, _, err := dia.entryConf.MyColor()
+						configuredColor, _, err := dia.connectorConf.MyColor()
 						if err != nil {
 							panic(kwu.G.Chat.Fatal(err.Error()))
 						}
@@ -312,7 +312,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 						}
 
 						// cmd_match
-						message := fmt.Sprintf("match %s %s %d %d %d\n", opponentPlayerName, myColorUppercase, dia.entryConf.BoardSize(), dia.entryConf.AvailableTimeMinutes(), dia.entryConf.CanadianTiming())
+						message := fmt.Sprintf("match %s %s %d %d %d\n", opponentPlayerName, myColorUppercase, dia.connectorConf.BoardSize(), dia.connectorConf.AvailableTimeMinutes(), dia.connectorConf.CanadianTiming())
 						kwu.G.Chat.Trace("...GE2NNGS... 対局を申し込むぜ☆（＾～＾）[%s]\n", message)
 						oi.LongWrite(dia.writerToServer, []byte(message))
 					}

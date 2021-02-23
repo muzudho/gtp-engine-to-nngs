@@ -1,4 +1,4 @@
-# (D) 白プレイヤー(人間)を想定
+# 接続設定ファイル
 
 [Server]
 
@@ -26,13 +26,13 @@ EngineCommandOption = ''
 
 # 自分の方から申し込むなら true, 申し込みを受けるのを待つ方なら false。
 # true にしたなら、 OpponentName も設定してください
-ApplyFromMe = false
+ApplyFromMe = true
 
 # 自分の方から申し込むなら、対戦相手のアカウント名も指定してください。そうでないなら無視されます
-OpponentName = ''
+OpponentName = "kifuwarabe"
 
 # 白番なら 'W', 黒番なら 'B'
-Phase = 'W'
+Phase = 'B'
 
 # 何路盤
 BoardSize = 19

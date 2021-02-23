@@ -31,9 +31,9 @@ func main() {
 	flag.Parse()
 	fmt.Printf("...GE2NNGS... flag.Args()=%s\n", flag.Args())
 	fmt.Printf("...GE2NNGS... workdir=%s\n", *workdir)
-	entryConfPath := filepath.Join(*workdir, "input/entry.conf.toml")
+	connectorConfPath := filepath.Join(*workdir, "input/connector.conf.toml")
 	engineConfPath := filepath.Join(*workdir, "input/engine.conf.toml")
-	fmt.Printf("...GE2NNGS... entryConfPath=%s\n", entryConfPath)
+	fmt.Printf("...GE2NNGS... connectorConfPath=%s\n", connectorConfPath)
 	fmt.Printf("...GE2NNGS... engineConfPath=%s\n", engineConfPath)
 
 	// グローバル変数の作成
@@ -66,26 +66,26 @@ func main() {
 		panic(kwu.G.Chat.Fatal("engineConfPath=[%s] err=[%s]\n", engineConfPath, err))
 	}
 
-	entryConf, err := ui.LoadEntryConf(entryConfPath)
+	connectorConf, err := ui.LoadConnectorConf(connectorConfPath)
 	if err != nil {
-		panic(kwu.G.Chat.Fatal("entryConfPath=[%s] err=[%s]\n", entryConfPath, err))
+		panic(kwu.G.Chat.Fatal("connectorConfPath=[%s] err=[%s]\n", connectorConfPath, err))
 	}
 
 	// NNGSからのメッセージ受信に対応するプログラムを指定したろ☆（＾～＾）
-	kwu.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]\n", entryConf.User.InterfaceType)
+	kwu.G.Chat.Trace("...GE2NNGS... (^q^) プレイヤーのタイプ☆ [%s]\n", connectorConf.User.InterfaceType)
 
 	// 思考エンジンを起動
-	startEngine(engineConf, entryConf, workdir)
+	startEngine(engineConf, connectorConf, workdir)
 
 	kwu.G.Chat.Trace("...GE2NNGS... (^q^) おわり☆！\n")
 }
 
 // 思考エンジンを起動
-func startEngine(engineConf *kwe.EngineConf, entryConf *e.EntryConf, workdir *string) {
-	parameters := strings.Split("--workdir "+*workdir+" "+entryConf.User.EngineCommandOption, " ")
+func startEngine(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, workdir *string) {
+	parameters := strings.Split("--workdir "+*workdir+" "+connectorConf.User.EngineCommandOption, " ")
 	kwu.G.Chat.Trace("(^q^) GTP対応の思考エンジンを起動するぜ☆ 途中で終わりたかったら [Ctrl]+[C]\n")
-	kwu.G.Chat.Trace("(^q^) command=[%s] argumentList=[%s]\n", entryConf.User.EngineCommand, strings.Join(parameters, " "))
-	cmd := exec.Command(entryConf.User.EngineCommand, parameters...)
+	kwu.G.Chat.Trace("(^q^) command=[%s] argumentList=[%s]\n", connectorConf.User.EngineCommand, strings.Join(parameters, " "))
+	cmd := exec.Command(connectorConf.User.EngineCommand, parameters...)
 
 	engineStdin, _ := cmd.StdinPipe()
 	defer engineStdin.Close()
@@ -98,6 +98,6 @@ func startEngine(engineConf *kwe.EngineConf, entryConf *e.EntryConf, workdir *st
 		panic(kwu.G.Chat.Fatal(err.Error()))
 	}
 
-	c.Spawn(engineConf, entryConf, &engineStdin, &engineStdout)
+	c.Spawn(engineConf, connectorConf, &engineStdin, &engineStdout)
 	// cmd.Wait()
 }

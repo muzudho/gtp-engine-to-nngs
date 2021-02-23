@@ -15,13 +15,13 @@ import (
 
 // Spawn - クライアント接続
 // * `engineStdin` - GTP Engine stdin
-func Spawn(engineConf *kwe.EngineConf, entryConf *e.EntryConf, engineStdin *io.WriteCloser, engineStdout *io.ReadCloser) error {
+func Spawn(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, engineStdin *io.WriteCloser, engineStdout *io.ReadCloser) error {
 	// NNGSクライアントの状態遷移図
 	nngsClientStateDiagram := NngsClientStateDiagram{
-		EngineStdin:  engineStdin,
-		EngineStdout: engineStdout,
-		engineConf:   *engineConf,
-		entryConf:    *entryConf,
+		EngineStdin:   engineStdin,
+		EngineStdout:  engineStdout,
+		engineConf:    *engineConf,
+		connectorConf: *connectorConf,
 		// nngsClientStateDiagram: *new(NngsClientStateDiagram),
 		index:                  0,
 		regexCommand:           *regexp.MustCompile("^(\\d+) (.*)"),
@@ -35,7 +35,7 @@ func Spawn(engineConf *kwe.EngineConf, entryConf *e.EntryConf, engineStdin *io.W
 		regexNngsMove:          *regexp.MustCompile("\\s*(\\d+)\\(([BWbw])\\): ([A-Z]\\d+|Pass)"),
 		regexAcceptCommand:     *regexp.MustCompile("match \\S+ \\S+ (\\d+) "),
 		regexEngineBestmove:    *regexp.MustCompile("= ([A-Z]\\d+|pass)")}
-	return telnet.DialToAndCall(fmt.Sprintf("%s:%d", entryConf.Server.Host, entryConf.Server.Port), nngsClientStateDiagram)
+	return telnet.DialToAndCall(fmt.Sprintf("%s:%d", connectorConf.Server.Host, connectorConf.Server.Port), nngsClientStateDiagram)
 }
 
 // CallTELNET - 決まった形のメソッド。サーバーに対して読み書きできます

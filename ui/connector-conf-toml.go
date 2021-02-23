@@ -7,8 +7,8 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
-// LoadEntryConf - Toml形式の参加設定ファイルを読み込みます。
-func LoadEntryConf(path string) (*e.EntryConf, error) {
+// LoadConnectorConf - Toml形式の参加設定ファイルを読み込みます。
+func LoadConnectorConf(path string) (*e.ConnectorConf, error) {
 
 	// ファイル読込
 	fileData, err := ioutil.ReadFile(path)
@@ -20,7 +20,7 @@ func LoadEntryConf(path string) (*e.EntryConf, error) {
 
 	// Toml解析
 	binary := []byte(string(fileData))
-	config := &e.EntryConf{}
+	config := &e.ConnectorConf{}
 	toml.Unmarshal(binary, config)
 
 	//debugPrintConfig(config)
@@ -48,7 +48,7 @@ func LoadEntryConf(path string) (*e.EntryConf, error) {
 // 	kwu.G.Chat.Trace("...GE2NNGS... MatchApplication.CanadianTiming=%d\n", tomlTree.Get("MatchApplication.CanadianTiming").(int64))
 // }
 
-// func debugPrintConfig(config e.EntryConf) {
+// func debugPrintConfig(config e.ConnectorConf) {
 // 	kwu.G.Chat.Trace("...GE2NNGS... Memory:\n")
 // 	kwu.G.Chat.Trace("...GE2NNGS... Server.Host=%s\n", config.Server.Host)
 // 	kwu.G.Chat.Trace("...GE2NNGS... Server.Port=%d\n", config.Server.Port)
