@@ -11,3 +11,32 @@ Connect to NNGS from GTP engine.
     * [on Windows](./doc/run-app-on-windows.md)
   * Operate
     * [on Windows](./doc/operate-app-on-windows.md)
+
+## 大会用メモ
+
+### CgfGoBan で対局するなら
+
+GTP 設定:  
+
+`C:\Users\むずでょ\go\src\github.com\muzudho\kifuwarabe-gtp\kifuwarabe-gtp.exe --workdir C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs\workspace-uec`  
+
+自分と、対局相手のログイン名を入れる必要がある。（大文字小文字を区別しない）  
+ログイン前に、白黒を合わせる必要もある。  
+
+### このプログラム(gtp-engine-to-nngs)で対局するなら
+
+* workdirの中に `input/connector.conf.toml`, `input/engine.conf.toml` 設定ファイルの２つがあり、そこに設定を書いておく
+  * 黒番と同じ設定でOK（待ちの状態になる）  
+* workdirの中に `output/connector/.gitkeep` ファイルを置いておくこと。そのディレクトリーが必要なので。
+
+```shell
+gtp-engine-to-nngs --workdir C:/Users/むずでょ/go/src/github.com/muzudho/gtp-engine-to-nngs/workspace-uec-b
+```
+
+## その他
+
+ゾンビ・ユーザーを蹴飛ばすとき(admin ユーザーで？)  
+
+```shell
+nuke <name>
+```

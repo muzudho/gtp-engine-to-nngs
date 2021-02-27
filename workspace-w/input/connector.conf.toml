@@ -1,5 +1,6 @@
 # 接続設定ファイル
 
+# `Server` - 接続先の情報
 [Server]
 
 Host = 'localhost'
@@ -8,7 +9,7 @@ Host = 'localhost'
 # (^q^) 数値型のデータをクォーテーションで囲むとエラーもなく読取失敗するから注意☆
 Port = 9696
 
-# ユーザー設定
+# `User` - gtp-engine-to-nngs が利用する区画。人間プレイヤー、GTPエンジン、閲覧者など接続者側の情報など。
 [User]
 
 # * `Human` - 人間プレイヤーが接続する
@@ -21,7 +22,7 @@ EngineCommand = 'C:\Users\むずでょ\go\src\github.com\muzudho\kifuwarabe-gtp\
 # EngineCommandOption - 思考エンジンを起動するコマンドの半角スペース区切りの引数（OSにより書き方が異なるかも）
 EngineCommandOption = ''
 
-# マッチの申込
+# `MatchApplication` - gtp-engine-to-nngs が利用する区画。マッチの申込の挙動
 [MatchApplication]
 
 # 自分の方から申し込むなら true, 申し込みを受けるのを待つ方なら false。
@@ -35,7 +36,7 @@ OpponentName = ''
 Phase = 'W'
 
 # 何路盤
-BoardSize = 9
+BoardSize = 19
 
 # 持ち時間（分）
 AvailableTimeMinutes = 40
