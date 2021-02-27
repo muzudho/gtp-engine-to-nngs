@@ -29,6 +29,8 @@ GTP 設定:
   * 黒番と同じ設定でOK（待ちの状態になる）  
 * workdirの中に `output/connector/.gitkeep` ファイルを置いておくこと。そのディレクトリーが必要なので。
 
+Example:  
+
 ```shell
 gtp-engine-to-nngs --workdir C:/Users/むずでょ/go/src/github.com/muzudho/gtp-engine-to-nngs/workspace-uec-b
 ```
