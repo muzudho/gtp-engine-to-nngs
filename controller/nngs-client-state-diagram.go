@@ -237,7 +237,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 			dia.MyColor = phase.ToNum(configuredColorUpperCase)
 
 			message := fmt.Sprintf("match %s %s %d %d %d\n", dia.connectorConf.OpponentName(), configuredColorUpperCase, dia.connectorConf.BoardSize(), dia.connectorConf.AvailableTimeMinutes(), dia.connectorConf.CanadianTiming())
-			g.G.Log.Trace("...GE2NNGS... 対局を申し込んだぜ☆（＾～＾）")
+			g.G.Log.Trace("...GE2NNGS... 対局を申し込んだぜ☆（＾～＾）\n")
 			g.G.Chat.Notice("<--GE2NNGS... [%s]\n", message)
 			oi.LongWrite(dia.writerToServer, []byte(message))
 		}
@@ -276,7 +276,8 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 					matches2 := dia.regexUseMatchToRespond.FindSubmatch(promptStateBytes)
 					if 2 < len(matches2) {
 						// 対局を申し込まれた方だけ、ここを通るぜ☆（＾～＾）
-						g.G.Chat.Trace("...GE2NNGS... 対局を申し込まれたぜ☆（＾～＾）[%s] accept[%s],decline[%s]\n", string(promptStateBytes), matches2[1], matches2[2])
+						accept := matches2[1]
+						g.G.Chat.Trace("...GE2NNGS... 対局を申し込まれたぜ☆（＾～＾）[%s] accept[%s],decline[%s]\n", string(promptStateBytes), accept, matches2[2])
 
 						// Example: `match kifuwarabi W 19 40 0`
 						dia.CommandOfMatchAccept = string(matches2[1])
@@ -313,6 +314,9 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 
 						// cmd_match
 						message := fmt.Sprintf("match %s %s %d %d %d\n", opponentPlayerName, myColorUppercase, dia.connectorConf.BoardSize(), dia.connectorConf.AvailableTimeMinutes(), dia.connectorConf.CanadianTiming())
+						if strings.TrimRight(message, "\n") != string(accept) {
+							panic(fmt.Errorf("...GE2NNGS... 対局を許諾しようとしましたが、設定が異なりました。 [%s] != [%s]", message, accept))
+						}
 						g.G.Chat.Trace("...GE2NNGS... 対局を許諾するぜ☆（＾～＾）[%s]\n", message)
 						oi.LongWrite(dia.writerToServer, []byte(message))
 					}
