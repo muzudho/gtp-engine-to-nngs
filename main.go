@@ -96,18 +96,26 @@ func startEngine(engineConf *kwe.EngineConf, connectorConf *e.ConnectorConf, wor
 	g.G.Chat.Trace("...GE2NNGS... (^q^) command=[%s] argumentList=[%s]\n", connectorConf.User.EngineCommand, parametersString)
 	cmd := exec.Command(connectorConf.User.EngineCommand, parameters...)
 
-	engineStdin, _ := cmd.StdinPipe()
+	engineStdin, err := cmd.StdinPipe()
+	if err != nil {
+		panic(err)
+	}
 	defer engineStdin.Close()
 
-	engineStdout, _ := cmd.StdoutPipe()
+	engineStdout, err := cmd.StdoutPipe()
+	if err != nil {
+		panic(err)
+	}
 	defer engineStdout.Close()
 
-	err := cmd.Start()
+	err = cmd.Start()
 	if err != nil {
 		panic(g.G.Chat.Fatal(fmt.Sprintf("...GE2NNGS... cmd.Start() --> %s", err)))
 	}
 
-	g.G.Chat.Trace("...GE2NNGS... SpawnServerConnection\n", connectorConf.User.EngineCommand, parametersString)
+	g.G.Chat.Trace("...GE2NNGS... SpawnServerConnection Begin\n")
 	c.SpawnServerConnection(engineConf, connectorConf, &engineStdin, &engineStdout)
+	g.G.Chat.Trace("...GE2NNGS... SpawnServerConnection End\n")
+
 	cmd.Wait()
 }
