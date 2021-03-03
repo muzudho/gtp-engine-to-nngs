@@ -1,9 +1,13 @@
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/muzudho/go-logger v0.0.0-20210303161105-701feda94d31 h1:0j3qMONok/aRmhmaU2C1XVRGXgUP4ua7FBM8Dat/iOg=
+github.com/muzudho/go-logger v0.0.0-20210303161105-701feda94d31/go.mod h1:+wyNvpn09fMB0AnZMZIlIl6kZA34ypAKUPkEmo7LCrE=
 github.com/muzudho/kifuwarabe-gtp v0.0.0-20210302100511-aae2ecdb6b5a h1:BaH9qeubpMkL9PWEEJsHhptMV9XgJYWic4BWEIzm8lQ=
 github.com/muzudho/kifuwarabe-gtp v0.0.0-20210302100511-aae2ecdb6b5a/go.mod h1:lAE9LAkymPmFfK+SDT6bKwLOuTRxSeVoAV74TmprEPg=
 github.com/muzudho/kifuwarabe-gtp v0.0.0-20210302145928-f9935f55a429 h1:uHx/o3Rn3EiViw5m0qLEYwVOM0H9F3eS1WxdgFMfO48=
 github.com/muzudho/kifuwarabe-gtp v0.0.0-20210302145928-f9935f55a429/go.mod h1:lAE9LAkymPmFfK+SDT6bKwLOuTRxSeVoAV74TmprEPg=
+github.com/muzudho/kifuwarabe-gtp v0.0.0-20210303161917-a6ed2b27b94f h1:Tl7+ozJk1v+i+EwOx0NpSHXRn4wx0yGzPDs/nfPTwbU=
+github.com/muzudho/kifuwarabe-gtp v0.0.0-20210303161917-a6ed2b27b94f/go.mod h1:r93B1DU/Iu+2FrGDavZlE/cjoDllzOeSVS2H/wsztMw=
 github.com/pelletier/go-toml v1.8.1 h1:1Nf83orprkJyknT6h7zbuEGUEjcyVlCxSUGTENmNCRM=
 github.com/pelletier/go-toml v1.8.1/go.mod h1:T2/BmBdy8dvIRq1a/8aqjN41wvWlN4lrapLU/GW4pbc=
 github.com/reiver/go-oi v1.0.0 h1:nvECWD7LF+vOs8leNGV/ww+F2iZKf3EYjYZ527turzM=

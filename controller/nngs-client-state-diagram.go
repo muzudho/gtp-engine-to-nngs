@@ -313,7 +313,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 
 						// cmd_match
 						message := fmt.Sprintf("match %s %s %d %d %d\n", opponentPlayerName, myColorUppercase, dia.connectorConf.BoardSize(), dia.connectorConf.AvailableTimeMinutes(), dia.connectorConf.CanadianTiming())
-						g.G.Chat.Trace("...GE2NNGS... 対局を申し込むぜ☆（＾～＾）[%s]\n", message)
+						g.G.Chat.Trace("...GE2NNGS... 対局を許諾するぜ☆（＾～＾）[%s]\n", message)
 						oi.LongWrite(dia.writerToServer, []byte(message))
 					}
 				} else if dia.regexMatchAccepted.Match(promptStateBytes) {

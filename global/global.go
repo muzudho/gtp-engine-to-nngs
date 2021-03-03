@@ -1,18 +1,18 @@
 package global
 
 import (
-	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
+	l "github.com/muzudho/go-logger"
 )
 
-// GlobalVariables - グローバル変数。
-type GlobalVariables struct {
+// Variables - グローバル変数。
+type Variables struct {
 	// Log - ロガー。
-	Log kwu.Logger
+	Log l.Logger
 	// Chat - チャッター。 標準出力とロガーを一緒にしただけです。
-	Chat kwu.Chatter
+	Chat l.Chatter
 	// StderrChat - チャッター。 標準エラー出力とロガーを一緒にしただけです。
-	StderrChat kwu.StderrChatter
+	StderrChat l.StderrChatter
 }
 
 // G - グローバル変数。思い切った名前。
-var G GlobalVariables
+var G Variables

@@ -8,13 +8,13 @@ import (
 	"path/filepath"
 	"strings"
 
+	l "github.com/muzudho/go-logger"
 	c "github.com/muzudho/gtp-engine-to-nngs/controller"
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
 	g "github.com/muzudho/gtp-engine-to-nngs/global"
 	"github.com/muzudho/gtp-engine-to-nngs/ui"
 	kwe "github.com/muzudho/kifuwarabe-gtp/entities"
 	kwui "github.com/muzudho/kifuwarabe-gtp/ui"
-	kwu "github.com/muzudho/kifuwarabe-gtp/usecases"
 )
 
 func main() {
@@ -36,10 +36,10 @@ func main() {
 	fmt.Printf("...GE2NNGS... WorkingDirectory=[%s] ConnectorConf=[%s] EngineConf=[%s]\n", *wd, connectorConfPath, engineConfPath)
 
 	// グローバル変数の作成
-	g.G = *new(g.GlobalVariables)
+	g.G = *new(g.Variables)
 
 	// ロガーの作成。
-	g.G.Log = *kwu.NewLogger(
+	g.G.Log = *l.NewLogger(
 		filepath.Join(*wd, "output/connector/trace.log"),
 		filepath.Join(*wd, "output/connector/debug.log"),
 		filepath.Join(*wd, "output/connector/info.log"),
@@ -62,8 +62,8 @@ func main() {
 	defer g.G.Log.CloseAllLogs()
 
 	// チャッターの作成も、エンジンが起動時に行う
-	g.G.Chat = *kwu.NewChatter(g.G.Log)
-	g.G.StderrChat = *kwu.NewStderrChatter(g.G.Log)
+	g.G.Chat = *l.NewChatter(g.G.Log)
+	g.G.StderrChat = *l.NewStderrChatter(g.G.Log)
 
 	g.G.Chat.Trace("...GE2NNGS... Start program\n")
 
