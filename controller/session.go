@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
 	g "github.com/muzudho/gtp-engine-to-nngs/global"
+	"github.com/muzudho/kifuwarabe-go-base/entities/phase"
 	"github.com/reiver/go-oi"
 )
 

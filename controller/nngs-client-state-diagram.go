@@ -9,10 +9,9 @@ import (
 
 	"github.com/muzudho/gtp-engine-to-nngs/controller/clistat"
 	e "github.com/muzudho/gtp-engine-to-nngs/entities"
-	"github.com/muzudho/gtp-engine-to-nngs/entities/phase"
 	g "github.com/muzudho/gtp-engine-to-nngs/global"
+	"github.com/muzudho/kifuwarabe-go-base/entities/phase"
 	kwe "github.com/muzudho/kifuwarabe-gtp/entities"
-	kwphase "github.com/muzudho/kifuwarabe-gtp/entities/phase"
 	"github.com/reiver/go-oi"
 	"github.com/reiver/go-telnet"
 )
@@ -70,9 +69,9 @@ type NngsClientStateDiagram struct {
 	regexEngineBestmove regexp.Regexp
 
 	// MyColor - 自分の手番の色
-	MyColor kwphase.Phase
+	MyColor phase.Phase
 	// Phase - これから指す方。局面の手番とは逆になる
-	CurrentPhase kwphase.Phase
+	CurrentPhase phase.Phase
 
 	// BoardSize - 何路盤。マッチを受け取ったときに確定
 	BoardSize uint
@@ -322,7 +321,7 @@ func (dia *NngsClientStateDiagram) parse(lis *nngsClientStateDiagramListener) bo
 					}
 				} else if dia.regexMatchAccepted.Match(promptStateBytes) {
 					// 黒の手番から始まるぜ☆（＾～＾）
-					dia.CurrentPhase = kwphase.Black
+					dia.CurrentPhase = phase.Black
 					// dia.turnState = 10
 
 				} else if dia.regexDecline1.Match(promptStateBytes) {

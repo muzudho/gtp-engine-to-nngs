@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	kwphase "github.com/muzudho/kifuwarabe-gtp/entities/phase"
+	"github.com/muzudho/kifuwarabe-go-base/entities/phase"
 )
 
 // ConnectorConf - 参加設定。
@@ -84,14 +84,14 @@ func (config ConnectorConf) Phase() string {
 }
 
 // MyColor - 自分の石の色
-func (config ConnectorConf) MyColor() (kwphase.Phase, string, error) {
+func (config ConnectorConf) MyColor() (phase.Phase, string, error) {
 	configuredColorUpperCase := strings.ToUpper(config.MatchApplication.Phase)
-	myPhase := kwphase.None
+	myPhase := phase.None
 	switch configuredColorUpperCase {
 	case "W":
-		myPhase = kwphase.White
+		myPhase = phase.White
 	case "B":
-		myPhase = kwphase.Black
+		myPhase = phase.Black
 	default:
 		return 0, "", fmt.Errorf("Unexpected MatchApplication.Phase [%s]", config.MatchApplication.Phase)
 	}
