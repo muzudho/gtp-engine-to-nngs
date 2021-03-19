@@ -1,0 +1,12 @@
+[2021-02-27 19:20:32] ...Engine Remove all old logs
+[2021-02-27 19:20:32] ...Engine KifuwarabeGoGo プログラム開始☆（＾～＾）
+[2021-02-27 19:20:32] ...Engine Author: Satoshi Takahashi
+[2021-02-27 19:20:32] ...Engine This is a GTP engine.
+[2021-02-27 19:20:32] ...Engine wdir=C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs
+[2021-02-27 19:20:32] ...Engine flag.Args()=[]
+[2021-02-27 19:20:32] ...Engine workdir=C:/Users/むずでょ/go/src/github.com/muzudho/gtp-engine-to-nngs/workspace-uec-b
+[2021-02-27 19:20:32] ...Engine engineConfPath=C:\Users\むずでょ\go\src\github.com\muzudho\gtp-engine-to-nngs\workspace-uec-b\input\engine.conf.toml
+[2021-02-27 19:20:32] ...Engine position.BoardSize()=19
+[2021-02-27 19:20:32] ...Engine position.SentinelBoardMax()=441
+[2021-02-27 19:20:32] ...Engine 何か標準入力しろだぜ☆（＾～＾）
+[2021-02-27 19:51:43] ...kifuwarabe... End engine

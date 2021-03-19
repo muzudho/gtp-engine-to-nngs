@@ -8,4 +8,4 @@
 # +
 
 # 黒番の例
-Start-Process "gtp-engine-to-nngs.exe" -ArgumentList "--workdir C:/Users/むずでょ/go/src/github.com/muzudho/gtp-engine-to-nngs/workspace-b" -NoNewWindow -Wait
+Start-Process -FilePath "gtp-engine-to-nngs.exe" -ArgumentList "--workdir C:/Users/むずでょ/go/src/github.com/muzudho/gtp-engine-to-nngs/workspace-b-uec12" -NoNewWindow -Wait

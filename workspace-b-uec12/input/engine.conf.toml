@@ -1,4 +1,4 @@
-# `Profile` - gtp-engine-to-nngs が利用する区画。 エンジンは gtp-engine-to-nngs からの `Name`, `Pass` の要求があったとき応答する必要があります。
+# `Profile` - gtp-engine-to-nngs が利用する区画。 エンジンは gtp-engine-to-nngs からの `Name`, `Pass` の要求があったとき応答する必要があります
 [Profile]
 
 # 対局者名（アカウント名）
@@ -9,7 +9,7 @@ Name = 'kifuwarabe'
 # パスワード（任意）
 Pass = ''
 
-# `Engine` - GTPエンジンが任意に利用する区画。NNGSや gtp-engine-to-nngs はここは見ません。
+# `Engine` - GTPエンジンが任意に利用する区画。NNGSや gtp-engine-to-nngs はここは見ません
 [Engine]
 
 # Komi - コミ☆（＾～＾）

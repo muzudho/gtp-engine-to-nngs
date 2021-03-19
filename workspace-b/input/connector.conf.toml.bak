@@ -19,6 +19,7 @@ InterfaceType = 'GTP'
 # EngineCommand - 思考エンジンを起動するコマンドの実行ファイル名の部分（OSにより書き方が異なるかも）
 EngineCommand = 'C:\Users\むずでょ\go\src\github.com\muzudho\kifuwarabe-gtp-uec12\kifuwarabe-gtp-uec12.exe'
 
+
 # EngineCommandOption - 思考エンジンを起動するコマンドの半角スペース区切りの引数（OSにより書き方が異なるかも）
 EngineCommandOption = ''
 
@@ -27,13 +28,13 @@ EngineCommandOption = ''
 
 # 自分の方から申し込むなら true, 申し込みを受けるのを待つ方なら false。
 # true にしたなら、 OpponentName も設定してください
-ApplyFromMe = false
+ApplyFromMe = true
 
 # 自分の方から申し込むなら、対戦相手のアカウント名も指定してください。そうでないなら無視されます
-OpponentName = ''
+OpponentName = "kifuwarabe"
 
 # 白番なら 'W', 黒番なら 'B'
-Phase = 'W'
+Phase = 'B'
 
 # 何路盤
 BoardSize = 19

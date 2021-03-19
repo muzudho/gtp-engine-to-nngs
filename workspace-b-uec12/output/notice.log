@@ -1,0 +1,832 @@
+[2021-02-27 19:29:43] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:29:52] <--kifuwarabe [J1] ok
+[2021-02-27 19:29:53] -->kifuwarabe 'play w q16' command
+[2021-02-27 19:29:53] <--kifuwarabe ok
+[2021-02-27 19:29:53] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:30:02] <--kifuwarabe [O1] ok
+[2021-02-27 19:30:03] -->kifuwarabe 'play w d16' command
+[2021-02-27 19:30:03] <--kifuwarabe ok
+[2021-02-27 19:30:03] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:30:12] <--kifuwarabe [N1] ok
+[2021-02-27 19:30:12] -->kifuwarabe 'play w d4' command
+[2021-02-27 19:30:12] <--kifuwarabe ok
+[2021-02-27 19:30:12] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:30:22] <--kifuwarabe [D1] ok
+[2021-02-27 19:30:22] -->kifuwarabe 'play w e3' command
+[2021-02-27 19:30:22] <--kifuwarabe ok
+[2021-02-27 19:30:22] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:30:31] <--kifuwarabe [L1] ok
+[2021-02-27 19:30:32] -->kifuwarabe 'play w k16' command
+[2021-02-27 19:30:32] <--kifuwarabe ok
+[2021-02-27 19:30:32] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:30:41] <--kifuwarabe [D2] ok
+[2021-02-27 19:30:41] -->kifuwarabe 'play w c3' command
+[2021-02-27 19:30:41] <--kifuwarabe ok
+[2021-02-27 19:30:41] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:30:50] <--kifuwarabe [A1] ok
+[2021-02-27 19:30:51] -->kifuwarabe 'play w c9' command
+[2021-02-27 19:30:51] <--kifuwarabe ok
+[2021-02-27 19:30:51] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:31:00] <--kifuwarabe [H3] ok
+[2021-02-27 19:31:00] -->kifuwarabe 'play w h5' command
+[2021-02-27 19:31:00] <--kifuwarabe ok
+[2021-02-27 19:31:00] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:31:09] <--kifuwarabe [E1] ok
+[2021-02-27 19:31:10] -->kifuwarabe 'play w f2' command
+[2021-02-27 19:31:10] <--kifuwarabe ok
+[2021-02-27 19:31:10] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:31:19] <--kifuwarabe [F1] ok
+[2021-02-27 19:31:19] -->kifuwarabe 'play w g4' command
+[2021-02-27 19:31:19] <--kifuwarabe ok
+[2021-02-27 19:31:19] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:31:28] <--kifuwarabe [N3] ok
+[2021-02-27 19:31:28] -->kifuwarabe 'play w k6' command
+[2021-02-27 19:31:28] <--kifuwarabe ok
+[2021-02-27 19:31:28] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:31:37] <--kifuwarabe [C1] ok
+[2021-02-27 19:31:38] -->kifuwarabe 'play w n5' command
+[2021-02-27 19:31:38] <--kifuwarabe ok
+[2021-02-27 19:31:38] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:31:46] <--kifuwarabe [H2] ok
+[2021-02-27 19:31:47] -->kifuwarabe 'play w b2' command
+[2021-02-27 19:31:47] <--kifuwarabe ok
+[2021-02-27 19:31:47] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:31:56] <--kifuwarabe [B1] ok
+[2021-02-27 19:31:56] -->kifuwarabe 'play w p5' command
+[2021-02-27 19:31:56] <--kifuwarabe ok
+[2021-02-27 19:31:56] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:32:05] <--kifuwarabe [K1] ok
+[2021-02-27 19:32:05] -->kifuwarabe 'play w q6' command
+[2021-02-27 19:32:05] <--kifuwarabe ok
+[2021-02-27 19:32:05] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:32:13] <--kifuwarabe [T6] ok
+[2021-02-27 19:32:14] -->kifuwarabe 'play w s7' command
+[2021-02-27 19:32:14] <--kifuwarabe ok
+[2021-02-27 19:32:14] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:32:22] <--kifuwarabe [K2] ok
+[2021-02-27 19:32:23] -->kifuwarabe 'play w q10' command
+[2021-02-27 19:32:23] <--kifuwarabe ok
+[2021-02-27 19:32:23] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:32:31] <--kifuwarabe [G1] ok
+[2021-02-27 19:32:32] -->kifuwarabe 'play w e9' command
+[2021-02-27 19:32:32] <--kifuwarabe ok
+[2021-02-27 19:32:32] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:32:40] <--kifuwarabe [K4] ok
+[2021-02-27 19:32:40] -->kifuwarabe 'play w d12' command
+[2021-02-27 19:32:40] <--kifuwarabe ok
+[2021-02-27 19:32:40] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:32:49] <--kifuwarabe [N4] ok
+[2021-02-27 19:32:50] -->kifuwarabe 'play w r14' command
+[2021-02-27 19:32:50] <--kifuwarabe ok
+[2021-02-27 19:32:50] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:32:58] <--kifuwarabe [O2] ok
+[2021-02-27 19:32:58] -->kifuwarabe 'play w n17' command
+[2021-02-27 19:32:58] <--kifuwarabe ok
+[2021-02-27 19:32:58] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:33:07] <--kifuwarabe [G8] ok
+[2021-02-27 19:33:08] -->kifuwarabe 'play w g10' command
+[2021-02-27 19:33:08] <--kifuwarabe ok
+[2021-02-27 19:33:08] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:33:16] <--kifuwarabe [L5] ok
+[2021-02-27 19:33:17] -->kifuwarabe 'play w h9' command
+[2021-02-27 19:33:17] <--kifuwarabe ok
+[2021-02-27 19:33:17] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:33:25] <--kifuwarabe [R10] ok
+[2021-02-27 19:33:26] -->kifuwarabe 'play w r11' command
+[2021-02-27 19:33:26] <--kifuwarabe ok
+[2021-02-27 19:33:26] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:33:34] <--kifuwarabe [Q7] ok
+[2021-02-27 19:33:36] -->kifuwarabe 'play w s5' command
+[2021-02-27 19:33:36] <--kifuwarabe ok
+[2021-02-27 19:33:36] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:33:43] <--kifuwarabe [R2] ok
+[2021-02-27 19:33:44] -->kifuwarabe 'play w l6' command
+[2021-02-27 19:33:44] <--kifuwarabe ok
+[2021-02-27 19:33:44] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:33:52] <--kifuwarabe [N2] ok
+[2021-02-27 19:33:53] -->kifuwarabe 'play w r9' command
+[2021-02-27 19:33:53] <--kifuwarabe ok
+[2021-02-27 19:33:53] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:34:01] <--kifuwarabe [A2] ok
+[2021-02-27 19:34:02] -->kifuwarabe 'play w a3' command
+[2021-02-27 19:34:02] <--kifuwarabe ok
+[2021-02-27 19:34:02] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:34:10] <--kifuwarabe [K5] ok
+[2021-02-27 19:34:12] -->kifuwarabe 'play w p17' command
+[2021-02-27 19:34:12] <--kifuwarabe ok
+[2021-02-27 19:34:12] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:34:19] <--kifuwarabe [B15] ok
+[2021-02-27 19:34:20] -->kifuwarabe 'play w b17' command
+[2021-02-27 19:34:20] <--kifuwarabe ok
+[2021-02-27 19:34:20] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:34:28] <--kifuwarabe [P11] ok
+[2021-02-27 19:34:30] -->kifuwarabe 'play w n11' command
+[2021-02-27 19:34:30] <--kifuwarabe ok
+[2021-02-27 19:34:30] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:34:37] <--kifuwarabe [O3] ok
+[2021-02-27 19:34:38] -->kifuwarabe 'play w p13' command
+[2021-02-27 19:34:38] <--kifuwarabe ok
+[2021-02-27 19:34:38] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:34:46] <--kifuwarabe [G2] ok
+[2021-02-27 19:34:48] -->kifuwarabe 'play w g16' command
+[2021-02-27 19:34:48] <--kifuwarabe ok
+[2021-02-27 19:34:48] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:34:56] <--kifuwarabe [A6] ok
+[2021-02-27 19:34:57] -->kifuwarabe 'play w f3' command
+[2021-02-27 19:34:57] <--kifuwarabe ok
+[2021-02-27 19:34:57] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:35:05] <--kifuwarabe [T18] ok
+[2021-02-27 19:35:06] -->kifuwarabe 'play w r18' command
+[2021-02-27 19:35:06] <--kifuwarabe ok
+[2021-02-27 19:35:06] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:35:14] <--kifuwarabe [M3] ok
+[2021-02-27 19:35:16] -->kifuwarabe 'play w g17' command
+[2021-02-27 19:35:16] <--kifuwarabe ok
+[2021-02-27 19:35:16] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:35:24] <--kifuwarabe [J2] ok
+[2021-02-27 19:35:25] -->kifuwarabe 'play w s3' command
+[2021-02-27 19:35:25] <--kifuwarabe ok
+[2021-02-27 19:35:25] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:35:33] <--kifuwarabe [T19] ok
+[2021-02-27 19:35:34] -->kifuwarabe 'play w s18' command
+[2021-02-27 19:35:34] <--kifuwarabe ok
+[2021-02-27 19:35:34] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:35:42] <--kifuwarabe [M8] ok
+[2021-02-27 19:35:43] -->kifuwarabe 'play w n7' command
+[2021-02-27 19:35:43] <--kifuwarabe ok
+[2021-02-27 19:35:43] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:35:51] <--kifuwarabe [C7] ok
+[2021-02-27 19:35:52] -->kifuwarabe 'play w j6' command
+[2021-02-27 19:35:52] <--kifuwarabe ok
+[2021-02-27 19:35:52] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:36:00] <--kifuwarabe [C6] ok
+[2021-02-27 19:36:01] -->kifuwarabe 'play w m6' command
+[2021-02-27 19:36:01] <--kifuwarabe ok
+[2021-02-27 19:36:01] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:36:08] <--kifuwarabe [C10] ok
+[2021-02-27 19:36:10] -->kifuwarabe 'play w b9' command
+[2021-02-27 19:36:10] <--kifuwarabe ok
+[2021-02-27 19:36:10] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:36:17] <--kifuwarabe [D5] ok
+[2021-02-27 19:36:19] -->kifuwarabe 'play w d10' command
+[2021-02-27 19:36:19] <--kifuwarabe ok
+[2021-02-27 19:36:19] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:36:26] <--kifuwarabe [M11] ok
+[2021-02-27 19:36:28] -->kifuwarabe 'play w n12' command
+[2021-02-27 19:36:28] <--kifuwarabe ok
+[2021-02-27 19:36:28] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:36:36] <--kifuwarabe [S16] ok
+[2021-02-27 19:36:38] -->kifuwarabe 'play w m10' command
+[2021-02-27 19:36:38] <--kifuwarabe ok
+[2021-02-27 19:36:38] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:36:46] <--kifuwarabe [Q1] ok
+[2021-02-27 19:36:48] -->kifuwarabe 'play w m5' command
+[2021-02-27 19:36:48] <--kifuwarabe ok
+[2021-02-27 19:36:48] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:36:55] <--kifuwarabe [J4] ok
+[2021-02-27 19:36:57] -->kifuwarabe 'play w m4' command
+[2021-02-27 19:36:57] <--kifuwarabe ok
+[2021-02-27 19:36:57] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:37:05] <--kifuwarabe [C2] ok
+[2021-02-27 19:37:07] -->kifuwarabe 'play w b3' command
+[2021-02-27 19:37:07] <--kifuwarabe ok
+[2021-02-27 19:37:07] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:37:15] <--kifuwarabe [R3] ok
+[2021-02-27 19:37:17] -->kifuwarabe 'play w e5' command
+[2021-02-27 19:37:17] <--kifuwarabe ok
+[2021-02-27 19:37:17] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:37:25] <--kifuwarabe [L3] ok
+[2021-02-27 19:37:27] -->kifuwarabe 'play w r4' command
+[2021-02-27 19:37:27] <--kifuwarabe ok
+[2021-02-27 19:37:27] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:37:34] <--kifuwarabe [P10] ok
+[2021-02-27 19:37:36] -->kifuwarabe 'play w q11' command
+[2021-02-27 19:37:36] <--kifuwarabe ok
+[2021-02-27 19:37:36] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:37:44] <--kifuwarabe [O9] ok
+[2021-02-27 19:37:45] -->kifuwarabe 'play w p7' command
+[2021-02-27 19:37:45] <--kifuwarabe ok
+[2021-02-27 19:37:45] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:37:52] <--kifuwarabe [T4] ok
+[2021-02-27 19:37:53] -->kifuwarabe 'play w p12' command
+[2021-02-27 19:37:53] <--kifuwarabe ok
+[2021-02-27 19:37:53] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:38:00] <--kifuwarabe [K3] ok
+[2021-02-27 19:38:02] -->kifuwarabe 'play w q4' command
+[2021-02-27 19:38:02] <--kifuwarabe ok
+[2021-02-27 19:38:02] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:38:09] <--kifuwarabe [R5] ok
+[2021-02-27 19:38:10] -->kifuwarabe 'play w t3' command
+[2021-02-27 19:38:10] <--kifuwarabe ok
+[2021-02-27 19:38:10] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:38:18] <--kifuwarabe [H13] ok
+[2021-02-27 19:38:19] -->kifuwarabe 'play w f13' command
+[2021-02-27 19:38:19] <--kifuwarabe ok
+[2021-02-27 19:38:19] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:38:27] <--kifuwarabe [A4] ok
+[2021-02-27 19:38:28] -->kifuwarabe 'play w h8' command
+[2021-02-27 19:38:28] <--kifuwarabe ok
+[2021-02-27 19:38:28] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:38:36] <--kifuwarabe [L12] ok
+[2021-02-27 19:38:37] -->kifuwarabe 'play w g14' command
+[2021-02-27 19:38:37] <--kifuwarabe ok
+[2021-02-27 19:38:37] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:38:44] <--kifuwarabe [F6] ok
+[2021-02-27 19:38:46] -->kifuwarabe 'play w e6' command
+[2021-02-27 19:38:46] <--kifuwarabe ok
+[2021-02-27 19:38:46] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:38:53] <--kifuwarabe [G18] ok
+[2021-02-27 19:38:55] -->kifuwarabe 'play w l10' command
+[2021-02-27 19:38:55] <--kifuwarabe ok
+[2021-02-27 19:38:55] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:39:02] <--kifuwarabe [H14] ok
+[2021-02-27 19:39:03] -->kifuwarabe 'play w h18' command
+[2021-02-27 19:39:03] <--kifuwarabe ok
+[2021-02-27 19:39:03] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:39:11] <--kifuwarabe [R8] ok
+[2021-02-27 19:39:12] -->kifuwarabe 'play w q8' command
+[2021-02-27 19:39:12] <--kifuwarabe ok
+[2021-02-27 19:39:12] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:39:19] <--kifuwarabe [R16] ok
+[2021-02-27 19:39:21] -->kifuwarabe 'play w t17' command
+[2021-02-27 19:39:21] <--kifuwarabe ok
+[2021-02-27 19:39:21] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:39:28] <--kifuwarabe [J5] ok
+[2021-02-27 19:39:29] -->kifuwarabe 'play w p3' command
+[2021-02-27 19:39:29] <--kifuwarabe ok
+[2021-02-27 19:39:29] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:39:36] <--kifuwarabe [B7] ok
+[2021-02-27 19:39:38] -->kifuwarabe 'play w d7' command
+[2021-02-27 19:39:38] <--kifuwarabe ok
+[2021-02-27 19:39:38] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:39:45] <--kifuwarabe [H7] ok
+[2021-02-27 19:39:46] -->kifuwarabe 'play w g7' command
+[2021-02-27 19:39:46] <--kifuwarabe ok
+[2021-02-27 19:39:46] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:39:53] <--kifuwarabe [R13] ok
+[2021-02-27 19:39:55] -->kifuwarabe 'play w s14' command
+[2021-02-27 19:39:55] <--kifuwarabe ok
+[2021-02-27 19:39:55] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:40:02] <--kifuwarabe [T2] ok
+[2021-02-27 19:40:03] -->kifuwarabe 'play w s2' command
+[2021-02-27 19:40:03] <--kifuwarabe ok
+[2021-02-27 19:40:03] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:40:09] <--kifuwarabe [Q2] ok
+[2021-02-27 19:40:11] -->kifuwarabe 'play w o4' command
+[2021-02-27 19:40:11] <--kifuwarabe ok
+[2021-02-27 19:40:11] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:40:17] <--kifuwarabe [F11] ok
+[2021-02-27 19:40:19] -->kifuwarabe 'play w m13' command
+[2021-02-27 19:40:19] <--kifuwarabe ok
+[2021-02-27 19:40:19] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:40:26] <--kifuwarabe [P1] ok
+[2021-02-27 19:40:28] -->kifuwarabe 'play w l13' command
+[2021-02-27 19:40:28] <--kifuwarabe ok
+[2021-02-27 19:40:28] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:40:34] <--kifuwarabe [N8] ok
+[2021-02-27 19:40:36] -->kifuwarabe 'play w g11' command
+[2021-02-27 19:40:36] <--kifuwarabe ok
+[2021-02-27 19:40:36] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:40:43] <--kifuwarabe [M18] ok
+[2021-02-27 19:40:44] -->kifuwarabe 'play w m17' command
+[2021-02-27 19:40:44] <--kifuwarabe ok
+[2021-02-27 19:40:44] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:40:51] <--kifuwarabe [E10] ok
+[2021-02-27 19:40:53] -->kifuwarabe 'play w c11' command
+[2021-02-27 19:40:53] <--kifuwarabe ok
+[2021-02-27 19:40:53] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:40:59] <--kifuwarabe [G6] ok
+[2021-02-27 19:41:01] -->kifuwarabe 'play w f7' command
+[2021-02-27 19:41:01] <--kifuwarabe ok
+[2021-02-27 19:41:01] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:41:08] <--kifuwarabe [F4] ok
+[2021-02-27 19:41:09] -->kifuwarabe 'play w q15' command
+[2021-02-27 19:41:09] <--kifuwarabe ok
+[2021-02-27 19:41:09] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:41:16] <--kifuwarabe [A15] ok
+[2021-02-27 19:41:17] -->kifuwarabe 'play w c14' command
+[2021-02-27 19:41:17] <--kifuwarabe ok
+[2021-02-27 19:41:17] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:41:24] <--kifuwarabe [R1] ok
+[2021-02-27 19:41:25] -->kifuwarabe 'play w s1' command
+[2021-02-27 19:41:25] <--kifuwarabe ok
+[2021-02-27 19:41:25] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:41:31] <--kifuwarabe [L2] ok
+[2021-02-27 19:41:32] -->kifuwarabe 'play w d3' command
+[2021-02-27 19:41:32] <--kifuwarabe ok
+[2021-02-27 19:41:32] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:41:39] <--kifuwarabe [E7] ok
+[2021-02-27 19:41:41] -->kifuwarabe 'play w e8' command
+[2021-02-27 19:41:41] <--kifuwarabe ok
+[2021-02-27 19:41:41] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:41:48] <--kifuwarabe [Q5] ok
+[2021-02-27 19:41:49] -->kifuwarabe 'play w c15' command
+[2021-02-27 19:41:49] <--kifuwarabe ok
+[2021-02-27 19:41:49] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:41:56] <--kifuwarabe [L7] ok
+[2021-02-27 19:41:57] -->kifuwarabe 'play w k8' command
+[2021-02-27 19:41:57] <--kifuwarabe ok
+[2021-02-27 19:41:57] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:42:04] <--kifuwarabe [E2] ok
+[2021-02-27 19:42:05] -->kifuwarabe 'play w q3' command
+[2021-02-27 19:42:05] <--kifuwarabe ok
+[2021-02-27 19:42:05] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:42:12] <--kifuwarabe [C5] ok
+[2021-02-27 19:42:13] -->kifuwarabe 'play w b4' command
+[2021-02-27 19:42:13] <--kifuwarabe ok
+[2021-02-27 19:42:13] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:42:19] <--kifuwarabe [B5] ok
+[2021-02-27 19:42:20] -->kifuwarabe 'play w b8' command
+[2021-02-27 19:42:20] <--kifuwarabe ok
+[2021-02-27 19:42:20] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:42:27] <--kifuwarabe [G3] ok
+[2021-02-27 19:42:27] -->kifuwarabe 'play w g5' command
+[2021-02-27 19:42:27] <--kifuwarabe ok
+[2021-02-27 19:42:27] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:42:34] <--kifuwarabe [A13] ok
+[2021-02-27 19:42:35] -->kifuwarabe 'play w b14' command
+[2021-02-27 19:42:35] <--kifuwarabe ok
+[2021-02-27 19:42:35] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:42:41] <--kifuwarabe [A8] ok
+[2021-02-27 19:42:42] -->kifuwarabe 'play w c8' command
+[2021-02-27 19:42:42] <--kifuwarabe ok
+[2021-02-27 19:42:42] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:42:48] <--kifuwarabe [T5] ok
+[2021-02-27 19:42:49] -->kifuwarabe 'play w t7' command
+[2021-02-27 19:42:49] <--kifuwarabe ok
+[2021-02-27 19:42:49] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:42:55] <--kifuwarabe [S6] ok
+[2021-02-27 19:42:56] -->kifuwarabe 'play w r6' command
+[2021-02-27 19:42:56] <--kifuwarabe ok
+[2021-02-27 19:42:56] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:43:03] <--kifuwarabe [K9] ok
+[2021-02-27 19:43:04] -->kifuwarabe 'play w k10' command
+[2021-02-27 19:43:04] <--kifuwarabe ok
+[2021-02-27 19:43:04] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:43:10] <--kifuwarabe [S10] ok
+[2021-02-27 19:43:11] -->kifuwarabe 'play w s9' command
+[2021-02-27 19:43:11] <--kifuwarabe ok
+[2021-02-27 19:43:11] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:43:17] <--kifuwarabe [P8] ok
+[2021-02-27 19:43:18] -->kifuwarabe 'play w o7' command
+[2021-02-27 19:43:18] <--kifuwarabe ok
+[2021-02-27 19:43:18] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:43:24] <--kifuwarabe [C4] ok
+[2021-02-27 19:43:24] -->kifuwarabe 'play w e4' command
+[2021-02-27 19:43:24] <--kifuwarabe ok
+[2021-02-27 19:43:24] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:43:31] <--kifuwarabe [L8] ok
+[2021-02-27 19:43:32] -->kifuwarabe 'play w o8' command
+[2021-02-27 19:43:32] <--kifuwarabe ok
+[2021-02-27 19:43:32] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:43:38] <--kifuwarabe [L11] ok
+[2021-02-27 19:43:39] -->kifuwarabe 'play w k12' command
+[2021-02-27 19:43:39] <--kifuwarabe ok
+[2021-02-27 19:43:39] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:43:46] <--kifuwarabe [N6] ok
+[2021-02-27 19:43:47] -->kifuwarabe 'play w o6' command
+[2021-02-27 19:43:47] <--kifuwarabe ok
+[2021-02-27 19:43:47] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:43:53] <--kifuwarabe [B11] ok
+[2021-02-27 19:43:54] -->kifuwarabe 'play w b10' command
+[2021-02-27 19:43:54] <--kifuwarabe ok
+[2021-02-27 19:43:54] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:44:00] <--kifuwarabe [Q13] ok
+[2021-02-27 19:44:02] -->kifuwarabe 'play w s13' command
+[2021-02-27 19:44:02] <--kifuwarabe ok
+[2021-02-27 19:44:02] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:44:08] <--kifuwarabe [P2] ok
+[2021-02-27 19:44:08] -->kifuwarabe 'play w l4' command
+[2021-02-27 19:44:08] <--kifuwarabe ok
+[2021-02-27 19:44:08] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:44:15] <--kifuwarabe [M1] ok
+[2021-02-27 19:44:15] -->kifuwarabe 'play w h4' command
+[2021-02-27 19:44:15] <--kifuwarabe ok
+[2021-02-27 19:44:15] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:44:21] <--kifuwarabe [F8] ok
+[2021-02-27 19:44:22] -->kifuwarabe 'play w h6' command
+[2021-02-27 19:44:22] <--kifuwarabe ok
+[2021-02-27 19:44:22] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:44:28] <--kifuwarabe [E13] ok
+[2021-02-27 19:44:29] -->kifuwarabe 'play w e14' command
+[2021-02-27 19:44:29] <--kifuwarabe ok
+[2021-02-27 19:44:29] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:44:35] <--kifuwarabe [A5] ok
+[2021-02-27 19:44:36] -->kifuwarabe 'play w d6' command
+[2021-02-27 19:44:36] <--kifuwarabe ok
+[2021-02-27 19:44:36] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:44:42] <--kifuwarabe [D11] ok
+[2021-02-27 19:44:43] -->kifuwarabe 'play w f10' command
+[2021-02-27 19:44:43] <--kifuwarabe ok
+[2021-02-27 19:44:43] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:44:49] <--kifuwarabe [T8] ok
+[2021-02-27 19:44:49] -->kifuwarabe 'play w t9' command
+[2021-02-27 19:44:49] <--kifuwarabe ok
+[2021-02-27 19:44:49] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:44:55] <--kifuwarabe [Q5] ok
+[2021-02-27 19:44:56] -->kifuwarabe 'play w r7' command
+[2021-02-27 19:44:56] <--kifuwarabe ok
+[2021-02-27 19:44:56] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:01] <--kifuwarabe [E7] ok
+[2021-02-27 19:45:02] -->kifuwarabe 'play w j7' command
+[2021-02-27 19:45:02] <--kifuwarabe ok
+[2021-02-27 19:45:02] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:08] <--kifuwarabe [F5] ok
+[2021-02-27 19:45:08] -->kifuwarabe 'play w f7' command
+[2021-02-27 19:45:08] <--kifuwarabe ok
+[2021-02-27 19:45:08] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:14] <--kifuwarabe [N15] ok
+[2021-02-27 19:45:15] -->kifuwarabe 'play w o15' command
+[2021-02-27 19:45:15] <--kifuwarabe ok
+[2021-02-27 19:45:15] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:20] <--kifuwarabe [M14] ok
+[2021-02-27 19:45:22] -->kifuwarabe 'play w n14' command
+[2021-02-27 19:45:22] <--kifuwarabe ok
+[2021-02-27 19:45:22] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:27] <--kifuwarabe [G7] ok
+[2021-02-27 19:45:28] -->kifuwarabe 'play w e7' command
+[2021-02-27 19:45:28] <--kifuwarabe ok
+[2021-02-27 19:45:28] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:33] <--kifuwarabe [B13] ok
+[2021-02-27 19:45:34] -->kifuwarabe 'play w a14' command
+[2021-02-27 19:45:34] <--kifuwarabe ok
+[2021-02-27 19:45:34] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:40] <--kifuwarabe [K7] ok
+[2021-02-27 19:45:40] -->kifuwarabe 'play w n9' command
+[2021-02-27 19:45:40] <--kifuwarabe ok
+[2021-02-27 19:45:40] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:46] <--kifuwarabe [N16] ok
+[2021-02-27 19:45:47] -->kifuwarabe 'play w o16' command
+[2021-02-27 19:45:47] <--kifuwarabe ok
+[2021-02-27 19:45:47] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:52] <--kifuwarabe [O18] ok
+[2021-02-27 19:45:53] -->kifuwarabe 'play w n18' command
+[2021-02-27 19:45:53] <--kifuwarabe ok
+[2021-02-27 19:45:53] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:45:58] <--kifuwarabe [E11] ok
+[2021-02-27 19:45:59] -->kifuwarabe 'play w b12' command
+[2021-02-27 19:45:59] <--kifuwarabe ok
+[2021-02-27 19:45:59] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:04] <--kifuwarabe [M7] ok
+[2021-02-27 19:46:05] -->kifuwarabe 'play w j8' command
+[2021-02-27 19:46:05] <--kifuwarabe ok
+[2021-02-27 19:46:05] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:10] <--kifuwarabe [L16] ok
+[2021-02-27 19:46:12] -->kifuwarabe 'play w l17' command
+[2021-02-27 19:46:12] <--kifuwarabe ok
+[2021-02-27 19:46:12] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:17] <--kifuwarabe [D18] ok
+[2021-02-27 19:46:17] -->kifuwarabe 'play w f18' command
+[2021-02-27 19:46:17] <--kifuwarabe ok
+[2021-02-27 19:46:17] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:22] <--kifuwarabe [D8] ok
+[2021-02-27 19:46:23] -->kifuwarabe 'play w d9' command
+[2021-02-27 19:46:23] <--kifuwarabe ok
+[2021-02-27 19:46:23] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:28] <--kifuwarabe [A9] ok
+[2021-02-27 19:46:29] -->kifuwarabe 'play w a11' command
+[2021-02-27 19:46:29] <--kifuwarabe ok
+[2021-02-27 19:46:29] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:34] <--kifuwarabe [F9] ok
+[2021-02-27 19:46:34] -->kifuwarabe 'play w g9' command
+[2021-02-27 19:46:34] <--kifuwarabe ok
+[2021-02-27 19:46:34] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:40] <--kifuwarabe [F4] ok
+[2021-02-27 19:46:40] -->kifuwarabe 'play w b11' command
+[2021-02-27 19:46:40] <--kifuwarabe ok
+[2021-02-27 19:46:40] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:46] <--kifuwarabe [F5] ok
+[2021-02-27 19:46:46] -->kifuwarabe 'play w n19' command
+[2021-02-27 19:46:46] <--kifuwarabe ok
+[2021-02-27 19:46:46] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:52] <--kifuwarabe [F6] ok
+[2021-02-27 19:46:53] -->kifuwarabe 'play w p9' command
+[2021-02-27 19:46:53] <--kifuwarabe ok
+[2021-02-27 19:46:53] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:46:58] <--kifuwarabe [G6] ok
+[2021-02-27 19:46:58] -->kifuwarabe 'play w o10' command
+[2021-02-27 19:46:58] <--kifuwarabe ok
+[2021-02-27 19:46:58] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:04] <--kifuwarabe [G7] ok
+[2021-02-27 19:47:04] -->kifuwarabe 'play w s8' command
+[2021-02-27 19:47:04] <--kifuwarabe ok
+[2021-02-27 19:47:04] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:09] <--kifuwarabe [H7] ok
+[2021-02-27 19:47:10] -->kifuwarabe 'play w o9' command
+[2021-02-27 19:47:10] <--kifuwarabe ok
+[2021-02-27 19:47:10] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:15] <--kifuwarabe [F8] ok
+[2021-02-27 19:47:15] -->kifuwarabe 'play w o11' command
+[2021-02-27 19:47:15] <--kifuwarabe ok
+[2021-02-27 19:47:15] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:21] <--kifuwarabe [G8] ok
+[2021-02-27 19:47:21] -->kifuwarabe 'play w n13' command
+[2021-02-27 19:47:21] <--kifuwarabe ok
+[2021-02-27 19:47:21] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:27] <--kifuwarabe [J9] ok
+[2021-02-27 19:47:27] -->kifuwarabe 'play w j10' command
+[2021-02-27 19:47:27] <--kifuwarabe ok
+[2021-02-27 19:47:27] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:32] <--kifuwarabe [L9] ok
+[2021-02-27 19:47:33] -->kifuwarabe 'play w p11' command
+[2021-02-27 19:47:33] <--kifuwarabe ok
+[2021-02-27 19:47:33] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:38] <--kifuwarabe [A10] ok
+[2021-02-27 19:47:38] -->kifuwarabe 'play w k11' command
+[2021-02-27 19:47:38] <--kifuwarabe ok
+[2021-02-27 19:47:38] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:44] <--kifuwarabe [A7] ok
+[2021-02-27 19:47:44] -->kifuwarabe 'play w o14' command
+[2021-02-27 19:47:44] <--kifuwarabe ok
+[2021-02-27 19:47:44] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:49] <--kifuwarabe [H10] ok
+[2021-02-27 19:47:50] -->kifuwarabe 'play w h15' command
+[2021-02-27 19:47:50] <--kifuwarabe ok
+[2021-02-27 19:47:50] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:47:55] <--kifuwarabe [T10] ok
+[2021-02-27 19:47:55] -->kifuwarabe 'play w s11' command
+[2021-02-27 19:47:55] <--kifuwarabe ok
+[2021-02-27 19:47:55] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:00] <--kifuwarabe [H11] ok
+[2021-02-27 19:48:01] -->kifuwarabe 'play w h12' command
+[2021-02-27 19:48:01] <--kifuwarabe ok
+[2021-02-27 19:48:01] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:06] <--kifuwarabe [J11] ok
+[2021-02-27 19:48:06] -->kifuwarabe 'play w j12' command
+[2021-02-27 19:48:06] <--kifuwarabe ok
+[2021-02-27 19:48:06] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:11] <--kifuwarabe [H10] ok
+[2021-02-27 19:48:12] -->kifuwarabe 'play w t11' command
+[2021-02-27 19:48:12] <--kifuwarabe ok
+[2021-02-27 19:48:12] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:17] <--kifuwarabe [R10] ok
+[2021-02-27 19:48:17] -->kifuwarabe 'play w o17' command
+[2021-02-27 19:48:17] <--kifuwarabe ok
+[2021-02-27 19:48:17] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:22] <--kifuwarabe [S10] ok
+[2021-02-27 19:48:23] -->kifuwarabe 'play w k17' command
+[2021-02-27 19:48:23] <--kifuwarabe ok
+[2021-02-27 19:48:23] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:28] <--kifuwarabe [H11] ok
+[2021-02-27 19:48:28] -->kifuwarabe 'play w s12' command
+[2021-02-27 19:48:28] <--kifuwarabe ok
+[2021-02-27 19:48:28] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:33] <--kifuwarabe [A12] ok
+[2021-02-27 19:48:34] -->kifuwarabe 'play w c13' command
+[2021-02-27 19:48:34] <--kifuwarabe ok
+[2021-02-27 19:48:34] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:39] <--kifuwarabe [A12] ok
+[2021-02-27 19:48:39] -->kifuwarabe 'play w d13' command
+[2021-02-27 19:48:39] <--kifuwarabe ok
+[2021-02-27 19:48:39] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:44] <--kifuwarabe [E12] ok
+[2021-02-27 19:48:44] -->kifuwarabe 'play w f12' command
+[2021-02-27 19:48:44] <--kifuwarabe ok
+[2021-02-27 19:48:44] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:50] <--kifuwarabe [E10] ok
+[2021-02-27 19:48:50] -->kifuwarabe 'play w e11' command
+[2021-02-27 19:48:50] <--kifuwarabe ok
+[2021-02-27 19:48:50] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:48:55] <--kifuwarabe [E12] ok
+[2021-02-27 19:48:55] -->kifuwarabe 'play w d15' command
+[2021-02-27 19:48:55] <--kifuwarabe ok
+[2021-02-27 19:48:55] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:00] <--kifuwarabe [G12] ok
+[2021-02-27 19:49:00] -->kifuwarabe 'play w g13' command
+[2021-02-27 19:49:00] <--kifuwarabe ok
+[2021-02-27 19:49:00] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:05] <--kifuwarabe [O12] ok
+[2021-02-27 19:49:05] -->kifuwarabe 'play w g15' command
+[2021-02-27 19:49:05] <--kifuwarabe ok
+[2021-02-27 19:49:05] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:10] <--kifuwarabe [Q12] ok
+[2021-02-27 19:49:10] -->kifuwarabe 'play w q17' command
+[2021-02-27 19:49:10] <--kifuwarabe ok
+[2021-02-27 19:49:10] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:15] <--kifuwarabe [R12] ok
+[2021-02-27 19:49:15] -->kifuwarabe 'play w g19' command
+[2021-02-27 19:49:15] <--kifuwarabe ok
+[2021-02-27 19:49:15] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:20] <--kifuwarabe [T12] ok
+[2021-02-27 19:49:20] -->kifuwarabe 'play w q18' command
+[2021-02-27 19:49:20] <--kifuwarabe ok
+[2021-02-27 19:49:20] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:24] <--kifuwarabe [A13] ok
+[2021-02-27 19:49:25] -->kifuwarabe 'play w g18' command
+[2021-02-27 19:49:25] <--kifuwarabe ok
+[2021-02-27 19:49:25] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:29] <--kifuwarabe [J13] ok
+[2021-02-27 19:49:30] -->kifuwarabe 'play w j15' command
+[2021-02-27 19:49:30] <--kifuwarabe ok
+[2021-02-27 19:49:30] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:34] <--kifuwarabe [K13] ok
+[2021-02-27 19:49:34] -->kifuwarabe 'play w c16' command
+[2021-02-27 19:49:34] <--kifuwarabe ok
+[2021-02-27 19:49:34] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:39] <--kifuwarabe [T13] ok
+[2021-02-27 19:49:39] -->kifuwarabe 'play w c17' command
+[2021-02-27 19:49:39] <--kifuwarabe ok
+[2021-02-27 19:49:39] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:43] <--kifuwarabe [F14] ok
+[2021-02-27 19:49:43] -->kifuwarabe 'play w b18' command
+[2021-02-27 19:49:43] <--kifuwarabe ok
+[2021-02-27 19:49:43] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:48] <--kifuwarabe [J14] ok
+[2021-02-27 19:49:48] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:49:48] <--kifuwarabe ok
+[2021-02-27 19:49:48] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:52] <--kifuwarabe [K14] ok
+[2021-02-27 19:49:52] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:49:52] <--kifuwarabe ok
+[2021-02-27 19:49:52] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:49:56] <--kifuwarabe [L14] ok
+[2021-02-27 19:49:57] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:49:57] <--kifuwarabe ok
+[2021-02-27 19:49:57] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:00] <--kifuwarabe [P14] ok
+[2021-02-27 19:50:01] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:01] <--kifuwarabe ok
+[2021-02-27 19:50:01] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:04] <--kifuwarabe [Q14] ok
+[2021-02-27 19:50:05] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:05] <--kifuwarabe ok
+[2021-02-27 19:50:05] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:09] <--kifuwarabe [T14] ok
+[2021-02-27 19:50:09] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:09] <--kifuwarabe ok
+[2021-02-27 19:50:09] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:12] <--kifuwarabe [E15] ok
+[2021-02-27 19:50:13] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:13] <--kifuwarabe ok
+[2021-02-27 19:50:13] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:16] <--kifuwarabe [F15] ok
+[2021-02-27 19:50:17] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:17] <--kifuwarabe ok
+[2021-02-27 19:50:17] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:20] <--kifuwarabe [K15] ok
+[2021-02-27 19:50:20] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:20] <--kifuwarabe ok
+[2021-02-27 19:50:20] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:24] <--kifuwarabe [L15] ok
+[2021-02-27 19:50:24] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:24] <--kifuwarabe ok
+[2021-02-27 19:50:24] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:27] <--kifuwarabe [M15] ok
+[2021-02-27 19:50:28] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:28] <--kifuwarabe ok
+[2021-02-27 19:50:28] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:31] <--kifuwarabe [P15] ok
+[2021-02-27 19:50:31] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:31] <--kifuwarabe ok
+[2021-02-27 19:50:31] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:34] <--kifuwarabe [R15] ok
+[2021-02-27 19:50:34] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:34] <--kifuwarabe ok
+[2021-02-27 19:50:34] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:37] <--kifuwarabe [S15] ok
+[2021-02-27 19:50:37] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:37] <--kifuwarabe ok
+[2021-02-27 19:50:37] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:40] <--kifuwarabe [T15] ok
+[2021-02-27 19:50:41] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:41] <--kifuwarabe ok
+[2021-02-27 19:50:41] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:43] <--kifuwarabe [A16] ok
+[2021-02-27 19:50:44] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:44] <--kifuwarabe ok
+[2021-02-27 19:50:44] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:46] <--kifuwarabe [B16] ok
+[2021-02-27 19:50:47] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:47] <--kifuwarabe ok
+[2021-02-27 19:50:47] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:49] <--kifuwarabe [E16] ok
+[2021-02-27 19:50:50] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:50] <--kifuwarabe ok
+[2021-02-27 19:50:50] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:52] <--kifuwarabe [F16] ok
+[2021-02-27 19:50:52] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:52] <--kifuwarabe ok
+[2021-02-27 19:50:52] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:55] <--kifuwarabe [H16] ok
+[2021-02-27 19:50:55] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:55] <--kifuwarabe ok
+[2021-02-27 19:50:55] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:50:58] <--kifuwarabe [J16] ok
+[2021-02-27 19:50:58] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:50:58] <--kifuwarabe ok
+[2021-02-27 19:50:58] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:00] <--kifuwarabe [T16] ok
+[2021-02-27 19:51:01] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:01] <--kifuwarabe ok
+[2021-02-27 19:51:01] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:03] <--kifuwarabe [A17] ok
+[2021-02-27 19:51:03] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:03] <--kifuwarabe ok
+[2021-02-27 19:51:03] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:05] <--kifuwarabe [D17] ok
+[2021-02-27 19:51:06] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:06] <--kifuwarabe ok
+[2021-02-27 19:51:06] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:08] <--kifuwarabe [E17] ok
+[2021-02-27 19:51:08] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:08] <--kifuwarabe ok
+[2021-02-27 19:51:08] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:10] <--kifuwarabe [F17] ok
+[2021-02-27 19:51:10] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:10] <--kifuwarabe ok
+[2021-02-27 19:51:10] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:12] <--kifuwarabe [H17] ok
+[2021-02-27 19:51:13] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:13] <--kifuwarabe ok
+[2021-02-27 19:51:13] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:15] <--kifuwarabe [J17] ok
+[2021-02-27 19:51:15] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:15] <--kifuwarabe ok
+[2021-02-27 19:51:15] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:17] <--kifuwarabe [R17] ok
+[2021-02-27 19:51:17] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:17] <--kifuwarabe ok
+[2021-02-27 19:51:17] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:19] <--kifuwarabe [S17] ok
+[2021-02-27 19:51:19] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:19] <--kifuwarabe ok
+[2021-02-27 19:51:19] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:21] <--kifuwarabe [T17] ok
+[2021-02-27 19:51:21] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:21] <--kifuwarabe ok
+[2021-02-27 19:51:21] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:23] <--kifuwarabe [A18] ok
+[2021-02-27 19:51:23] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:23] <--kifuwarabe ok
+[2021-02-27 19:51:23] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:25] <--kifuwarabe [C18] ok
+[2021-02-27 19:51:25] -->kifuwarabe 'play w b19' command
+[2021-02-27 19:51:25] <--kifuwarabe ok
+[2021-02-27 19:51:25] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:27] <--kifuwarabe [E18] ok
+[2021-02-27 19:51:27] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:27] <--kifuwarabe ok
+[2021-02-27 19:51:27] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:28] <--kifuwarabe [J18] ok
+[2021-02-27 19:51:29] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:29] <--kifuwarabe ok
+[2021-02-27 19:51:29] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:30] <--kifuwarabe [K18] ok
+[2021-02-27 19:51:30] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:30] <--kifuwarabe ok
+[2021-02-27 19:51:30] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:31] <--kifuwarabe [L18] ok
+[2021-02-27 19:51:32] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:32] <--kifuwarabe ok
+[2021-02-27 19:51:32] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:33] <--kifuwarabe [P18] ok
+[2021-02-27 19:51:33] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:33] <--kifuwarabe ok
+[2021-02-27 19:51:33] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:34] <--kifuwarabe [C19] ok
+[2021-02-27 19:51:34] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:34] <--kifuwarabe ok
+[2021-02-27 19:51:34] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:35] <--kifuwarabe [D19] ok
+[2021-02-27 19:51:36] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:36] <--kifuwarabe ok
+[2021-02-27 19:51:36] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:37] <--kifuwarabe [E19] ok
+[2021-02-27 19:51:37] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:37] <--kifuwarabe ok
+[2021-02-27 19:51:37] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:38] <--kifuwarabe [H19] ok
+[2021-02-27 19:51:38] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:38] <--kifuwarabe ok
+[2021-02-27 19:51:38] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:39] <--kifuwarabe [J19] ok
+[2021-02-27 19:51:39] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:39] <--kifuwarabe ok
+[2021-02-27 19:51:39] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:40] <--kifuwarabe [K19] ok
+[2021-02-27 19:51:40] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:40] <--kifuwarabe ok
+[2021-02-27 19:51:40] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:40] <--kifuwarabe [L19] ok
+[2021-02-27 19:51:41] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:41] <--kifuwarabe ok
+[2021-02-27 19:51:41] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:41] <--kifuwarabe [O19] ok
+[2021-02-27 19:51:41] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:41] <--kifuwarabe ok
+[2021-02-27 19:51:41] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:42] <--kifuwarabe [P19] ok
+[2021-02-27 19:51:42] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:42] <--kifuwarabe ok
+[2021-02-27 19:51:42] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:42] <--kifuwarabe [Q19] ok
+[2021-02-27 19:51:43] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:43] <--kifuwarabe ok
+[2021-02-27 19:51:43] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:43] <--kifuwarabe [R19] ok
+[2021-02-27 19:51:43] -->kifuwarabe 'play w pass' command
+[2021-02-27 19:51:43] <--kifuwarabe ok
+[2021-02-27 19:51:43] -->kifuwarabe 'genmove b' command
+[2021-02-27 19:51:43] <--kifuwarabe [pass] ok
+[2021-02-27 19:51:43] -->kifuwarabe 'quit' command
+[2021-02-27 19:51:43] <--kifuwarabe Quit
