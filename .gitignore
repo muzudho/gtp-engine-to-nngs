@@ -10,6 +10,8 @@ workspace-uec-w/output/connector/*.log
 
 workspace-b-cgfopen2021/output/*.log
 workspace-b-cgfopen2021/output/connector/*.log
+workspace-w-cgfopen2021/output/*.log
+workspace-w-cgfopen2021/output/connector/*.log
 
 # Binaries for programs and plugins
 *.exe
