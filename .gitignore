@@ -2,10 +2,14 @@ workspace-b/output/*.log
 workspace-b/output/connector/*.log
 workspace-w/output/*.log
 workspace-w/output/connector/*.log
+
 workspace-uec-b/output/*.log
 workspace-uec-b/output/connector/*.log
 workspace-uec-w/output/*.log
 workspace-uec-w/output/connector/*.log
+
+workspace-b-cgfopen2021/output/*.log
+workspace-b-cgfopen2021/output/connector/*.log
 
 # Binaries for programs and plugins
 *.exe
